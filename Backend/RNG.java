@@ -82,7 +82,7 @@ public class TestClass {
     }
     
     public static String randomNumber(){
-        String number = "";
+        String number = ""; // 1234567
         int type = new Random().nextInt(4)+4;
         number += new Random().nextInt(9)+1;
         for (int i = 0; i < type-1;i++){
@@ -92,7 +92,7 @@ public class TestClass {
     }
     
     public static String randomDigit(){
-        String digit = "";
+        String digit = ""; //1234.123
         int type = new Random().nextInt(2)+2;
         int dec = new Random().nextInt(3)+1;
         digit += new Random().nextInt(9)+1;
@@ -106,11 +106,32 @@ public class TestClass {
         return digit;
     }
     
+    public static String randomMixed(){
+        int type = new Random().nextInt(3);
+        switch (type){
+            case 0:
+            {
+                return randomDigit();
+            }
+            case 1:
+           {
+                return randomNumber();
+            }
+            case 2:
+           {
+                return randomDate();
+            }
+            default:
+                return "";
+        }
+    }
+    
     public static void main(String[] args) {
         
         System.out.println(randomDate());
         System.out.println(randomNumber());
         System.out.println(randomDigit());
+        System.out.println(randomMixed());
     }
     
 }
