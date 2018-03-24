@@ -28,7 +28,7 @@ import { AdminComponent } from './admin/admin.component';
   imports: [
     BrowserModule,
     routing,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

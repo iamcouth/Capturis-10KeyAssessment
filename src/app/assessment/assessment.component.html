@@ -6,14 +6,14 @@
 </div>
 	<div class="input-field">
   	<br><br><br><br>
-		<input type="text" id = 'in' name="in" class="in" value = "{{index2}}" (keyup) = "increment($event)" readonly>
-		<input type="text" name = "num" class = "out" value = "{{index}}" readonly><br>
+		<input type="text" id = 'in' name="in" class="in" value = "{{index}}" (keyup) = "increment($event)" readonly>
+		<input type="text" name = "num" class = "out" value = "{{ a }}" readonly><br>
 		<textarea name="out" class="list" rows = "3" readonly>
-			{{count[index + 1]}}
-			{{count[index + 2]}}
-			{{count[index + 3]}}
+			{{ b }}
+			{{ c }}
+			{{ d }}
 		</textarea>
-		<input type="text" id='clock' name= 'clock' class='clock' value="{{start - ticks}}" readonly>
+		<input type="text" id='clock' name= 'clock' class='clock' value="{{timeLeft}}" readonly>
 	</div>
 	<br><br>
 </body>

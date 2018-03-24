@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { AssessmentResultsComponent } from './assessment-results/assessment-results.component';
 
+
 const appRoutes: Routes = [
     { path: '', component: UserDashboardComponent  },
     { path: 'login', component: LoginComponent },
