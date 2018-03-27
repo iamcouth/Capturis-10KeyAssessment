@@ -13,12 +13,12 @@ const appRoutes: Routes = [
     { path: '', component: UserDashboardComponent  },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'assessment', component: AssessmentComponent },
+    { path: 'assessment/:type/:time', component: AssessmentComponent },
     { path: 'assessment-results', component: AssessmentResultsComponent },
     { path: 'home', component: UserDashboardComponent },
 
     // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: 'home' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

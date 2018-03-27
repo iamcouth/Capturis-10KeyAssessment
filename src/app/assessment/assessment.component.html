@@ -6,14 +6,15 @@
 </div>
 	<div class="input-field">
   	<br><br><br><br>
-		<input type="text" id = 'in' name="in" class="in" value = "{{index}}" (keyup) = "increment($event)" readonly>
+		<input type="text" id = 'in' name="in" class="in" (keypress) = "increment($event)">
 		<input type="text" name = "num" class = "out" value = "{{ a }}" readonly><br>
 		<textarea name="out" class="list" rows = "3" readonly>
 			{{ b }}
 			{{ c }}
 			{{ d }}
 		</textarea>
-		<input type="text" id='clock' name= 'clock' class='clock' value="{{timeLeft}}" readonly>
+		<input type="text" id='clock' name= 'clock' class='clock' value="{{displayTime}}" readonly>
 	</div>
 	<br><br>
 </body>
+

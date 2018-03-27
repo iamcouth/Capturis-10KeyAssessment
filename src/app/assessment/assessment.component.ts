@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-assessment',
@@ -12,9 +13,10 @@ export class AssessmentComponent implements OnInit {
 
   @ViewChild('in') input: string;
   @Input()
-  testType = 0;
+  testType;
   index = 0;
-  timeLeft = 60;
+  timeLeft;
+  displayTime;
   timer;
   sub;
   a; b; c; d;
@@ -25,6 +27,7 @@ export class AssessmentComponent implements OnInit {
   change2: EventEmitter<string> = new EventEmitter<string>();
 
   increment($event) {
+  	//this.inputs += $event.keyCode;
     if ($event.keyCode === 13) {
       this.testValues += this.a;
       this.a = this.b;
@@ -32,16 +35,14 @@ export class AssessmentComponent implements OnInit {
       this.c = this.d;
       this.d = this.d = this.generateRandom(this.testType);
       this.index++;
-      if (this.index === 10) {
-          this.redirect();
-          //console.log(this.testValues);
-      }
       this.change2.emit(this.a);
+      this.document.getElementById('in').value = '';
+
     } else {
 
     }
-   }
-  constructor(private router: Router) { }
+  }
+  constructor(private router: Router, private route: ActivatedRoute, @Inject(DOCUMENT) private document) { }
   redirect() {
     this.router.navigate(['/assessment-results']);
   }
@@ -50,8 +51,7 @@ export class AssessmentComponent implements OnInit {
     if (x === 0) {
         x = Math.floor(Math.random() * Math.floor(2)) + 1;
     }
-
-    if (x === 1) {
+    if (x == 1) {
       const month = Math.floor(Math.random() * Math.floor(12)) + 1;
   	  let range = 31;
   	  if (month === 2) {
@@ -80,10 +80,57 @@ export class AssessmentComponent implements OnInit {
           this.sub.unsubscribe();
           this.redirect();
       }
-      this.timeLeft--;      
+      this.timeLeft--;
+      const minutes = Math.floor(this.timeLeft / 60);
+      const seconds = this.timeLeft % 60;
+      if (seconds < 10) {
+          this.displayTime = minutes + ':0' + seconds;
+      } else {
+          this.displayTime = minutes + ':' + seconds;
+      }
+
+  }
+
+  getTestType(x) {
+
+      if (x === ':date') {
+          return 1;
+      } else if (x === ':decimal') {
+          return 2;
+      } else if (x === ':whole') {
+          return 3;
+      } else {
+          return 0;
+      }
+
+  }
+
+  getTestTime(x) {
+      if (x === ':1') {
+          this.displayTime = '1:00';
+          return 60;
+      } else if (x === ':3') {
+          this.displayTime = '3:00';
+          return 180;
+      } else if (x === ':5') {
+          this.displayTime = '5:00';
+          return 300;
+      } else {
+          this.displayTime = '1:00';
+          return 60;
+      }
+
   }
 
   ngOnInit() {
+      let typeOfTest = '';
+      let timeOfTest = '';
+      this.route.params.subscribe((params: Params) => typeOfTest = params['type']);
+      this.route.params.subscribe((params: Params) => timeOfTest = params['time']);
+
+      this.testType = this.getTestType(typeOfTest);
+      this.timeLeft = this.getTestTime(timeOfTest);
+
       this.timer = Observable.timer(5000, 1000);
       this.sub = this.timer.subscribe(t => {
           this.counter();

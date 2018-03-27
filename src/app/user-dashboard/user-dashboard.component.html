@@ -1,14 +1,12 @@
 <html>
    <head>
-      <link href=https://fonts.googleapis.com/icon?family=Material+Icons rel="stylesheet">
+      <link href=https://fonts.googleapis.com/icon?family=Material+Icons rel="stylesheet"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <meta name="viewport" content="width=device-width, initial-scale=1">
    </head>
    
    <body>
-      <img style="border: lightblue 1px solid; padding:10px;" src="assets\capturis-logo.png">
-      <p><a class="logout" [routerLink]="['/login']"><strong>Logout</strong></a></p>
       <div>
          <h2>Welcome User!</h2>
       </div>
@@ -18,9 +16,9 @@
          </div>
          <div class = "box2">
             <div class = "minutes">
-               <button id="uno" [routerLink]="['/assessment']">1 Minute</button>
-               <button id="tres">3 Minute</button>
-               <button id="cinco">5 Minute</button>
+               <button id="uno" [routerLink]="['/assessment/:whole/:1']">1 Minute</button>
+               <button id="tres" [routerLink]="['/assessment/:whole/:3']">3 Minute</button>
+               <button id="cinco" [routerLink]="['/assessment/:whole/:5']">5 Minute</button>
             </div>
             <div class = "box3">
                <p>12345   <br>
@@ -42,9 +40,9 @@
          </div>
          <div class = "box2">
             <div class = "minutes">
-               <button id="uno">1 Minute</button>
-               <button id="tres">3 Minute</button>
-               <button id="cinco">5 Minute</button>
+               <button id="uno" [routerLink]="['/assessment/:decimal/:1']">1 Minute</button>
+               <button id="tres" [routerLink]="['/assessment/:decimal/:3']">3 Minute</button>
+               <button id="cinco" [routerLink]="['/assessment/:decimal/:5']">5 Minute</button>
             </div>
             <div class = "box3">
                <p>99.35   <br>
@@ -66,9 +64,9 @@
          </div>
          <div class = "box2">
             <div class = "minutes">
-               <button id="uno">1 Minute</button>
-               <button id="tres">3 Minute</button>
-               <button id="cinco">5 Minute</button>
+               <button id="uno" [routerLink]="['/assessment/:date/:1']">1 Minute</button>
+               <button id="tres" [routerLink]="['/assessment/:date/:3']">3 Minute</button>
+               <button id="cinco" [routerLink]="['/assessment/:decimal/:5']">5 Minute</button>
             </div>
             <div class = "box3">
                <p>01/01/2001 <br>
@@ -88,9 +86,9 @@
          </div>
          <div class = "box2">
             <div class = "minutes">
-               <button id="uno">1 Minute</button>
-               <button id="tres">3 Minute</button>
-               <button id="cinco">5 Minute</button>
+               <button id="uno" [routerLink]="['/assessment/:mixed/:1']">1 Minute</button>
+               <button id="tres" [routerLink]="['/assessment/:mixed/:3']">3 Minute</button>
+               <button id="cinco" [routerLink]="['/assessment/:mixed/:5']">5 Minute</button>
             </div>
             <div class = "box3">
                <p>12345 <br>
