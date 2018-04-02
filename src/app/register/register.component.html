@@ -1,3 +1,76 @@
-<p>
-  register works!
-</p>
+
+<div class="container">
+        <div class="row">
+
+            <div class="col-md-8 col-md-offset-2">
+                <form role="form" method="POST" action="#">
+
+                    <fieldset>
+                    
+                    	<legend class="text-center">Account Registration</legend>
+
+                        <div class="form-group col-md-6">
+                            <label for="first_name">First name</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="last_name">Last name</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                            <label for="">Phone Number</label>
+                            <input type="text" class="form-control" name="" id="phone_number" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Address Line 1</label>
+                            <input type="text" class="form-control" name="" id="address1" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Address Line 2 (optional)</label>
+                            <input type="text" class="form-control" name="" id="address2">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">City</label>
+                            <input type="text" class="form-control" name="city" id="city" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="">State</label>
+                            <input type="text" class="form-control" name="" id="state" maxlength = "2" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="">Zip</label>
+                            <input type="email" class="form-control" name="" id="zip" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="" id="password">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="confirm_password">Confirm Password</label>
+                            <input type="password" class="form-control" name="" id="confirm_password">
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <div class="submit-button">
+                            <button type="submit" class="btn btn-primary" (click) = "validateFields()">
+                                Register
+                            </button><br><br>
+                            <a href="/login">Already have an account?</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>

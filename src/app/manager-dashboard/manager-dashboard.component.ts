@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -7,7 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagerDashboardComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  jobCode;
+  name;
+  KPH;
+  accuracy;
+
+  search() {
+    this.jobCode = this.document.getElementById('search').value;
+
+    if (this.jobCode === '123') {
+      this.name = 'Jamie';
+      this.KPH = '10,000';
+      this.accuracy = '105%';
+    } else {
+      this.name = 'none';
+      this.KPH = '';
+      this.accuracy = '';
+    }
+  }
+
+  constructor(@Inject(DOCUMENT) private document) { }
 
   ngOnInit() {
   }

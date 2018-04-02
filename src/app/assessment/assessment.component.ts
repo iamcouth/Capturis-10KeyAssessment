@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Inject } fro
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-assessment',
@@ -14,6 +14,7 @@ export class AssessmentComponent implements OnInit {
   @ViewChild('in') input: string;
   @Input()
   testType;
+  testDesc;
   index = 0;
   timeLeft;
   displayTime;
@@ -27,7 +28,7 @@ export class AssessmentComponent implements OnInit {
   change2: EventEmitter<string> = new EventEmitter<string>();
 
   increment($event) {
-  	//this.inputs += $event.keyCode;
+// this.inputs += $event.keyCode;
     if ($event.keyCode === 13) {
       this.testValues += this.a;
       this.a = this.b;
@@ -51,25 +52,29 @@ export class AssessmentComponent implements OnInit {
     if (x === 0) {
         x = Math.floor(Math.random() * Math.floor(2)) + 1;
     }
-    if (x == 1) {
+    if (x === 1) {
       const month = Math.floor(Math.random() * Math.floor(12)) + 1;
-  	  let range = 31;
-  	  if (month === 2) {
-  		  range = 28;
-  	  } else if (month === 4 || month === 6 || month === 9 || month === 11) {
+      let range = 31;
+      if (month === 2) {
+        range = 28;
+      } else if (month === 4 || month === 6 || month === 9 || month === 11) {
         range = 30;
-  	  }
-  	  const day = Math.floor(Math.random() * Math.floor(range)) + 1;
-      return month + '/' + day + '/2017';
+      }
+      const day = Math.floor(Math.random() * Math.floor(range)) + 1;
+      if (month > 9) {
+        return month + '/' + day + '/2018';
+      } else {
+        return '0' + month + '/' + day + '/2018';
+      }
     } else if (x === 2) {
       const num = Math.floor(Math.random() * Math.floor(9999)) + 1;
-    	const dec = Math.floor(Math.random() * Math.floor(99)) + 1;
+      const dec = Math.floor(Math.random() * Math.floor(99)) + 1;
 
-    	return num + '.' + dec;
+      return num + '.' + dec;
     } else if (x === 3) {
       const num = Math.floor(Math.random() * Math.floor(999999)) + 1;
 
-    	return num;
+      return num;
     }
 
   }
@@ -94,12 +99,16 @@ export class AssessmentComponent implements OnInit {
   getTestType(x) {
 
       if (x === ':date') {
+          this.testDesc = 'Date Format';
           return 1;
       } else if (x === ':decimal') {
+          this.testDesc = 'Decimal Number';
           return 2;
       } else if (x === ':whole') {
+          this.testDesc = 'Whole Number';
           return 3;
       } else {
+          this.testDesc = 'Mixed Format';
           return 0;
       }
 

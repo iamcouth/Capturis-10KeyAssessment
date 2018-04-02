@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BotDetectCaptchaModule } from 'angular-captcha';
 
 
 import { AppComponent } from './app.component';
@@ -8,8 +9,8 @@ import { AssessmentResultsComponent } from './assessment-results/assessment-resu
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {routing} from './app.routing';
-import { FormsModule }    from '@angular/forms';
+import { routing } from './app.routing';
+import { FormsModule } from '@angular/forms';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 
@@ -28,7 +29,7 @@ import { AdminComponent } from './admin/admin.component';
   imports: [
     BrowserModule,
     routing,
-    FormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
