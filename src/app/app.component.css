@@ -1,1 +1,17 @@
-//
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body, .ten-key-app {
+  height: 100%;
+  overflow: hidden;
+  background-color: #fafafa !important;
+}
+
+.mat-button .mat-button-wrapper {
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+}

@@ -13,6 +13,7 @@ import { routing } from './app.routing';
 import { FormsModule } from '@angular/forms';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import { AdminComponent } from './admin/admin.component';
+import { MatButtonModule } from '@angular/material';
 
 
 @NgModule({
@@ -24,10 +25,11 @@ import { AdminComponent } from './admin/admin.component';
     LoginComponent,
     RegisterComponent,
     ManagerDashboardComponent,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
+    MatButtonModule,
     routing,
     FormsModule
   ],

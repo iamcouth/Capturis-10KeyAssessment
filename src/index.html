@@ -5,10 +5,23 @@
 	position:fixed;
     top: 50%;
     left: 50%;
-	
+
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.appBody {
+  position: absolute;
+  min-height: 100% !important;
+}
+
+.appHeader {
+  background-color: #fafafa !important;
 }
 </style>
-<head>
+<head class="appHeader">
     <base href="/" />
     <title>10 Key Assessment</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,13 +30,13 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    
+
 </head>
-<body>
+<body class="appBody">
     <div id="container">
         <header class="clearfix">
             <div class="navbar navbar-default navbar-fixed-top">
-                
+
                 <div class="navbar navbar-default navbar-fixed-top">
                     <div class="container">
                         <div class="navbar-header">
