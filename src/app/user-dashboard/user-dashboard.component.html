@@ -1,114 +1,120 @@
 <div class="userDashboard">
-      <div>
-         <h2>Welcome User!</h2>
+  <div>
+    <h2>Welcome User!</h2>
+  </div>
+
+  <div class="AssessmentDesc">
+    <div class="box">
+      <p class="desctext">Whole Number</p>
+    </div>
+    <div class="box2">
+      <div class="rightBox">
+        <div class="minutes">
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:whole/:1']">1 Minute</button>
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:whole/:3']">3 Minute</button>
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:whole/:5']">5 Minute</button>
+        </div>
       </div>
-      <div class = "AssessmentDesc">
-         <div class = "box">
-            <p class = "desctext">Whole Number</p>
-         </div>
-         <div class = "box2">
-           <div class="rightBox">
-            <div class = "minutes">
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:whole/:1']">1 Minute</button>
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:whole/:3']">3 Minute</button>
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:whole/:5']">5 Minute</button>
-            </div>
-             <div class="leftBox">
-            <div class = "box3">
-                  12345   <br>
-                  864     <br>
-                  4637239 <br>
-                  43834   <br>
-                  937451  <br>
-                  71938   <br>
-                  6284623 <br>
-                  194720  <br>
-                  0223472
-            </div>
-             </div>
-           </div>
-         </div>
+      <div class="leftBox">
+        <div class="box3">
+          12345 <br>
+          864 <br>
+          4637239 <br>
+          43834 <br>
+          937451 <br>
+          71938 <br>
+          6284623 <br>
+          194720 <br>
+          0223472
+        </div>
       </div>
-      <div class = "AssessmentDesc">
-         <div class = "box">
-            <p class = "desctext">Decimal Number</p>
-         </div>
-         <div class = "box2">
-           <div class="rightBox">
-            <div class = "minutes">
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:decimal/:1']">1 Minute</button>
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:decimal/:3']">3 Minute</button>
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:decimal/:5']">5 Minute</button>
-            </div>
-            <div class = "box3">
-                  99.35   <br>
-                  123.45  <br>
-                  857.00  <br>
-                  5463.21 <br>
-                  6923.99 <br>
-                  76.27   <br>
-                  1003.73 <br>
-                  93.39   <br>
-                  583.43
-            </div>
-           </div>
-         </div>
+    </div>
+  </div>
+
+  <div class="AssessmentDesc">
+    <div class="box">
+      <p class="desctext">Decimal Number</p>
+    </div>
+    <div class="box2">
+      <div class="rightBox">
+        <div class="minutes">
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:decimal/:1']">1 Minute</button>
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:decimal/:3']">3 Minute</button>
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:decimal/:5']">5 Minute</button>
+        </div>
       </div>
-      <div class = "AssessmentDesc">
-         <div class = "box">
-            <p class = "desctext">Date Format</p>
-         </div>
-         <div class = "box2">
-           <div class="rightBox">
-            <div class = "minutes">
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:date/:1']">1 Minute</button>
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:date/:3']">3 Minute</button>
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:decimal/:5']">5 Minute</button>
-            </div>
-             <div class="leftBox">
-            <div class = "box3">
-                  01/01/2001 <br>
-                  13/21/2018 <br>
-                  12/31/2018 <br>
-                  01/01/2005 <br>
-                  02/18/2017  <br>
-                  04/09/1984 <br>
-                  02/18/2017  <br>
-                  04/09/1984 <br>
-                  01/02/2013
-            </div>
-             </div>
-           </div>
-         </div>
+      <div class="leftBox">
+        <div class="box3">
+          99.35 <br>
+          123.45 <br>
+          857.00 <br>
+          5463.21 <br>
+          6923.99 <br>
+          76.27 <br>
+          1003.73 <br>
+          93.39 <br>
+          583.43
+        </div>
       </div>
-      <div class = "AssessmentDesc">
-         <div class = "box">
-            <p class = "desctext">Mixed Format</p>
-         </div>
-         <div class = "box2">
-           <div class="rightBox">
-            <div class = "minutes">
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:mixed/:1']">1 Minute</button>
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:mixed/:3']">3 Minute</button>
-               <button mat-button class="assessmentButton" [routerLink]="['/assessment/:mixed/:5']">5 Minute</button>
-            </div>
-             <div class="leftBox">
-            <div class = "box3">
-                  12345 <br>
-                  01/17/2012 <br>
-                  375.38 <br>
-                  48344 <br>
-                  937451 <br>
-                  4672.20 <br>
-                  01/01/2020 <br>
-                  47593 <br>
-                  11/26/1993
-            </div>
-             </div>
-           </div>
-         </div>
+    </div>
+  </div>
+
+  <div class="AssessmentDesc">
+    <div class="box">
+      <p class="desctext">Date Format</p>
+    </div>
+    <div class="box2">
+      <div class="rightBox">
+        <div class="minutes">
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:date/:1']">1 Minute</button>
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:date/:3']">3 Minute</button>
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:decimal/:5']">5 Minute</button>
+        </div>
       </div>
-      <div class = "HistoryBox">
-        <div class = "desctext">History</div>
+      <div class="leftBox">
+        <div class="box3">
+          01/01/2001 <br>
+          03/21/2018 <br>
+          12/31/2018 <br>
+          01/01/2005 <br>
+          02/18/2017 <br>
+          04/09/1984 <br>
+          01/02/2013
+        </div>
       </div>
+    </div>
+  </div>
+
+  <div class="AssessmentDesc">
+    <div class="box">
+      <p class="desctext">Mixed Format</p>
+    </div>
+    <div class="box2">
+      <div class="rightBox">
+        <div class="minutes">
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:mixed/:1']">1 Minute</button>
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:mixed/:3']">3 Minute</button>
+          <button mat-button class="assessmentButton" [routerLink]="['/assessment/:mixed/:5']">5 Minute</button>
+        </div>
+      </div>
+      <div class="leftBox">
+        <div class="box3">
+          12345 <br>
+          01/17/2012 <br>
+          375.38 <br>
+          48344 <br>
+          937451 <br>
+          4672.20 <br>
+          01/01/2020 <br>
+          47593 <br>
+          11/26/1993
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="HistoryBox">
+    <div class="desctext">History</div>
+  </div>
+
 </div>

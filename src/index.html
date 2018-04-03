@@ -15,10 +15,15 @@
 .appBody {
   position: absolute;
   min-height: 100% !important;
+  width: 100%;
 }
 
 .appHeader {
   background-color: #fafafa !important;
+}
+
+.navbar-brand {
+  padding: 10px 10px !important;
 }
 </style>
 <head class="appHeader">
@@ -40,7 +45,9 @@
                 <div class="navbar navbar-default navbar-fixed-top">
                     <div class="container">
                         <div class="navbar-header">
-                            <a class="navbar-brand" title="Capturis" href="/home"><img alt="Capturis" src="assets/capturis-logo.png"></a>
+                            <a class="navbar-brand" title="Capturis" href="/home">
+                              <img alt="Capturis" src="assets/capturis-logo.png" style="height: 100%">
+                            </a>
                         </div>
                         <div class="navbar-collapse collapse">
                             <ul id="header-menu" class="nav navbar-nav menu-style-1 navbar-right">
