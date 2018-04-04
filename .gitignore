@@ -8,6 +8,8 @@
 
 # dependencies
 /node_modules
+node_modules/
+
 
 # IDEs and editors
 /.idea
@@ -17,6 +19,14 @@
 *.launch
 .settings/
 *.sublime-workspace
+.idea
+*.iml
+
+*.class
+target
+
+node_modules/
+typings/
 
 # IDE - VSCode
 .vscode/*
