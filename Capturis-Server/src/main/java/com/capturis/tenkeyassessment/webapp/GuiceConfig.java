@@ -11,5 +11,6 @@ public class GuiceConfig extends ServletModule {
     bind(HealthResource.class);
     bind(RegisterResource.class);
     bind(LoginResource.class);
+    filter("*").through(CORSFilter.class);
   }
 }
