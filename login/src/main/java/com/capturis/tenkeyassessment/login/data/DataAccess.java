@@ -10,9 +10,9 @@ import java.sql.SQLException;
 public class DataAccess
 {
 
-  private static  final String DB_CONN = "jdbc:postgresql://134.129.125.210:5432/capturis_10keyassessment";
-  private static  final String DB_USER = "tester";
-  private static  final String DB_PW = "test1234";
+  private static  final String DB_CONN = "jdbc:postgresql://localhost:5432/thedatabase";
+    private static  final String DB_USER = "username";
+    private static  final String DB_PW = "password";
 
   private  static Connection getDBConn() {
     Connection dbConn = null;
