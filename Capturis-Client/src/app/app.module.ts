@@ -13,6 +13,7 @@ import { routing } from './app.routing';
 import { FormsModule } from '@angular/forms';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import { AdminComponent } from './admin/admin.component';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AdminComponent } from './admin/admin.component';
   imports: [
     BrowserModule,
     routing,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

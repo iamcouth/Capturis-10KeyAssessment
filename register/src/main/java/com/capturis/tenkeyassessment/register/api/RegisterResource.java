@@ -26,5 +26,4 @@ public class RegisterResource {
     return String.format("Got creds - EMAIL: %s, PASSWORD: %s", params.getFirstName(), params.getLastName());
   }
 
-
 }

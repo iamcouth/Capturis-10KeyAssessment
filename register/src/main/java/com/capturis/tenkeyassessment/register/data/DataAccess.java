@@ -25,7 +25,6 @@ public class DataAccess {
         }
         return  dbConn;
     }
-
     public void AddUser(AssessmentUser params)
     {
         Connection conn = null;

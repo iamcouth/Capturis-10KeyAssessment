@@ -1,13 +1,20 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import {DOCUMENT} from "@angular/common";
+import {EmailValidator} from "@angular/forms";
+import {RegisterService} from "./register.service";
+import {Register} from "ts-node";
+import {AssessmentUser} from "./register.model";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+
 })
 export class RegisterComponent implements OnInit {
 
+  params: AssessmentUser = new AssessmentUser();
+  serverResponse: string = '';
   validateFields() {
     if (this.document.getElementById('first_name').value === '') {
       this.document.getElementById('first_name').style.border = '1px solid #ff0000';
@@ -53,9 +60,20 @@ export class RegisterComponent implements OnInit {
     console.log(this.document.getElementById('password').value === this.document.getElementById('confirm_password').value);
   }
 
-  constructor(@Inject(DOCUMENT) private document) { }
+  constructor(@Inject(DOCUMENT) private document, private _registerService: RegisterService, private _emailValid: EmailValidator) {
+
+  }
 
   ngOnInit() {
   }
+
+//   onSubmitLogin()
+// {
+//   this._registerService.submitLogin(this.params)
+//     .subscribe(
+//       res => this.serverResponse = res,
+//
+//     )
+// }
 
 }

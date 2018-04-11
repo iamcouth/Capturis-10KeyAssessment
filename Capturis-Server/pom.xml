@@ -38,6 +38,11 @@
         <artifactId>register</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.capturis.tenkeyassessment</groupId>
+        <artifactId>login</artifactId>
+        <version>${project.version}</version>
+      </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -48,6 +53,18 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.1</version>
         </dependency>
+      <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
+      <dependency>
+        <groupId>org.mindrot</groupId>
+        <artifactId>jbcrypt</artifactId>
+        <version>0.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-catalina</artifactId>
+        <version>7.0.42</version>
+        <scope>provided</scope>
+      </dependency>
     </dependencies>
 
     <build>
