@@ -45,7 +45,7 @@ import java.sql.Statement;
       int kph = rs.getInt("kph");
       double accuracy = rs.getDouble("accuracy");
       int linesCompleted = rs.getInt("linescompleted");
-      int totalKeyStrokes = rs.getInt("totalkeystrokes ");
+      int totalKeyStrokes = rs.getInt("totalkeystrokes");
       int correctedMistakes = rs.getInt("correctedmistakes");
 
       AssessmentResult assessmentResult = new AssessmentResult();

@@ -3,11 +3,13 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import { DOCUMENT } from '@angular/common';
+import {AssessmentService} from "./assessment.service";
 
 @Component({
   selector: 'app-assessment',
   templateUrl: './assessment.component.html',
-  styleUrls: ['./assessment.component.css']
+  styleUrls: ['./assessment.component.css'],
+  providers: [AssessmentService]
 })
 export class AssessmentComponent implements OnInit {
 
@@ -53,7 +55,7 @@ export class AssessmentComponent implements OnInit {
     }
 
   }
-  constructor(private router: Router, private route: ActivatedRoute, @Inject(DOCUMENT) private document) { }
+  constructor(private router: Router, private route: ActivatedRoute, @Inject(DOCUMENT) private document, private _assessmentService: AssessmentService) { }
   redirect() {
     this.router.navigate(['/assessment-results']);
   }
@@ -151,6 +153,15 @@ export class AssessmentComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this._assessmentService.getAssessmentByUserId(1).subscribe( res => {
+      console.log(res)
+
+    },
+      error => {
+        console.error(error)
+      });
+
     let typeOfTest = '';
     let timeOfTest = '';
     this.route.params.subscribe((params: Params) => typeOfTest = params['type']);

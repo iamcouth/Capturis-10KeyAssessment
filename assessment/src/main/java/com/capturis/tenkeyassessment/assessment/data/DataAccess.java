@@ -21,7 +21,7 @@ public class DataAccess extends Connection {
 
   public Assessment getAssessmentByUserId(int id) throws SQLException{
 
-    String sql = "SELECT * FROM assessmentuser where userid = " + id;
+    String sql = "SELECT * FROM assessment where userid = " + id;
     ResultSet rs = statement.executeQuery(sql);
     if (rs.next()) {
       return mapAssessment(rs);

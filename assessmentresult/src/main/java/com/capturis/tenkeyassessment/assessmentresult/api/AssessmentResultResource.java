@@ -3,6 +3,7 @@ package com.capturis.tenkeyassessment.assessmentresult.api;
 import com.capturis.tenkeyassessment.assessmentresult.data.DataAccess;
 import com.capturis.tenkeyassessment.assessmentresult.model.AssessmentResult;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,7 +17,8 @@ public class AssessmentResultResource {
 
   private final DataAccess dataAccess;
 
-  public AssessmentResultResource(DataAccess dataAccess) { this.dataAccess = dataAccess; }
+  @Inject
+  public AssessmentResultResource (DataAccess dataAccess) { this.dataAccess = dataAccess; }
 
   @GET
   @Path("/{id}")
