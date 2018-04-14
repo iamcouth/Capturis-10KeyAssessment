@@ -1,48 +1,74 @@
 package com.capturis.tenkeyassessment.login.data;
 
 import com.capturis.tenkeyassessment.login.model.UserLogin;
+import com.capturis.tenkeyassessment.login.sql.Connection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import javax.inject.Inject;
+import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 
-public class DataAccess
+public class DataAccess extends Connection
 {
 
-  private static  final String DB_CONN = "jdbc:postgresql://localhost:5432/thedatabase";
-    private static  final String DB_USER = "username";
-    private static  final String DB_PW = "password";
+    private final Statement statement;
 
-  private  static Connection getDBConn() {
-    Connection dbConn = null;
-    try
-    {
-      dbConn = DriverManager.getConnection(DB_CONN, DB_USER, DB_PW);
-      return dbConn;
+    @Inject
+    public DataAccess() throws SQLException, IOException {
+      this.statement = setupStatement();
     }
-    catch (SQLException e)
-    {
-      System.out.println(e.getMessage());
+
+//  public void AddUser(UserLogin params) {
+//    Connection conn = null;
+//    try {
+//      conn = getDBConn();
+//      PreparedStatement ps = conn.prepareStatement("INSERT INTO testhash(plainpass, hashpass, matc) VALUES (?, ?, ?, ?)");
+//
+//      ps.setString(1, params.getPlainText());
+//      ps.setString(2, params.getHashed());
+//      ps.setBoolean(3, params.isMatched());
+//      ps.setInt(4, params.getId());
+//
+//      ps.executeUpdate();
+//    }
+//    catch (SQLException e)
+//    {
+//      String.format(e.getMessage());
+//    }
+//  }
+
+  public UserLogin getById(int id) throws SQLException{
+    String sql = "SELECT * FROM userlogin where userid = " + id;
+    ResultSet rs = statement.executeQuery(sql);
+    if (rs.next()) {
+      return userLoginMap(rs);
     }
-    return  dbConn;
+    else
+    {
+      return null;
+    }
   }
-  public void AddUser(UserLogin params) {
-    Connection conn = null;
-    try {
-      conn = getDBConn();
-      PreparedStatement ps = conn.prepareStatement("INSERT INTO testhash(plainpass, hashpass, matc) VALUES (?, ?, ?)");
 
-      ps.setString(1, params.getPlainText());
-      ps.setString(2, params.getHashed());
-      ps.setBoolean(3, params.isMatched());
+  private UserLogin userLoginMap(ResultSet rs) throws SQLException {
+    int userloginid = rs.getInt("userloginid");
+    String username = rs.getString("username");
+    String passwordhash = rs.getString("passwordhash");
+    int userid = rs.getInt("userid");
+    boolean accountlock_fl = rs.getBoolean("accountlock_fl");
+    Timestamp lastlogindate = rs.getTimestamp("lastlogindate");
 
-      ps.executeUpdate();
-    }
-    catch (SQLException e)
-    {
-      String.format(e.getMessage());
-    }
+    UserLogin userLogin = new UserLogin();
+    userLogin.setUserLoginId(userloginid);
+    userLogin.setUsername(username);
+    userLogin.setPasswordHash(passwordhash);
+    userLogin.setUserId(userid);
+    userLogin.setAccountLockFl(accountlock_fl);
+    userLogin.setLastLoginDate(lastlogindate);
+
+    return userLogin;
+
   }
 
 }
