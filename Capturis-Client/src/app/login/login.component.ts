@@ -9,7 +9,8 @@ import {tempLogin} from "./login.model";
   providers: [TempService]
 })
 export class LoginComponent implements OnInit {
-
+  tl: tempLogin;
+  //sessionId: number = parseInt(sessionStorage.getItem('userId'))
   constructor(private tempService: TempService) {
   }
 
@@ -18,10 +19,13 @@ export class LoginComponent implements OnInit {
 
       //let body = res.body;
       console.log(res);
+      this.tl = res.body;
+      console.log(this.tl);
     },
       err => {
         console.error(err)
     });
+
 
 
   }

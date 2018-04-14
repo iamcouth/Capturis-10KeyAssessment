@@ -2,13 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {EmailValidator} from "@angular/forms";
 import {RegisterService} from "./register.service";
-import {Register} from "ts-node";
 import {AssessmentUser} from "./register.model";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  providers: [RegisterService]
 
 })
 export class RegisterComponent implements OnInit {
@@ -65,6 +65,13 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this._registerService.getUserById(1).subscribe(res => {
+      console.log(res)
+    },
+      err => {
+        console.error(err)
+      });
   }
 
 //   onSubmitLogin()

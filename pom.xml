@@ -12,6 +12,7 @@
         <module>Capturis-Server</module>
         <module>health</module>
         <module>register</module>
+        <module>login</module>
     </modules>
 
     <properties>

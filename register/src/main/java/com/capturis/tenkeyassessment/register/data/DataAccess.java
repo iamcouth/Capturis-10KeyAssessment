@@ -1,56 +1,70 @@
 package com.capturis.tenkeyassessment.register.data;
 
 import com.capturis.tenkeyassessment.register.models.AssessmentUser;
+import com.capturis.tenkeyassessment.register.sql.Connection;
 
-import java.sql.*;
-import java.time.Instant;
+import javax.inject.Inject;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 
-public class DataAccess {
+public class DataAccess extends Connection {
 
-    private static  final String DB_CONN = "jdbc:postgresql://localhost:5432/thedatabase";
-    private static  final String DB_USER = "username";
-    private static  final String DB_PW = "password";
+  private final Statement statement;
 
-    private  static Connection getDBConn()
-    {
-        Connection dbConn = null;
-        try
-        {
-            dbConn = DriverManager.getConnection(DB_CONN, DB_USER, DB_PW);
-            return dbConn;
-        }
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-        }
-        return  dbConn;
-    }
-    public void AddUser(AssessmentUser params)
-    {
-        Connection conn = null;
-        try {
-            conn = getDBConn();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO AssessmentUser (firstname, lastname, emailaddress, phonenumber, roleid, createddate, street, city, state, zipcode, country, jobcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+  @Inject
+  public DataAccess() throws SQLException, IOException {
+    this.statement = setupStatement();
+  }
 
-            ps.setString(1, params.getFirstName());
-            ps.setString(2, params.getLastName());
-            ps.setString(3, params.getEmailAddress());
-            ps.setString(4, params.getPhoneNumber());
-            ps.setInt(5, 1);
-            ps.setTimestamp(6, Timestamp.from(Instant.now()));
-            ps.setString(7, params.getStreet());
-            ps.setString(8, params.getCity());
-            ps.setString(9, params.getState());
-            ps.setString(10, params.getZipCode());
-            ps.setString(11, params.getCountry());
-            ps.setString(12, params.getJobCode());
+public AssessmentUser getUserById(int id) throws SQLException{
 
-            ps.executeUpdate();
-        }
+  String sql = "SELECT * FROM assessmentuser where userid = " + id;
+  ResultSet rs = statement.executeQuery(sql);
+  if (rs.next()) {
+    return assessmentUserMap(rs);
+  }
+  else
+  {
+    return null;
+  }
 
-        catch (SQLException e)
-        {
-            String.format(e.getMessage());
-        }
-    }
+}
+
+private AssessmentUser assessmentUserMap(ResultSet rs) throws  SQLException{
+
+  int userId = rs.getInt("userid");
+  String firstName = rs.getString("firstname");
+  String lastName = rs.getString("lastname");
+  String emailAddress = rs.getString("emailaddress");
+  String phoneNumber = rs.getString("phonenumber");
+  int roleId = rs.getInt("roleid");
+  Timestamp createdDate = rs.getTimestamp("createddate");
+  String street = rs.getString("street");
+  String city = rs.getString("city");
+  String state = rs.getString("state");
+  String zipCode = rs.getString("zipcode");
+  String country = rs.getString("country");
+  String jobCode = rs.getString("jobcode");
+
+  AssessmentUser assessmentUser = new AssessmentUser();
+  assessmentUser.setUserId(userId);
+  assessmentUser.setFirstName(firstName);
+  assessmentUser.setLastName(lastName);
+  assessmentUser.setEmailAddress(emailAddress);
+  assessmentUser.setPhoneNumber(phoneNumber);
+  assessmentUser.setRoleId(roleId);
+  assessmentUser.setCreatedDate(createdDate);
+  assessmentUser.setStreet(street);
+  assessmentUser.setCity(city);
+  assessmentUser.setState(state);
+  assessmentUser.setZipCode(zipCode);
+  assessmentUser.setCountry(country);
+  assessmentUser.setJobCode(jobCode);
+
+  return assessmentUser;
+}
+
 }
