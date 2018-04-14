@@ -1,71 +1,172 @@
 <!DOCTYPE html>
+
 <html>
+
 <style>
+
 .loading {
-	position:fixed;
-    top: 50%;
-    left: 50%;
+
+
 
 }
+
 * {
+
   margin: 0;
+
   padding: 0;
+
 }
+
+
 
 .appBody {
+
   position: absolute;
+
   min-height: 100% !important;
+
   width: 100%;
+
 }
 
+.loader {
+
+  border: 16px solid #4CAF50;
+
+  border-radius: 50%;
+
+  border-top: 16px solid #42683c;
+
+  width: 120px;
+
+  height: 120px;
+
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+
+  animation: spin 2s linear infinite;
+
+  position: fixed;
+
+  top: 45%;
+
+  left: 45%;
+}
+
+
+
 .appHeader {
+
   background-color: #fafafa !important;
+
+}
+
+@-webkit-keyframes spin {
+
+  0% { -webkit-transform: rotate(0deg); }
+
+  100% { -webkit-transform: rotate(360deg); }
+
+}
+
+@keyframes spin {
+
+  0% { transform: rotate(0deg); }
+
+  100% { transform: rotate(360deg); }
+
 }
 
 .navbar-brand {
+
   padding: 10px 10px !important;
+
 }
+
 </style>
+
 <head class="appHeader">
+
     <base href="/" />
+
     <title>10 Key Assessment</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
     <!-- bootstrap css -->
+
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+
+
 </head>
+
 <body class="appBody">
+
     <div id="container">
+
         <header class="clearfix">
+
             <div class="navbar navbar-default navbar-fixed-top">
 
+
+
                 <div class="navbar navbar-default navbar-fixed-top">
+
                     <div class="container">
+
                         <div class="navbar-header">
+
                             <a class="navbar-brand" title="Capturis" href="/home">
+
                               <img alt="Capturis" src="assets/capturis-logo.png" style="height: 100%">
+
                             </a>
+
                         </div>
+
                         <div class="navbar-collapse collapse">
+
                             <ul id="header-menu" class="nav navbar-nav menu-style-1 navbar-right">
+
                                 <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-18 active "><a href="https://www.capturis.com/">Home</a></li>
+
                                 <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19"><a href="https://www.capturis.com/about-us/">About Us</a></li>
+
                                 <li id="menu-item-489" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-489"><a href="https://www.nisc.coop/careers/capturis/">Careers</a></li>
+
                             </ul>
+
                         </div>
+
                     </div>
+
                </div>
+
             </div>
+
         </header>
+
         <br><br><br>
+
        </div>
+
     <app>
+
     	<div class="loading">
-    		Loading...
+
+    		<div class="loader"></div>
+
     	</div>
+
     </app>
+
 </body>
+
 </html>
