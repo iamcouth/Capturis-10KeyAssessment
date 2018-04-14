@@ -13,6 +13,8 @@
         <module>health</module>
         <module>register</module>
         <module>login</module>
+        <module>assessment</module>
+        <module>assessmentresult</module>
     </modules>
 
     <properties>
