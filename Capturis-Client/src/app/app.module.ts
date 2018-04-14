@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 /*import { BotDetectCaptchaModule } from 'angular-captcha';*/
 
-
 import { AppComponent } from './app.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { AssessmentResultsComponent } from './assessment-results/assessment-results.component';
@@ -13,7 +12,8 @@ import { routing } from './app.routing';
 import { FormsModule } from '@angular/forms';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import { AdminComponent } from './admin/admin.component';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
+import { MatButtonModule, MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -25,10 +25,12 @@ import {HttpClientModule} from "@angular/common/http";
     LoginComponent,
     RegisterComponent,
     ManagerDashboardComponent,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
+    MatButtonModule,
+    MatInputModule,
     routing,
     FormsModule,
     HttpClientModule
