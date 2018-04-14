@@ -1,49 +1,120 @@
 html, body{
-	height: 100%;
-	background-color: WHITE;
-	width: 100%;
-	padding-top: 10px;
+  height: 100%;
+  background-color: WHITE;
+  width: 100%;
+  padding-top: 10px;
+  font-size: 100%;
+}
+
+.mat-title {
+  width: 100%;
+  text-align: center;
+  font-size: 100%;
+}
+
+.example-card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 20%;
+  top: 30%;
+  height: 50%;
+  width: 60%;
+}
+
+div.border {
+  position: absolute;
+  border-style: solid;
+  border-color: BLACK;
+  border-width: 5px;
+  left: 20%;
+  top: 30%;
+  height: 50%;
+  width: 60%;
+  background-color: #6cc049;
 }
 
 #header {
-	width: 100%;
-	text-align:center;
-	height: 40%;
+  width: 100%;
+  text-align:center;
 }
-img.center {
-  display:inline-block;
-  margin: 0 auto;
-}
+
 input.in {
-  position: relative;
-  height: 50px;
-  left: 60px;
-  margin-left: 170px;
-  width: 200px;
-  font-size: 25px;
-  float: left;
+  position: absolute;
+  height: 20%;
+  top: 25%;
+  left: 5%;
+  width: 25%;
+  border-color: BLACK;
+  font-size: 200%;
 }
 input.out{
-	width: 200px;
-	background-color: yellow;
-	outline: none;
-	text-align: center;
-	font-weight: bold;
-	font-size: 30px;
-	margin-left: 200px;
+  position: absolute;
+  left: 35%;
+  width: 25%;
+  top: 25%;
+  height: 20%;
+  background-color: #4CAF50;
+  border-color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: 200%;
+  color: white;
 }
-textarea.list {
-	position: relative;
-	float: left;
-	width: 200px;
-	height: 100px;
-	margin-left:200px;
-	font-size: 15px;
+input.next{
+  position:absolute;
+  left: 35%;
+  width: 25%;
+  height: 15%;
+  top: 50%;
+  border-color: Transparent;
+  background-color: Transparent;
+  text-align: center;
+  font-weight: bold;
+  font-size: 200%;
+  color: #42683c;
 }
+input.next2{
+  position:absolute;
+  left: 35%;
+  width: 25%;
+  height: 15%;
+  top: 65%;
+  border-color: Transparent;
+  background-color: Transparent;
+  color: #42683c;
+  text-align: center;
+  font-weight: bold;
+  font-size: 200%;
+}
+input.next3{
+  position:absolute;
+  left: 35%;
+  width: 25%;
+  height: 15%;
+  color: #42683c;
+  top: 80%;
+  border-color: Transparent;
+  background-color: Transparent;
+  text-align: center;
+  font-weight: bold;
+  font-size: 200%;
+}
+
 input.clock {
-	margin-left: 150px;
-	width: 140px;
-	height: 85px;
-	text-align: center;
-	font-size: 50px;
+  position: absolute;
+  left: 70%;
+  top: 25%;
+  width: 25%;
+  height: 20%;
+  border: none;
+  text-align: center;
+  font-weight: bold;
+  font-size: 300%;
+}
+.instructions {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  border-color: black;
 }

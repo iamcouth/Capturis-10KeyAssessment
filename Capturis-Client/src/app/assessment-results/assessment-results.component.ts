@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { AssessmentComponent } from '/assessment/assessment.component';
-
 
 @Component({
   selector: 'app-assessment-results',

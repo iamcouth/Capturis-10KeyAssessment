@@ -9,11 +9,13 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { routing } from './app.routing';
-import { FormsModule } from '@angular/forms';
+import {EmailValidator, FormsModule} from '@angular/forms';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { HttpClientModule } from "@angular/common/http";
 import { MatButtonModule, MatInputModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import {RegisterService} from "./register/register.service";
 
 
 @NgModule({
@@ -33,9 +35,10 @@ import { MatButtonModule, MatInputModule } from '@angular/material';
     MatInputModule,
     routing,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [RegisterService, EmailValidator],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

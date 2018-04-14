@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Connection {
-private static  final String DB_CONN = "jdbc:postgresql://localhost:5432/thedb";
-  private static  final String DB_USER = "username";
-  private static  final String DB_PW = "password";
+private static  final String DB_CONN = "jdbc:postgresql://134.129.125.210:5432/capturis_10keyassessment";
+  private static  final String DB_USER = "tester";
+  private static  final String DB_PW = "test1234";
 
   public Statement setupStatement() throws SQLException, IOException {
 

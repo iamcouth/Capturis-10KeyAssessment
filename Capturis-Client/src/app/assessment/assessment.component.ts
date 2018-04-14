@@ -15,6 +15,7 @@ export class AssessmentComponent implements OnInit {
   @Input()
   testType;
   testDesc;
+  start = 0;
   index = 0;
   timeLeft;
   displayTime;
@@ -29,6 +30,14 @@ export class AssessmentComponent implements OnInit {
 
   increment($event) {
 // this.inputs += $event.keyCode;
+    if (this.start === 0) {
+      this.timer = Observable.timer(1000, 1000);
+      this.start = 1;
+      this.sub = this.timer.subscribe(t => {
+        this.counter();
+      });
+    }
+
     if ($event.keyCode === 13) {
       this.testValues += this.a;
       this.a = this.b;
@@ -42,6 +51,7 @@ export class AssessmentComponent implements OnInit {
     } else {
 
     }
+
   }
   constructor(private router: Router, private route: ActivatedRoute, @Inject(DOCUMENT) private document) { }
   redirect() {
@@ -50,7 +60,7 @@ export class AssessmentComponent implements OnInit {
   generateRandom(x) {
 
     if (x === 0) {
-        x = Math.floor(Math.random() * Math.floor(2)) + 1;
+      x = Math.floor(Math.random() * Math.floor(3)) + 1;
     }
     if (x === 1) {
       const month = Math.floor(Math.random() * Math.floor(12)) + 1;
@@ -61,10 +71,19 @@ export class AssessmentComponent implements OnInit {
         range = 30;
       }
       const day = Math.floor(Math.random() * Math.floor(range)) + 1;
+
       if (month > 9) {
-        return month + '/' + day + '/2018';
+        if (day < 10) {
+          return month + '/0' + day + '/2018';
+        } else {
+          return month + '/' + day + '/2018';
+        }
       } else {
-        return '0' + month + '/' + day + '/2018';
+        if (day < 10) {
+          return '0' + month + '/0' + day + '/2018';
+        } else {
+          return '0' + month + '/' + day + '/2018';
+        }
       }
     } else if (x === 2) {
       const num = Math.floor(Math.random() * Math.floor(9999)) + 1;
@@ -81,69 +100,65 @@ export class AssessmentComponent implements OnInit {
 
   counter() {
 
-      if (this.timeLeft === 0) {
-          this.sub.unsubscribe();
-          this.redirect();
-      }
-      this.timeLeft--;
-      const minutes = Math.floor(this.timeLeft / 60);
-      const seconds = this.timeLeft % 60;
-      if (seconds < 10) {
-          this.displayTime = minutes + ':0' + seconds;
-      } else {
-          this.displayTime = minutes + ':' + seconds;
-      }
+    if (this.timeLeft === 0) {
+      this.sub.unsubscribe();
+      this.redirect();
+    }
+    this.timeLeft--;
+    const minutes = Math.floor(this.timeLeft / 60);
+    const seconds = this.timeLeft % 60;
+    if (seconds < 10) {
+      this.displayTime = minutes + ':0' + seconds;
+    } else {
+      this.displayTime = minutes + ':' + seconds;
+    }
 
   }
 
   getTestType(x) {
 
-      if (x === ':date') {
-          this.testDesc = 'Date Format';
-          return 1;
-      } else if (x === ':decimal') {
-          this.testDesc = 'Decimal Number';
-          return 2;
-      } else if (x === ':whole') {
-          this.testDesc = 'Whole Number';
-          return 3;
-      } else {
-          this.testDesc = 'Mixed Format';
-          return 0;
-      }
+    if (x === ':date') {
+      this.testDesc = 'Date Format';
+      return 1;
+    } else if (x === ':decimal') {
+      this.testDesc = 'Decimal Number';
+      return 2;
+    } else if (x === ':whole') {
+      this.testDesc = 'Whole Number';
+      return 3;
+    } else {
+      this.testDesc = 'Mixed Format';
+      return 0;
+    }
 
   }
 
   getTestTime(x) {
-      if (x === ':1') {
-          this.displayTime = '1:00';
-          return 60;
-      } else if (x === ':3') {
-          this.displayTime = '3:00';
-          return 180;
-      } else if (x === ':5') {
-          this.displayTime = '5:00';
-          return 300;
-      } else {
-          this.displayTime = '1:00';
-          return 60;
-      }
+    if (x === ':1') {
+      this.displayTime = '1:00';
+      return 60;
+    } else if (x === ':3') {
+      this.displayTime = '3:00';
+      return 180;
+    } else if (x === ':5') {
+      this.displayTime = '5:00';
+      return 300;
+    } else {
+      this.displayTime = '1:00';
+      return 60;
+    }
 
   }
 
   ngOnInit() {
-      let typeOfTest = '';
-      let timeOfTest = '';
-      this.route.params.subscribe((params: Params) => typeOfTest = params['type']);
-      this.route.params.subscribe((params: Params) => timeOfTest = params['time']);
+    let typeOfTest = '';
+    let timeOfTest = '';
+    this.route.params.subscribe((params: Params) => typeOfTest = params['type']);
+    this.route.params.subscribe((params: Params) => timeOfTest = params['time']);
 
-      this.testType = this.getTestType(typeOfTest);
-      this.timeLeft = this.getTestTime(timeOfTest);
+    this.testType = this.getTestType(typeOfTest);
+    this.timeLeft = this.getTestTime(timeOfTest);
 
-      this.timer = Observable.timer(5000, 1000);
-      this.sub = this.timer.subscribe(t => {
-          this.counter();
-      });
     this.a = this.generateRandom(this.testType);
     this.b = this.generateRandom(this.testType);
     this.c = this.generateRandom(this.testType);
