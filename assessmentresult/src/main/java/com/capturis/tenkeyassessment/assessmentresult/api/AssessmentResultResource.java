@@ -2,6 +2,7 @@ package com.capturis.tenkeyassessment.assessmentresult.api;
 
 import com.capturis.tenkeyassessment.assessmentresult.data.DataAccess;
 import com.capturis.tenkeyassessment.assessmentresult.model.AssessmentResult;
+import com.capturis.tenkeyassessment.assessmentresult.model.ManagerSummary;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -80,6 +81,18 @@ public class AssessmentResultResource {
     catch (SQLException | IOException e) {
       System.out.println((e.getMessage()));
     }
+  }
+
+  @GET
+  @Path("/all/manager")
+  public List<ManagerSummary> findAllManager() {
+    try {
+      return dataAccess.findAllManager();
+    }
+    catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+    return  null;
   }
 
 }

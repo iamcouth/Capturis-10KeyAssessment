@@ -1,14 +1,12 @@
 package com.capturis.tenkeyassessment.assessmentresult.data;
 
 import com.capturis.tenkeyassessment.assessmentresult.model.AssessmentResult;
+import com.capturis.tenkeyassessment.assessmentresult.model.ManagerSummary;
 import com.capturis.tenkeyassessment.assessmentresult.sql.Connection;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +43,33 @@ public class DataAccess extends Connection {
     ResultSet rs = statement.executeQuery(sql);
     while (rs.next()) {
       list.add(mapAssessmentResult(rs));
+    }
+
+    return list;
+  }
+
+  public List<ManagerSummary> findAllManager() throws SQLException{
+
+    List<ManagerSummary> list = new ArrayList<ManagerSummary>();
+    String sql = "SELECT (au.firstname || ' ' || au.lastname) as name" +
+      ",ar.kph" +
+      ",ar.accuracy" +
+      ",au.jobcode" +
+      ",att.assessmentname" +
+      ",a.timegiven" +
+      ",a.datetaken " +
+      "FROM assessmentuser as au " +
+      "JOIN assessment as a " +
+      "ON a.userid = au.userid " +
+      "JOIN assessmentresult as ar " +
+      "ON ar.assessmentid = a.assessmentid " +
+      "JOIN assessmenttype as att " +
+      "ON att.assessmenttypeid = a.typeid " +
+      "ORDER BY a.assessmentid";
+
+    ResultSet rs = statement.executeQuery(sql);
+    while (rs.next()) {
+      list.add(mapManagerSummary(rs));
     }
 
     return list;
@@ -136,5 +161,28 @@ public class DataAccess extends Connection {
 
       return assessmentResult;
     }
+
+  private ManagerSummary mapManagerSummary(ResultSet rs) throws SQLException{
+
+    String name = rs.getString("name");
+    int kph = rs.getInt("kph");
+    double accuracy = rs.getDouble("accuracy");
+    String jobCode = rs.getString("jobcode");
+    String assessmentName = rs.getString("assessmentname");
+    int timeGiven = rs.getInt("timegiven");
+    Timestamp dateTaken = rs.getTimestamp("datetaken");
+
+    ManagerSummary managerSummary = new ManagerSummary();
+
+    managerSummary.setName(name);
+    managerSummary.setKph(kph);
+    managerSummary.setAccuracy(accuracy);
+    managerSummary.setJobCode(jobCode);
+    managerSummary.setAssessmentName(assessmentName);
+    managerSummary.setTimeGiven(timeGiven);
+    managerSummary.setDateTaken(dateTaken);
+
+    return managerSummary;
+  }
 
   }
