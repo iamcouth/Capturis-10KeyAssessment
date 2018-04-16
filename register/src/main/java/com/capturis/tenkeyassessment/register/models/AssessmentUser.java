@@ -12,6 +12,14 @@ public class AssessmentUser {
         this.userId = userId;
     }
 
+    public int getUserLoginId() {
+    return userLoginId;
+  }
+
+    public void setUserLoginId(int userLoginId) {
+    this.userLoginId = userLoginId;
+  }
+
     public String getFirstName() {
         return firstName;
     }
@@ -108,7 +116,22 @@ public class AssessmentUser {
         return jobCode;
     }
 
+    public String getUsername() {
+    return username;
+  }
+
+    public void setUsername(String username) {
+    this.username = username;
+  }
+
+    public String getPasswordHash() { return  passwordHash; }
+
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+
+
+
 private int userId;
+    private int userLoginId;
 private String firstName;
 private String lastName;
 private String emailAddress;
@@ -121,4 +144,6 @@ private String state;
 private String zipCode;
 private String country;
 private String jobCode;
+private String username;
+private String passwordHash;
 }

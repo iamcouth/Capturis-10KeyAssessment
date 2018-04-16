@@ -1,9 +1,10 @@
-import {HttpClient, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable}     from 'rxjs/Observable';
 import {AssessmentUser} from "./register.model";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import {Injectable} from "@angular/core";
+import {tempLogin} from "../login/login.model";
 
 const path = 'http://localhost:8080/api/auth';
 // Service related to login page
@@ -26,7 +27,14 @@ export class RegisterService {
     const options: any = {
       observe: 'response',
     };
-    return this.http.get(path + '/register/');
+    return this.http.get(path + '/all/registeredusers');
+  }
+
+  postRegister(aUser: AssessmentUser): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    console.log(aUser);
+    return this.http.post(path + "/register", aUser, {headers: headers});
   }
 
   // update(assessmentUser: AssessmentUser): Observable<any> {

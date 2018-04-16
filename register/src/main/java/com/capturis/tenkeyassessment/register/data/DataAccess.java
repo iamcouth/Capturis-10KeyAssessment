@@ -2,6 +2,7 @@ package com.capturis.tenkeyassessment.register.data;
 
 import com.capturis.tenkeyassessment.register.models.AssessmentUser;
 import com.capturis.tenkeyassessment.register.sql.Connection;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -46,39 +47,68 @@ public AssessmentUser getUserById(int id) throws SQLException{
   }
 
   public AssessmentUser create(AssessmentUser assessmentUser) throws SQLException, IOException {
-    String sql = "INSERT INTO assessmentuser (firstname, lastname, emailaddress, phonenumber, roleid, createddate, street, city, state, zipcode, country, jobcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO assessmentuser " +
+      "(firstname, lastname, emailaddress, phonenumber, roleid, createddate, street, city, state, zipcode, country, jobcode)" +
+      " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
+      "RETURNING userid";
+    String sql1 = "INSERT INTO userlogin (username, userid, passwordHash, accountlock_fl, lastlogindate) VALUES (?, ?, ?, ?, ?) RETURNING userloginid";
+    try {
     PreparedStatement ps = setupPreparedStatement(sql);
 
-    ps.setString(1, assessmentUser.getFirstName());
-    ps.setString(2, assessmentUser.getLastName());
-    ps.setString(3, assessmentUser.getEmailAddress());
-    ps.setString(4, assessmentUser.getPhoneNumber());
-    ps.setInt(5, 1);
-    ps.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
-    ps.setString(7, assessmentUser.getStreet());
-    ps.setString(8, assessmentUser.getCity());
-    ps.setString(9, assessmentUser.getState());
-    ps.setString(10, assessmentUser.getZipCode());
-    ps.setString(11, assessmentUser.getCountry());
-    ps.setString(12, assessmentUser.getJobCode());
+      ps.setString(1, assessmentUser.getFirstName());
+      ps.setString(2, assessmentUser.getLastName());
+      ps.setString(3, assessmentUser.getEmailAddress());
+      ps.setString(4, assessmentUser.getPhoneNumber());
+      ps.setInt(5, 1);
+      ps.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+      ps.setString(7, assessmentUser.getStreet());
+      ps.setString(8, assessmentUser.getCity());
+      ps.setString(9, assessmentUser.getState());
+      ps.setString(10, assessmentUser.getZipCode());
+      ps.setString(11, assessmentUser.getCountry());
+      ps.setString(12, assessmentUser.getJobCode());
 
 
-    ps.executeUpdate();
+      ResultSet rs = ps.executeQuery();
 
-    ResultSet rs = ps.getGeneratedKeys();
+      //ResultSet rs = ps.getGeneratedKeys();
 
-    if(rs.next()){
-      int id = rs.getInt(1);
-      assessmentUser.setUserId(id);
 
-      return assessmentUser;
+        rs.next();
+
+        int id = rs.getInt(1);
+        assessmentUser.setUserId(id);
+
+      String hashedpw = BCrypt.hashpw(assessmentUser.getPasswordHash(), BCrypt.gensalt());
+      PreparedStatement ps1 = setupPreparedStatement(sql1);
+      ps1.setString(1, assessmentUser.getUsername());
+      ps1.setInt(2, id);
+      ps1.setString(3, hashedpw);
+      ps1.setBoolean(4, false);
+      ps1.setTimestamp(5, null);
+
+      ResultSet rs1 = ps1.executeQuery();
+
+
+      rs1.next();
+
+        int id1 = rs1.getInt(1);
+        assessmentUser.setUserLoginId(id1);
     }
+    catch (Exception e)
+    {
 
-    else return null;
-
-
-
+      if(e instanceof RuntimeException)
+      {
+        throw e;
+      }
+      else {
+        throw new RuntimeException(e);
+      }
+    }
+    return assessmentUser;
   }
+
 
   public AssessmentUser update(AssessmentUser assessmentUser) throws SQLException, IOException {
 

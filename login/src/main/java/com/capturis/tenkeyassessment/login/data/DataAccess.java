@@ -2,6 +2,7 @@ package com.capturis.tenkeyassessment.login.data;
 
 import com.capturis.tenkeyassessment.login.model.UserLogin;
 import com.capturis.tenkeyassessment.login.sql.Connection;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -72,28 +73,33 @@ public class DataAccess extends Connection
     String sql = "INSERT INTO userlogin (username, userid, passwordhash, accountlock_fl, lastlogindate) VALUES (?, ?, ?, ?, ?)";
       ps = setupPreparedStatement(sql);
 
+    String hashedpw = BCrypt.hashpw(userLogin.getPasswordHash(), BCrypt.gensalt());
+
       ps.setString(1, userLogin.getUsername());
       ps.setInt(2, userLogin.getUserId());
-      ps.setString(3, userLogin.getPasswordHash());
+      ps.setString(3, hashedpw);
       ps.setBoolean(4, userLogin.isAccountLockFl());
       ps.setTimestamp(5, userLogin.getLastLoginDate());
 
       ps.executeUpdate();
       ResultSet rs = ps.getGeneratedKeys();
 
-      rs.next();
+      if(rs.next()) {
 
-      int id = rs.getInt(1);
-      userLogin.setUserLoginId(id);
+        int id = rs.getInt(1);
+        userLogin.setUserLoginId(id);
 
-      return userLogin;
+        return userLogin;
+      }
 
+      else return null;
   }
 
   public UserLogin update(UserLogin userLogin) throws SQLException, IOException {
 
     String sql = "UPDATE userlogin SET username = ?, passwordhash = ?, accountlock_fl = ? WHERE userid = ?";
       PreparedStatement ps = setupPreparedStatement(sql);
+
 
       ps.setString(1, userLogin.getUsername());
       ps.setString(2, userLogin.getPasswordHash());

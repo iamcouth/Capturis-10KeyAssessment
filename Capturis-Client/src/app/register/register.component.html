@@ -10,59 +10,63 @@
                     	<legend class="text-center">Account Registration</legend>
 
                         <div class="form-group col-md-6">
-                            <label for="first_name">First name</label>
-                            <input type="text" class="form-control" name="first_name" id="first_name" required>
+                            <label for="lastName">First name</label>
+                          <input type="text" class="form-control" id="firstName" name="firstName" required [(ngModel)]="au.firstName">
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="last_name">Last name</label>
-                            <input type="text" class="form-control" name="last_name" id="last_name" required>
+                            <label for="lastName">Last name</label>
+                          <input type="text" class="form-control" id="lastName" name="lastName" required [(ngModel)]="au.lastName">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="">Email</label>
-                            <input matInput type="email" class="form-control" name="email" id="email" required>
+                          <input type="text" class="form-control" id="emailAddress" name="emailAddress" required [(ngModel)]="au.emailAddress">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="">Phone Number</label>
-                            <input type="text" class="form-control" name="" id="phone_number" required>
+                          <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required [(ngModel)]="au.phoneNumber">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="">Address Line 1</label>
-                            <input type="text" class="form-control" name="" id="address1" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="">Address Line 2 (optional)</label>
-                            <input type="text" class="form-control" name="" id="address2">
+                            <label for="">Street</label>
+                          <input type="text" class="form-control" id="street" name="street" required [(ngModel)]="au.street">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">City</label>
-                            <input type="text" class="form-control" name="city" id="city" required>
+                          <input type="text" class="form-control" id="city" name="city" required [(ngModel)]="au.city">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="">State</label>
-                            <input type="text" class="form-control" name="" id="state" maxlength = "2" required>
+                          <input type="text" class="form-control" id="state" maxlength="2" name="state" required [(ngModel)]="au.state">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="">Zip</label>
-                            <input type="email" class="form-control" name="" id="zip" required>
+                          <input type="text" class="form-control" id="zipCode" name="zipCode" required [(ngModel)]="au.zipCode">
                         </div>
 
+                      <div class="form-group col-md-6">
+                        <label for="">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required autofocus [(ngModel)]="au.username">
+                      </div>
                         <div class="form-group col-md-6">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="" id="password">
+                            <label for="passwordHash">Password</label>
+                            <input type="password" class="form-control" name="passwordHash" id="passwordHash" minlength="6" required [(ngModel)]="au.passwordHash">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="confirm_password">Confirm Password</label>
                             <input type="password" class="form-control" name="" id="confirm_password">
                         </div>
+                      <div class="form-group col-md-6">
+                        <label for="">Job code</label>
+                        <input type="text" class="form-control" id="jobCode" name="jobCode" required [(ngModel)]="au.jobCode">
+                      </div>
                     </fieldset>
 
                     <div class="form-group">
                         <div class="submit-button">
-                            <button type="submit" class="btn btn-primary" (click) = "validateFields()">
+                            <button type="submit" class="btn btn-primary" (click) = "submitRegister()">
                                 Register
                             </button><br><br>
                             <a href="/login">Already have an account?</a>

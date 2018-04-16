@@ -1,6 +1,6 @@
 export class AssessmentUser
 {
-  public userId: number;
+  public userLoginId: number;
   public firstName: string;
   public lastName: string;
   public emailAddress: string;
@@ -13,4 +13,6 @@ export class AssessmentUser
   public zipCode: string;
   public country: string;
   public jobCode: string;
+  public username: string;
+  public passwordHash: string;
 }

@@ -36,11 +36,8 @@ export class TempService{
   }
 
   postLogin(tLogin: tempLogin): Observable<any> {
-    const options: any = {
-      observe: 'response',
-    };
-    let body = JSON.stringify(tLogin)
-    console.log(tLogin);
-    return this.http.post(MASTER_PATH, body, options);
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(MASTER_PATH + "post", tLogin, {headers: headers});
   }
 }

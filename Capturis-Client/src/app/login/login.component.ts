@@ -8,7 +8,14 @@ import {tempLogin} from "./login.model";
   providers: [TempService]
 })
 export class LoginComponent implements OnInit {
-  tl: tempLogin = new tempLogin();
+  tl: tempLogin = {
+    userLoginId: null,
+    username: '',
+  userId: null,
+  passwordHash: '',
+  accountLockFl: false,
+  lastLoginDate: new Date()
+}
   tllist: Array<any>;
   serverResponse: string = '';
   //sessionId: number = parseInt(sessionStorage.getItem('userId'))
@@ -46,8 +53,7 @@ export class LoginComponent implements OnInit {
 
     this.tempService.postLogin(this.tl).subscribe(res => {
       this.serverResponse = res
-      console.log(res.body);
-      console.log(this.tl);},
+      },
         error => {
       this.serverResponse = <any>error
     });
