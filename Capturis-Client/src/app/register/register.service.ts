@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import {Injectable} from "@angular/core";
 
-
 const path = 'http://localhost:8080/api/auth';
 // Service related to login page
 @Injectable()
@@ -22,6 +21,21 @@ export class RegisterService {
     //console.log(req);
     return req;
   }
+
+  getAllUsers(): Observable<any> {
+    const options: any = {
+      observe: 'response',
+    };
+    return this.http.get(path + '/register/');
+  }
+
+  // update(assessmentUser: AssessmentUser): Observable<any> {
+  //   const options: any = {
+  //     observe: 'response',
+  //   };
+  //   const url = path + '/' + assessmentUser.userId;
+  //   return this.http.put(url, JSON.stringify(assessmentUser), options).subscribe()
+  // }
   //
   // addNewRegistrationUser(au: AssessmentUser): Promise<any>{
   //   const options: any = {

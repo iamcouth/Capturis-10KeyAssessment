@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 
 @Singleton
@@ -34,7 +36,54 @@ public LoginResource(DataAccess dataAccess) {
     System.out.println(e.getMessage());
   }
     return null;
+}
+
+  @GET
+  @Path("/all/Users")
+  public List<UserLogin> findAll() {
+  try {
+    return dataAccess.findAll();
   }
+  catch (SQLException e) {
+    System.out.println(e.getMessage());
+  }
+  return  null;
+}
+
+  @POST
+  public UserLogin create(UserLogin userLogin) {
+  try {
+    return dataAccess.create(userLogin);
+  }
+  catch (SQLException | IOException e) {
+    System.out.println(e.getMessage());
+  }
+  return null;
+}
+
+  @PUT
+  @Path("/{id}")
+  public UserLogin update(UserLogin userLogin) {
+  try {
+    dataAccess.update(userLogin);
+    return userLogin;
+  }
+  catch (SQLException | IOException e) {
+    System.out.println((e.getMessage()));
+  }
+  return null;
+  }
+
+  @DELETE
+  @Path("/{id}")
+  public void remove (@PathParam("id") int id) {
+  try {
+    dataAccess.remove(id);
+  }
+  catch (SQLException | IOException e) {
+    System.out.println((e.getMessage()));
+  }
+}
 
 //  @GET
 //  @Produces(MediaType.APPLICATION_JSON)

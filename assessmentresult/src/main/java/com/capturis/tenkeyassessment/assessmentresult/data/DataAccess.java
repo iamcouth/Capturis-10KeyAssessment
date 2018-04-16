@@ -5,12 +5,15 @@ import com.capturis.tenkeyassessment.assessmentresult.sql.Connection;
 
 import javax.inject.Inject;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 
-  public class DataAccess extends Connection {
+public class DataAccess extends Connection {
 
     private final Statement statement;
 
@@ -33,6 +36,75 @@ import java.sql.Statement;
       }
 
     }
+
+  public List<AssessmentResult> findAll() throws SQLException{
+
+    List<AssessmentResult> list = new ArrayList<AssessmentResult>();
+    String sql = "SELECT * FROM assessmentresult ORDER BY userid";
+
+    ResultSet rs = statement.executeQuery(sql);
+    while (rs.next()) {
+      list.add(mapAssessmentResult(rs));
+    }
+
+    return list;
+  }
+
+  public AssessmentResult create(AssessmentResult assessmentResult) throws SQLException, IOException {
+    String sql = "INSERT INTO assessmentresult (userid, assessmentid, perfectcount, uncorrectedmistakes, backspacepresscount, kph, accuracy, linescompleted, totalkeystrokes, correctedmistakes) VALUES (?, ?, ?, ? ,? ,? ,? ,? ,? ,?)";
+    PreparedStatement ps = setupPreparedStatement(sql);
+
+    ps.setInt(1, assessmentResult.getUserId());
+    ps.setInt(2, assessmentResult.getAssessmentId());
+    ps.setInt(3, assessmentResult.getPerfectCount());
+    ps.setInt(4, assessmentResult.getUnCorrectedMistakes());
+    ps.setInt(5, assessmentResult.getBackspacePressCount());
+    ps.setInt(6, assessmentResult.getKph());
+    ps.setDouble(7, assessmentResult.getAccuracy());
+    ps.setInt(8, assessmentResult.getLinesCompleted());
+    ps.setInt(9, assessmentResult.getTotalKeyStrokes());
+    ps.setInt(10, assessmentResult.getCorrectedMistakes());
+
+    ResultSet rs = ps.getGeneratedKeys();
+
+    rs.next();
+
+    int id = rs.getInt(1);
+    assessmentResult.setAssessmentResultId(id);
+
+    return assessmentResult;
+
+  }
+
+  public AssessmentResult update(AssessmentResult assessmentResult) throws SQLException, IOException {
+
+    String sql = "UPDATE assessmentresult SET perfectcount = ?, uncorrectedmistakes = ?, backspacepresscount = ?, kph = ?, accuracy = ?, linescompleted = ?, totalkeystrokes = ?, correctedmistakes = ? WHERE userid = ? AND assessmentid = ?";
+    PreparedStatement ps = setupPreparedStatement(sql);
+
+    ps.setInt(1, assessmentResult.getPerfectCount());
+    ps.setInt(2, assessmentResult.getUnCorrectedMistakes());
+    ps.setInt(3, assessmentResult.getBackspacePressCount());
+    ps.setInt(4, assessmentResult.getKph());
+    ps.setDouble(5, assessmentResult.getAccuracy());
+    ps.setInt(6, assessmentResult.getLinesCompleted());
+    ps.setInt(7, assessmentResult.getTotalKeyStrokes());
+    ps.setInt(8, assessmentResult.getCorrectedMistakes());
+    ps.setInt(9, assessmentResult.getUserId());
+    ps.setInt(10, assessmentResult.getAssessmentId());
+
+    ps.executeUpdate();
+
+    return assessmentResult;
+  }
+
+  public boolean remove(int id) throws SQLException, IOException {
+    String sql = "DELETE FROM assessmentresults where assessmentresultid = ?";
+    PreparedStatement ps = setupPreparedStatement(sql);
+    ps.setInt(1, id);
+
+    int count = ps.executeUpdate();
+    return count == 1;
+  }
 
     private AssessmentResult mapAssessmentResult(ResultSet rs) throws SQLException{
 

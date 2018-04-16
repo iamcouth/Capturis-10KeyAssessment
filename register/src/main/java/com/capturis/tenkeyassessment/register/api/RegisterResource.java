@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Singleton
 @Produces(MediaType.APPLICATION_JSON)
@@ -33,6 +35,52 @@ public class RegisterResource {
     return null;
   }
 
+  @GET
+  @Path("/all/registeredusers")
+  public List<AssessmentUser> findAll() {
+    try {
+      return dataAccess.findAll();
+    }
+    catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+    return  null;
+  }
+
+  @POST
+  public AssessmentUser create(AssessmentUser assessmentUser) {
+    try {
+      return dataAccess.create(assessmentUser);
+    }
+    catch (SQLException | IOException e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
+  }
+
+  @PUT
+  @Path("/{id}")
+  public AssessmentUser update(AssessmentUser assessmentUser) {
+    try {
+      dataAccess.update(assessmentUser);
+      return assessmentUser;
+    }
+    catch (SQLException | IOException e) {
+      System.out.println((e.getMessage()));
+    }
+    return null;
+  }
+
+  @DELETE
+  @Path("/{id}")
+  public void remove (@PathParam("id") int id) {
+    try {
+      dataAccess.remove(id);
+    }
+    catch (SQLException | IOException e) {
+      System.out.println((e.getMessage()));
+    }
+  }
 //  @POST
 //  @Consumes(MediaType.APPLICATION_JSON)
 //  @Produces(MediaType.APPLICATION_JSON)

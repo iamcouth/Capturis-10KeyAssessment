@@ -5,10 +5,9 @@ import com.capturis.tenkeyassessment.login.sql.Connection;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataAccess extends Connection
 {
@@ -49,6 +48,68 @@ public class DataAccess extends Connection
     {
       return null;
     }
+  }
+
+  public List<UserLogin> findAll() throws SQLException{
+
+      List<UserLogin> list = new ArrayList<UserLogin>();
+      String sql = "SELECT * FROM userlogin ORDER BY userid";
+
+      ResultSet rs = statement.executeQuery(sql);
+      while (rs.next()) {
+        list.add(userLoginMap(rs));
+      }
+
+      return list;
+  }
+
+  public UserLogin save(UserLogin userLogin) throws SQLException, IOException {
+      return userLogin.getUserId() > 0 ? update(userLogin) : create(userLogin);
+  }
+
+  public UserLogin create(UserLogin userLogin) throws SQLException, IOException {
+    String sql = "INSERT INTO userlogin (username, userid, passwordhash, accountlock_fl, lastlogindate) VALUES (?, ?, ?, ?, ?)";
+      PreparedStatement ps = setupPreparedStatement(sql);
+
+      ps.setString(1, userLogin.getUsername());
+      ps.setInt(2, userLogin.getUserId());
+      ps.setString(3, userLogin.getPasswordHash());
+      ps.setBoolean(4, userLogin.isAccountLockFl());
+      ps.setTimestamp(5, userLogin.getLastLoginDate());
+
+      ResultSet rs = ps.getGeneratedKeys();
+
+      rs.next();
+
+      int id = rs.getInt(1);
+      userLogin.setUserLoginId(id);
+
+      return userLogin;
+
+  }
+
+  public UserLogin update(UserLogin userLogin) throws SQLException, IOException {
+
+    String sql = "UPDATE userlogin SET username = ?, passwordhash = ?, accountlock_fl = ? WHERE userid = ?";
+      PreparedStatement ps = setupPreparedStatement(sql);
+
+      ps.setString(1, userLogin.getUsername());
+      ps.setString(2, userLogin.getPasswordHash());
+      ps.setBoolean(3, userLogin.isAccountLockFl());
+      ps.setInt(4, userLogin.getUserId());
+
+      ps.executeUpdate();
+
+      return userLogin;
+  }
+
+  public boolean remove(int id) throws SQLException, IOException {
+      String sql = "DELETE FROM userlogin where userloginid = ?";
+      PreparedStatement ps = setupPreparedStatement(sql);
+      ps.setInt(1, id);
+
+      int count = ps.executeUpdate();
+      return count == 1;
   }
 
   private UserLogin userLoginMap(ResultSet rs) throws SQLException {

@@ -74,6 +74,14 @@ export class RegisterComponent implements OnInit {
       });
   }
 
+
+
+  // onSubmit(){
+  //   this._registerService.update(this.params).subscribe(
+  //     res => res.
+  //   )
+
+
 //   onSubmitLogin()
 // {
 //   this._registerService.submitLogin(this.params)

@@ -5,9 +5,12 @@
             <div class="account-wall">
                 <img class="profile-img" src="/assets/login-avatar.png"
                     alt="">
-                <form class="form-signin">
-                <input type="text" class="form-control" placeholder="Email" required autofocus>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <form class="form-signin" method="post">
+                <input type="text" class="form-control" placeholder="username" name="username" required autofocus >
+                <input type="text" class="form-control" placeholder="userId" required>
+                  <input type="password" class="form-control" placeholder="passwordHash" required>
+                  <input type="text" class="form-control" placeholder="accountLockFl" required autofocus >
+                  <input type="text" class="form-control" placeholder="lastLoginDate" required autofocus >
                 <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['home']">
                     Sign in</button>
                 </form>
@@ -15,4 +18,10 @@
             <a href='register' class="text-center new-account">Create an account</a>
         </div>
     </div>
+</div>
+
+<h2>UserName List</h2>
+
+<div *ngFor="let car of tllist">
+  {{car.username}}
 </div>

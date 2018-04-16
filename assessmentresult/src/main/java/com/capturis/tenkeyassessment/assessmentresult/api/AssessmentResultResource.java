@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Singleton
 @Produces(MediaType.APPLICATION_JSON)
@@ -33,5 +35,51 @@ public class AssessmentResultResource {
     return null;
   }
 
+  @GET
+  @Path("/all/assessmentresults")
+  public List<AssessmentResult> findAll() {
+    try {
+      return dataAccess.findAll();
+    }
+    catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+    return  null;
+  }
+
+  @POST
+  public AssessmentResult create(AssessmentResult assessmentResult) {
+    try {
+      return dataAccess.create(assessmentResult);
+    }
+    catch (SQLException | IOException e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
+  }
+
+  @PUT
+  @Path("/{id}")
+  public AssessmentResult update(AssessmentResult assessmentResult) {
+    try {
+      dataAccess.update(assessmentResult);
+      return assessmentResult;
+    }
+    catch (SQLException | IOException e) {
+      System.out.println((e.getMessage()));
+    }
+    return null;
+  }
+
+  @DELETE
+  @Path("/{id}")
+  public void remove (@PathParam("id") int id) {
+    try {
+      dataAccess.remove(id);
+    }
+    catch (SQLException | IOException e) {
+      System.out.println((e.getMessage()));
+    }
+  }
 
 }
