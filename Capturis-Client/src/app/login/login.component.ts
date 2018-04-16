@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {TempService} from "../services/temp.service";
-import {tempLogin} from "./login.model";
+import {TempService} from '../services/temp.service';
+import {tempLogin} from './login.model';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tempService.getById(1).subscribe(res =>{
+    this.tempService.getById(1).subscribe(res => {
 
       //let body = res.body;
       console.log(res);
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       console.log(this.tl);
     },
       err => {
-        console.error(err)
+        console.error(err);
     });
 
 

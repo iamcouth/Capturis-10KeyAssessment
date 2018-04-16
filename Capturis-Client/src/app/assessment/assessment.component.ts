@@ -3,11 +3,13 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import { DOCUMENT } from '@angular/common';
+import { AssessmentService } from './assessment.service';
 
 @Component({
   selector: 'app-assessment',
   templateUrl: './assessment.component.html',
-  styleUrls: ['./assessment.component.css']
+  styleUrls: ['./assessment.component.css'],
+  providers: [AssessmentService]
 })
 export class AssessmentComponent implements OnInit {
 
@@ -21,17 +23,19 @@ export class AssessmentComponent implements OnInit {
   displayTime;
   timer;
   sub;
+  keystrokes = 0;
+  backspaces = 0;
   a; b; c; d;
-  inputs: any[];
-  testValues = {};
+  inputValues: any[];
+  expectedValues: any[];
   @Output()
   change: EventEmitter<number> = new EventEmitter<number>();
   change2: EventEmitter<string> = new EventEmitter<string>();
 
   increment($event) {
-// this.inputs += $event.keyCode;
+    //this.inputValues += $event.keyCode;
     if (this.start === 0) {
-      this.timer = Observable.timer(1000, 1000);
+      this.timer = Observable.timer(1000, 100);
       this.start = 1;
       this.sub = this.timer.subscribe(t => {
         this.counter();
@@ -39,13 +43,14 @@ export class AssessmentComponent implements OnInit {
     }
 
     if ($event.keyCode === 13) {
-      this.testValues += this.a;
+      this.expectedValues += this.a;
       this.a = this.b;
       this.b = this.c;
       this.c = this.d;
       this.d = this.d = this.generateRandom(this.testType);
       this.index++;
       this.change2.emit(this.a);
+      this.inputValues += this.document.getElementById('in').value;
       this.document.getElementById('in').value = '';
 
     } else {
@@ -53,9 +58,16 @@ export class AssessmentComponent implements OnInit {
     }
 
   }
-  constructor(private router: Router, private route: ActivatedRoute, @Inject(DOCUMENT) private document) { }
+  constructor(private router: Router,
+  private route: ActivatedRoute,
+  @Inject(DOCUMENT) private document,
+  private _assessmentService: AssessmentService
+  ) { }
+
   redirect() {
-    this.router.navigate(['/assessment-results']);
+
+    this._assessmentService.processData(this.inputValues, this.expectedValues, this.backspaces, this.keystrokes).subscribe(res => {console.log(res)});
+    //this.router.navigate(['/assessment-results']);
   }
   generateRandom(x) {
 

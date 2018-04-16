@@ -22,13 +22,13 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 
 import { AdminComponent } from './admin/admin.component';
 
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatButtonModule, MatInputModule } from '@angular/material';
 
 import { MatCardModule } from '@angular/material/card';
 
-import { RegisterService } from "./register/register.service";
+import { RegisterService } from './register/register.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 

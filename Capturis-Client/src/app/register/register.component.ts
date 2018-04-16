@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {DOCUMENT} from "@angular/common";
-import {EmailValidator} from "@angular/forms";
-import {RegisterService} from "./register.service";
-import {AssessmentUser} from "./register.model";
+import {DOCUMENT} from '@angular/common';
+import {EmailValidator} from '@angular/forms';
+import {RegisterService} from './register.service';
+import {AssessmentUser} from './register.model';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +14,7 @@ import {AssessmentUser} from "./register.model";
 export class RegisterComponent implements OnInit {
 
   params: AssessmentUser = new AssessmentUser();
-  serverResponse: string = '';
+  serverResponse = '';
   validateFields() {
     if (this.document.getElementById('first_name').value === '') {
       this.document.getElementById('first_name').style.border = '1px solid #ff0000';
@@ -67,10 +67,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
     this._registerService.getUserById(1).subscribe(res => {
-      console.log(res)
+      console.log(res);
     },
       err => {
-        console.error(err)
+        console.error(err);
       });
   }
 
