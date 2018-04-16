@@ -6,11 +6,11 @@
                 <img class="profile-img" src="/assets/login-avatar.png"
                     alt="">
                 <form class="form-signin" method="post">
-                <input type="text" class="form-control" placeholder="username" name="username" required autofocus >
-                <input type="text" class="form-control" placeholder="userId" required>
-                  <input type="password" class="form-control" placeholder="passwordHash" required>
-                  <input type="text" class="form-control" placeholder="accountLockFl" required autofocus >
-                  <input type="text" class="form-control" placeholder="lastLoginDate" required autofocus >
+                <input type="text" class="form-control" placeholder="username" id="username" name="username" required autofocus [(ngModel)]="params.username">
+                <input type="text" class="form-control" placeholder="userId" required [(ngModel)]="params.userId">
+                  <input type="password" class="form-control" placeholder="passwordHash" required [(ngModel)]="params.passwordHash">
+                  <input type="text" class="form-control" placeholder="accountLockFl" required [(ngModel)]="params.accountLockFl">
+                  <input type="text" class="form-control" placeholder="lastLoginDate" required [(ngModel)]="params.lastLoginDate">
                 <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['home']">
                     Sign in</button>
                 </form>
@@ -25,3 +25,5 @@
 <div *ngFor="let car of tllist">
   {{car.username}}
 </div>
+
+<h3>Server Response: {{serverResponse}}</h3>

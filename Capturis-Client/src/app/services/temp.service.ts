@@ -39,7 +39,8 @@ export class TempService{
     const options: any = {
       observe: 'response',
     };
+    let body = JSON.stringify(tLogin)
     console.log(tLogin);
-    return this.http.post(MASTER_PATH, tLogin, options);
+    return this.http.post(MASTER_PATH, body, options);
   }
 }

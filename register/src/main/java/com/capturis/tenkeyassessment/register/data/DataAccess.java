@@ -46,29 +46,37 @@ public AssessmentUser getUserById(int id) throws SQLException{
   }
 
   public AssessmentUser create(AssessmentUser assessmentUser) throws SQLException, IOException {
-    String sql = "INSERT INTO assessmentuser (firstname, lastname, emailaddress, phonenumber, street, city, state, zipcode, country, jobcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO assessmentuser (firstname, lastname, emailaddress, phonenumber, roleid, createddate, street, city, state, zipcode, country, jobcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     PreparedStatement ps = setupPreparedStatement(sql);
 
     ps.setString(1, assessmentUser.getFirstName());
     ps.setString(2, assessmentUser.getLastName());
     ps.setString(3, assessmentUser.getEmailAddress());
     ps.setString(4, assessmentUser.getPhoneNumber());
-    ps.setString(5, assessmentUser.getStreet());
-    ps.setString(6, assessmentUser.getCity());
-    ps.setString(7, assessmentUser.getState());
-    ps.setString(8, assessmentUser.getZipCode());
-    ps.setString(9, assessmentUser.getCountry());
-    ps.setString(10, assessmentUser.getJobCode());
+    ps.setInt(5, 1);
+    ps.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+    ps.setString(7, assessmentUser.getStreet());
+    ps.setString(8, assessmentUser.getCity());
+    ps.setString(9, assessmentUser.getState());
+    ps.setString(10, assessmentUser.getZipCode());
+    ps.setString(11, assessmentUser.getCountry());
+    ps.setString(12, assessmentUser.getJobCode());
 
+
+    ps.executeUpdate();
 
     ResultSet rs = ps.getGeneratedKeys();
 
-    rs.next();
+    if(rs.next()){
+      int id = rs.getInt(1);
+      assessmentUser.setUserId(id);
 
-    int id = rs.getInt(1);
-    assessmentUser.setUserId(id);
+      return assessmentUser;
+    }
 
-    return assessmentUser;
+    else return null;
+
+
 
   }
 
@@ -95,7 +103,7 @@ public AssessmentUser getUserById(int id) throws SQLException{
   }
 
   public boolean remove(int id) throws SQLException, IOException {
-    String sql = "DELETE FROM assessmentuser where userid = ?";
+    String sql = "DELETE FROM asse where userloginid = ?";
     PreparedStatement ps = setupPreparedStatement(sql);
     ps.setInt(1, id);
 

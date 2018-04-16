@@ -48,6 +48,7 @@ public class RegisterResource {
   }
 
   @POST
+  @Path("/register")
   public AssessmentUser create(AssessmentUser assessmentUser) {
     try {
       return dataAccess.create(assessmentUser);

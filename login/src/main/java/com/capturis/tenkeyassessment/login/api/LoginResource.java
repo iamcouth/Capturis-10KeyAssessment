@@ -51,6 +51,9 @@ public LoginResource(DataAccess dataAccess) {
 }
 
   @POST
+  @Path("/post")
+  @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
   public UserLogin create(UserLogin userLogin) {
   try {
     return dataAccess.create(userLogin);

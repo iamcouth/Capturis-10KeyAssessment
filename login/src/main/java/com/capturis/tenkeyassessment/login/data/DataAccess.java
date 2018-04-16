@@ -13,6 +13,7 @@ public class DataAccess extends Connection
 {
 
     private final Statement statement;
+    private PreparedStatement ps;
 
     @Inject
     public DataAccess() throws SQLException, IOException {
@@ -69,7 +70,7 @@ public class DataAccess extends Connection
 
   public UserLogin create(UserLogin userLogin) throws SQLException, IOException {
     String sql = "INSERT INTO userlogin (username, userid, passwordhash, accountlock_fl, lastlogindate) VALUES (?, ?, ?, ?, ?)";
-      PreparedStatement ps = setupPreparedStatement(sql);
+      ps = setupPreparedStatement(sql);
 
       ps.setString(1, userLogin.getUsername());
       ps.setInt(2, userLogin.getUserId());
@@ -77,6 +78,7 @@ public class DataAccess extends Connection
       ps.setBoolean(4, userLogin.isAccountLockFl());
       ps.setTimestamp(5, userLogin.getLastLoginDate());
 
+      ps.executeUpdate();
       ResultSet rs = ps.getGeneratedKeys();
 
       rs.next();
