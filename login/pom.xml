@@ -18,6 +18,11 @@
       <artifactId>jbcrypt</artifactId>
       <version>0.4</version>
     </dependency>
+    <dependency>
+      <groupId>com.capturis.tenkeyassessment</groupId>
+      <artifactId>register</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
     <dependency>
       <groupId>com.google.code.gson</groupId>

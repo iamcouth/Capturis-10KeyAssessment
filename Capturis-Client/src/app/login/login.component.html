@@ -7,10 +7,7 @@
                     alt="">
                 <form class="form-signin" method="post">
                 <input type="text" class="form-control" id="username" name="username" required autofocus [(ngModel)]="tl.username">
-                  <input type="text" class="form-control" name="userId" [(ngModel)]="tl.userId" required>
                   <input type="password" class="form-control" name="passwordHash" required [(ngModel)]="tl.passwordHash">
-                  <input type="text" class="form-control" name="accountLockFl" required [(ngModel)]="tl.accountLockFl">
-                  <input type="text" class="form-control" name="lastLoginDate" required [(ngModel)]="tl.lastLoginDate">
                 <button (click)="submitLogin()" class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['home']">
                     Sign in</button>
                 </form>
@@ -20,10 +17,10 @@
     </div>
 </div>
 
-<h2>UserName List</h2>
+<!--<h2>UserName List</h2>-->
 
-<div *ngFor="let car of tllist">
-  {{car.username}}
-</div>
+<!--<div *ngFor="let car of tllist">-->
+  <!--{{car.username}}-->
+<!--</div>-->
 
-<h3>Server Response: {{serverResponse}}</h3>
+<!--<h3>Server Response: {{serverResponse}}</h3>-->

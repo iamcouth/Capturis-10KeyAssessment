@@ -2,6 +2,7 @@ package com.capturis.tenkeyassessment.login.api;
 
 import com.capturis.tenkeyassessment.login.data.DataAccess;
 import com.capturis.tenkeyassessment.login.model.UserLogin;
+import com.capturis.tenkeyassessment.register.models.AssessmentUser;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -50,19 +51,34 @@ public LoginResource(DataAccess dataAccess) {
   return  null;
 }
 
+//  @POST
+//  @Path("/post")
+//  @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//  @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+//  public UserLogin create(UserLogin userLogin) {
+//  try {
+//    return dataAccess.login(userLogin);
+//  }
+//  catch (SQLException | IOException e) {
+//    System.out.println(e.getMessage());
+//  }
+//  return null;
+//}
+
   @POST
-  @Path("/post")
+  @Path("/authenticate")
   @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-  public UserLogin create(UserLogin userLogin) {
+
+  public AssessmentUser login(UserLogin userLogin) {
   try {
-    return dataAccess.create(userLogin);
+    return dataAccess.authenticate(userLogin.getUsername(), userLogin.getPasswordHash());
   }
   catch (SQLException | IOException e) {
     System.out.println(e.getMessage());
   }
   return null;
-}
+  }
 
   @PUT
   @Path("/{id}")

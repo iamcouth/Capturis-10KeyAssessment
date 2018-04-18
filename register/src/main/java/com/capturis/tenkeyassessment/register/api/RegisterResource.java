@@ -23,7 +23,7 @@ public class RegisterResource {
   public RegisterResource (DataAccess dataAccess) {this.dataAccess = dataAccess;}
 
   @GET
-  @Path("/register/{id}")
+  @Path("/getuser/{id}")
   public AssessmentUser getById(@PathParam("id") int id) {
     try{
       return dataAccess.getUserById(id);

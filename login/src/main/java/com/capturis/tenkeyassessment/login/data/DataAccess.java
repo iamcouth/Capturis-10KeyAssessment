@@ -2,6 +2,7 @@ package com.capturis.tenkeyassessment.login.data;
 
 import com.capturis.tenkeyassessment.login.model.UserLogin;
 import com.capturis.tenkeyassessment.login.sql.Connection;
+import com.capturis.tenkeyassessment.register.models.AssessmentUser;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.inject.Inject;
@@ -52,6 +53,40 @@ public class DataAccess extends Connection
     }
   }
 
+  public AssessmentUser authenticate(String username, String password) throws SQLException, IOException {
+      String sql = "SELECT * FROM userlogin WHERE username=?";
+    ps = setupPreparedStatement(sql);
+      ps.setString(1, username);
+    ResultSet rs = ps.executeQuery();
+      if(rs.next()){
+        UserLogin userLogin = userLoginMap(rs);
+        String sql1 = "SELECT * FROM userlogin WHERE userid = ?";
+        ps = setupPreparedStatement(sql1);
+        ps.setInt(1, userLogin.getUserId());
+        ResultSet rs1 = ps.executeQuery();
+        if(rs1.next()) {
+          UserLogin ul2 = userLoginMap(rs1);
+          String plainPass = password;
+          if(BCrypt.checkpw(plainPass, ul2.getPasswordHash()))
+          {
+            String sql2 = "SELECT * FROM assessmentuser WHERE userid = ?";
+            ps = setupPreparedStatement(sql2);
+            ps.setInt(1, ul2.getUserId());
+            ResultSet rs2 = ps.executeQuery();
+            if(rs2.next()) {
+              AssessmentUser au = assessmentUserMap(rs2);
+              return au;
+            }
+          }
+        }
+        else {
+          return null;
+        }
+
+      }
+      return null;
+    }
+
   public List<UserLogin> findAll() throws SQLException{
 
       List<UserLogin> list = new ArrayList<UserLogin>();
@@ -65,35 +100,35 @@ public class DataAccess extends Connection
       return list;
   }
 
-  public UserLogin save(UserLogin userLogin) throws SQLException, IOException {
-      return userLogin.getUserId() > 0 ? update(userLogin) : create(userLogin);
-  }
+//  public UserLogin save(UserLogin userLogin) throws SQLException, IOException {
+//      return userLogin.getUserId() > 0 ? update(userLogin) : create(userLogin);
+//  }
 
-  public UserLogin create(UserLogin userLogin) throws SQLException, IOException {
-    String sql = "INSERT INTO userlogin (username, userid, passwordhash, accountlock_fl, lastlogindate) VALUES (?, ?, ?, ?, ?)";
-      ps = setupPreparedStatement(sql);
-
-    String hashedpw = BCrypt.hashpw(userLogin.getPasswordHash(), BCrypt.gensalt());
-
-      ps.setString(1, userLogin.getUsername());
-      ps.setInt(2, userLogin.getUserId());
-      ps.setString(3, hashedpw);
-      ps.setBoolean(4, userLogin.isAccountLockFl());
-      ps.setTimestamp(5, userLogin.getLastLoginDate());
-
-      ps.executeUpdate();
-      ResultSet rs = ps.getGeneratedKeys();
-
-      if(rs.next()) {
-
-        int id = rs.getInt(1);
-        userLogin.setUserLoginId(id);
-
-        return userLogin;
-      }
-
-      else return null;
-  }
+//  public UserLogin create(UserLogin userLogin) throws SQLException, IOException {
+//    String sql = "INSERT INTO userlogin (username, userid, passwordhash, accountlock_fl, lastlogindate) VALUES (?, ?, ?, ?, ?)";
+//      ps = setupPreparedStatement(sql);
+//
+////    String hashedpw = BCrypt.hashpw(userLogin.getPasswordHash(), BCrypt.gensalt());
+//
+//      ps.setString(1, userLogin.getUsername());
+//      ps.setInt(2, userLogin.getUserId());
+//      ps.setString(3, userLogin.getPasswordHash());
+//      ps.setBoolean(4, userLogin.isAccountLockFl());
+//      ps.setTimestamp(5, userLogin.getLastLoginDate());
+//
+//      ps.executeUpdate();
+//      ResultSet rs = ps.getGeneratedKeys();
+//
+//      if(rs.next()) {
+//
+//        int id = rs.getInt(1);
+//        userLogin.setUserLoginId(id);
+//
+//        return userLogin;
+//      }
+//
+//      else return null;
+//  }
 
   public UserLogin update(UserLogin userLogin) throws SQLException, IOException {
 
@@ -138,6 +173,39 @@ public class DataAccess extends Connection
 
     return userLogin;
 
+  }
+  private AssessmentUser assessmentUserMap(ResultSet rs) throws  SQLException{
+
+    int userId = rs.getInt("userid");
+    String firstName = rs.getString("firstname");
+    String lastName = rs.getString("lastname");
+    String emailAddress = rs.getString("emailaddress");
+    String phoneNumber = rs.getString("phonenumber");
+    int roleId = rs.getInt("roleid");
+    Timestamp createdDate = rs.getTimestamp("createddate");
+    String street = rs.getString("street");
+    String city = rs.getString("city");
+    String state = rs.getString("state");
+    String zipCode = rs.getString("zipcode");
+    String country = rs.getString("country");
+    String jobCode = rs.getString("jobcode");
+
+    AssessmentUser assessmentUser = new AssessmentUser();
+    assessmentUser.setUserId(userId);
+    assessmentUser.setFirstName(firstName);
+    assessmentUser.setLastName(lastName);
+    assessmentUser.setEmailAddress(emailAddress);
+    assessmentUser.setPhoneNumber(phoneNumber);
+    assessmentUser.setRoleId(roleId);
+    assessmentUser.setCreatedDate(createdDate);
+    assessmentUser.setStreet(street);
+    assessmentUser.setCity(city);
+    assessmentUser.setState(state);
+    assessmentUser.setZipCode(zipCode);
+    assessmentUser.setCountry(country);
+    assessmentUser.setJobCode(jobCode);
+
+    return assessmentUser;
   }
 
 }
