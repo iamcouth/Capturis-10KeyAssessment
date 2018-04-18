@@ -11,7 +11,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="lastName">First name</label>
-                          <input type="text" class="form-control" id="firstName" name="firstName" required [(ngModel)]="au.firstName">
+                          <input type="text" class="form-control" id="firstName" name="firstName" autofocus required [(ngModel)]="au.firstName">
                         </div>
 
                         <div class="form-group col-md-6">
@@ -47,7 +47,7 @@
 
                       <div class="form-group col-md-6">
                         <label for="">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" required autofocus [(ngModel)]="au.username">
+                        <input type="text" class="form-control" id="username" name="username" required [(ngModel)]="au.username">
                       </div>
                         <div class="form-group col-md-6">
                             <label for="passwordHash">Password</label>
@@ -66,7 +66,7 @@
 
                     <div class="form-group">
                         <div class="submit-button">
-                            <button type="submit" class="btn btn-primary" (click) = "submitRegister()">
+                            <button type="submit" class="btn btn-primary" (click) = "submitRegister()" [routerLink]="['login']">
                                 Register
                             </button><br><br>
                             <a href="/login">Already have an account?</a>
@@ -78,3 +78,4 @@
 
         </div>
     </div>
+<!--<h3>Server Response: {{serverResponse}}</h3>-->
