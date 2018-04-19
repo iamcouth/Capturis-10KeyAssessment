@@ -1,6 +1,6 @@
-export class AssessmentUser
-{
+export class AssessmentUser {
   public userLoginId: number;
+  public userId: number;
   public firstName: string;
   public lastName: string;
   public emailAddress: string;

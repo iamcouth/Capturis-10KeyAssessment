@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, Inject } from '@angular/core';
+import { Component, OnInit, Input, Output, Inject, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -13,22 +14,17 @@ export class ManagerDashboardComponent implements OnInit {
   name;
   KPH;
   accuracy;
+  loadingIndicator = true;
+  reorderable = true;
+  rows = [ { name: 'test1' }, { name: 'test2' } , { name: 'test3' } ];
+  columns = [ { name: 'name' }];
 
-  search() {
-    this.jobCode = this.document.getElementById('search').value;
 
-    if (this.jobCode === '123') {
-      this.name = 'Jamie';
-      this.KPH = '10,000';
-      this.accuracy = '105%';
-    } else {
-      this.name = 'none';
-      this.KPH = '';
-      this.accuracy = '';
-    }
+
+   constructor() {
+
+
   }
-
-  constructor(@Inject(DOCUMENT) private document) { }
 
   ngOnInit() {
   }

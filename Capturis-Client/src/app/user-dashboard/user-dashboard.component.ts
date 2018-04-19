@@ -14,6 +14,7 @@ export class UserDashboardComponent implements OnInit {
 
   assessmentUser: AssessmentUser = {
     userLoginId: null,
+    userId: null,
     username: '',
     passwordHash: '',
     firstName: '',

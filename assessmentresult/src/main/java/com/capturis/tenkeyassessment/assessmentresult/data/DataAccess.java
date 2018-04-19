@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DataAccess extends Connection {
+
+  public class DataAccess extends Connection {
 
     private final Statement statement;
 
@@ -131,6 +132,19 @@ public class DataAccess extends Connection {
     return count == 1;
   }
 
+    public AssessmentResult getResults(int id) throws SQLException
+    {
+      String sql = "SELECT * FROM assessmentresult where assessmentid = " + id;
+      ResultSet rs = statement.executeQuery(sql);
+      if(rs.next())
+      {
+        return mapAssessmentResult(rs);
+      }
+      else
+      {
+        return null;
+      }
+    }
     private AssessmentResult mapAssessmentResult(ResultSet rs) throws SQLException{
 
       int assessmentResultId = rs.getInt("assessmentresultid");
@@ -161,7 +175,6 @@ public class DataAccess extends Connection {
 
       return assessmentResult;
     }
-
   private ManagerSummary mapManagerSummary(ResultSet rs) throws SQLException{
 
     String name = rs.getString("name");
@@ -184,5 +197,4 @@ public class DataAccess extends Connection {
 
     return managerSummary;
   }
-
   }

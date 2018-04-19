@@ -1,5 +1,4 @@
-export class tempLogin
-{
+export class tempLogin {
   public userLoginId: number;
   public username: string;
   public userId: number;

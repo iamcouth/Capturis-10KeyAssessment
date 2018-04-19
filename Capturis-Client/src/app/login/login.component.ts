@@ -39,7 +39,18 @@ export class LoginComponent implements OnInit {
     this.tempService.getAll().subscribe(data => {
       //console.log(data);
       this.tllist = data.body;
-    })
+    });
+
+    // this.tempService.getById(1).subscribe(res => {
+    //
+    //   //let body = res.body;
+    //   console.log(res);
+    //   this.tl = res.body;
+    //   console.log(this.tl);
+    // },
+    //   err => {
+    //     console.error(err);
+    // });
 
     //   console.log(res);
     //   this.tl = res.body;

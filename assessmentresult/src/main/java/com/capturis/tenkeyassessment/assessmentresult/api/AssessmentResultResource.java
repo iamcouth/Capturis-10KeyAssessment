@@ -52,13 +52,23 @@ public class AssessmentResultResource {
   public AssessmentResult create(AssessmentResult assessmentResult) {
     try {
       return dataAccess.create(assessmentResult);
+    } catch (SQLException | IOException e) {
     }
-    catch (SQLException | IOException e) {
+    return null;
+  }
+  @Path("/getResults")
+  public AssessmentResult getResults(int assessmentID)
+  {
+    try
+    {
+      return dataAccess.getResults(assessmentID);
+    }
+    catch (SQLException e)
+    {
       System.out.println(e.getMessage());
     }
     return null;
   }
-
   @PUT
   @Path("/{id}")
   public AssessmentResult update(AssessmentResult assessmentResult) {
