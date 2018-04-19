@@ -10,5 +10,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>assessment</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>com.capturis.tenkeyassessment</groupId>
+      <artifactId>assessmentresult</artifactId>
+      <version>1.0</version>
+    </dependency>
+  </dependencies>
 
 </project>

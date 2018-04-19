@@ -33,5 +33,20 @@ public class AssessmentResultResource {
     return null;
   }
 
+  @GET
+  @Path("/getResults")
+  public AssessmentResult getResults(int assessmentID)
+  {
+    try
+    {
+      return dataAccess.getResults(assessmentID);
+    }
+    catch (SQLException e)
+    {
+      System.out.println(e.getMessage());
+    }
+    return null;
+  }
+
 
 }

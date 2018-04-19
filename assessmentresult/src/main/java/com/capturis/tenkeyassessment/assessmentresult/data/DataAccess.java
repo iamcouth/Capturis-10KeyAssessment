@@ -33,6 +33,19 @@ import java.sql.Statement;
       }
 
     }
+    public AssessmentResult getResults(int id) throws SQLException
+    {
+      String sql = "SELECT * FROM assessmentresult where assessmentid = " + id;
+      ResultSet rs = statement.executeQuery(sql);
+      if(rs.next())
+      {
+        return mapAssessmentResult(rs);
+      }
+      else
+      {
+        return null;
+      }
+    }
 
     private AssessmentResult mapAssessmentResult(ResultSet rs) throws SQLException{
 

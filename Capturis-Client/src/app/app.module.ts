@@ -32,7 +32,7 @@ import { RegisterService } from './register/register.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
-/*import { BotDetectCaptchaModule } from 'angular-captcha';*/
+import { BotDetectCaptchaModule } from 'angular-captcha';
 
 @NgModule({
   declarations: [

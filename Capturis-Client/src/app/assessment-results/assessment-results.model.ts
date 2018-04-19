@@ -1,11 +1,11 @@
-export class Assessment {
+export class AssessmentResults {
   public userId: number;
   public dateTaken: Date;
   public timeGiven: number;
   public typeId: number;
   public keystrokes: number;
+  public kph: number;
   public backspaces: number;
-  public inputValues:string[];
-  public expectedValues:string[];
-  public enterCount: number;
+  public accuracy: number;
+  public assessmentId: number;
 }

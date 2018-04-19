@@ -10,6 +10,8 @@ export class AssessmentResultsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let test = sessionStorage.getItem("assessmentid");
+    console.log(test);
   }
 
 }

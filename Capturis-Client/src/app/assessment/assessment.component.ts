@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import { DOCUMENT } from '@angular/common';
 import { AssessmentService } from './assessment.service';
+import { Assessment } from './assessment.model';
+
 
 @Component({
   selector: 'app-assessment',
@@ -13,12 +15,13 @@ import { AssessmentService } from './assessment.service';
 })
 export class AssessmentComponent implements OnInit {
 
-  @ViewChild('in') input: string;
-  @Input()
+  assessment: Assessment;
   testType;
   testDesc;
+  enterCount = 0;
   start = 0;
   index = 0;
+  timeOfTest;
   timeLeft;
   displayTime;
   timer;
@@ -26,14 +29,13 @@ export class AssessmentComponent implements OnInit {
   keystrokes = 0;
   backspaces = 0;
   a; b; c; d;
-  inputValues: any[];
-  expectedValues: any[];
+  inputValues:string[] = new Array(500);
+  expectedValues:string[] = new Array(500);
   @Output()
   change: EventEmitter<number> = new EventEmitter<number>();
   change2: EventEmitter<string> = new EventEmitter<string>();
 
   increment($event) {
-    //this.inputValues += $event.keyCode;
     if (this.start === 0) {
       this.timer = Observable.timer(1000, 100);
       this.start = 1;
@@ -43,20 +45,22 @@ export class AssessmentComponent implements OnInit {
     }
 
     if ($event.keyCode === 13) {
-      this.expectedValues += this.a;
+      this.expectedValues[this.enterCount] = this.a;
+      this.inputValues[this.enterCount] = this.document.getElementById('in').value;
       this.a = this.b;
       this.b = this.c;
       this.c = this.d;
       this.d = this.d = this.generateRandom(this.testType);
       this.index++;
+      this.enterCount++;
       this.change2.emit(this.a);
-      this.inputValues += this.document.getElementById('in').value;
       this.document.getElementById('in').value = '';
 
+    } else if ($event.keyCode === 8) {
+        this.backspaces++;
     } else {
-
-    }
-
+        this.keystrokes++;
+      }
   }
   constructor(private router: Router,
   private route: ActivatedRoute,
@@ -65,13 +69,29 @@ export class AssessmentComponent implements OnInit {
   ) { }
 
   redirect() {
+    this.expectedValues[this.enterCount] = this.a;
+    this.inputValues[this.enterCount] = this.document.getElementById('in').value;
+    this.enterCount++;
+    this.assessment = {
+    userId: 0,
+    dateTaken: new Date(),
+    timeGiven: this.timeOfTest,
+    typeId: this.testType,
+    keystrokes: this.keystrokes,
+    backspaces: this.backspaces,
+    inputValues: this.inputValues,
+    expectedValues: this.expectedValues,
+    enterCount: this.enterCount
+  }
 
-    this._assessmentService.processData(this.inputValues, this.expectedValues, this.backspaces, this.keystrokes).subscribe(res => {console.log(res)});
-    //this.router.navigate(['/assessment-results']);
+    let id: any;
+    this._assessmentService.processData(this.assessment).subscribe(res => {console.log(res)});
+    sessionStorage.setItem("assessmentid", id);
+    this.router.navigate(['/assessment-results']);
   }
   generateRandom(x) {
 
-    if (x === 0) {
+    if (x === 4) {
       x = Math.floor(Math.random() * Math.floor(3)) + 1;
     }
     if (x === 1) {
@@ -129,18 +149,18 @@ export class AssessmentComponent implements OnInit {
 
   getTestType(x) {
 
-    if (x === ':date') {
-      this.testDesc = 'Date Format';
+    if (x === ':1') {
+      this.testDesc = 'Whole Number';
       return 1;
-    } else if (x === ':decimal') {
+    } else if (x === ':2') {
       this.testDesc = 'Decimal Number';
       return 2;
-    } else if (x === ':whole') {
-      this.testDesc = 'Whole Number';
+    } else if (x === ':3') {
+      this.testDesc = 'Date Format';
       return 3;
     } else {
       this.testDesc = 'Mixed Format';
-      return 0;
+      return 4;
     }
 
   }
@@ -148,12 +168,15 @@ export class AssessmentComponent implements OnInit {
   getTestTime(x) {
     if (x === ':1') {
       this.displayTime = '1:00';
+      this.timeOfTest = 1;
       return 60;
     } else if (x === ':3') {
       this.displayTime = '3:00';
+      this.timeOfTest = 3;
       return 180;
     } else if (x === ':5') {
       this.displayTime = '5:00';
+      this.timeOfTest = 5;
       return 300;
     } else {
       this.displayTime = '1:00';
