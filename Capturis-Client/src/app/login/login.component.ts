@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TempService} from "../services/temp.service";
 import {tempLogin} from "./login.model";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,8 +19,9 @@ export class LoginComponent implements OnInit {
 }
   tllist: Array<any>;
   serverResponse: string = '';
+  authentication_error = false;
   //sessionId: number = parseInt(sessionStorage.getItem('userId'))
-  constructor(private tempService: TempService) {
+  constructor(private tempService: TempService, private router: Router) {
   }
 
   ngOnInit() {
@@ -52,15 +54,19 @@ export class LoginComponent implements OnInit {
   submitLogin() {
     this.tempService.postLogin(this.tl).subscribe(res => {
       this.serverResponse = res;
+      sessionStorage.clear();
       if(res != null)
       {
+        this.authentication_error = true;
         //console.log("yay");
         //console.log(this.tl);
         sessionStorage.setItem("userid", res.userId)
         console.log(sessionStorage);
+        this.router.navigate(['home']);
       }
       else{
-        console.log("boo");
+        //location.reload();
+        console.log(this.authentication_error);
       }
       //console.log(res);
       },

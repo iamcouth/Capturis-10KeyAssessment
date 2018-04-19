@@ -8,13 +8,17 @@
                 <form class="form-signin" method="post">
                 <input type="text" class="form-control" id="username" name="username" required autofocus [(ngModel)]="tl.username">
                   <input type="password" class="form-control" name="passwordHash" required [(ngModel)]="tl.passwordHash">
-                <button (click)="submitLogin()" class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['home']">
+                <button (click)="submitLogin()" class="btn btn-lg btn-primary btn-block" type="submit">
                     Sign in</button>
                 </form>
             </div>
             <a href='register' class="text-center new-account">Create an account</a>
         </div>
     </div>
+</div>
+
+<div *ngIf="authentication_error" class="alert alert-success box-msg" role="alert">
+  <strong>List Saved!</strong> Your changes has been saved.
 </div>
 
 <!--<h2>UserName List</h2>-->

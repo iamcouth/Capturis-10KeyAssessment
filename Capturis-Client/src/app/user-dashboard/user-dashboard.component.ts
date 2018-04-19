@@ -29,7 +29,7 @@ export class UserDashboardComponent implements OnInit {
     roleId: 0,
     country: ''
   }
-  sessionId = sessionStorage.getItem("userid");
+  sessionId = parseInt(sessionStorage.getItem("userid"));
 
     constructor(private router: Router, private _userdashboardservice: UserDashboardService) {
 
@@ -37,7 +37,7 @@ export class UserDashboardComponent implements OnInit {
     }
 
   ngOnInit() {
-    this._userdashboardservice.getById(parseInt(this.sessionId)).subscribe(res =>{
+    this._userdashboardservice.getById(this.sessionId).subscribe(res =>{
 
       //let body = res.body;
       console.log(res);
