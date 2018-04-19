@@ -40,6 +40,7 @@ export class UserDashboardComponent implements OnInit {
     this._userdashboardservice.getById(this.sessionId).subscribe(res =>{
 
       //let body = res.body;
+      //
       console.log(res);
       this.assessmentUser = res.body;
       console.log(this.assessmentUser);
