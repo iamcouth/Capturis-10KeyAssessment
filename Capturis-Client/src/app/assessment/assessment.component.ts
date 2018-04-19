@@ -72,7 +72,7 @@ export class AssessmentComponent implements OnInit {
     this.inputValues[this.enterCount] = this.document.getElementById('in').value;
     this.enterCount++;
     this.assessment = {
-    userId: 0,
+    userId: 1,
     dateTaken: new Date(),
     timeGiven: this.timeOfTest,
     typeId: this.testType,
@@ -84,7 +84,7 @@ export class AssessmentComponent implements OnInit {
   }
 
     let id: any;
-    this._assessmentService.processData(this.assessment).subscribe(res => {console.log(res)});
+    this._assessmentService.processData(this.assessment).subscribe(res => {id = (res)});
     sessionStorage.setItem("assessmentid", id);
     this.router.navigate(['/assessment-results']);
   }

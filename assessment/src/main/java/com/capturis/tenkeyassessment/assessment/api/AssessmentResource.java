@@ -103,7 +103,7 @@ public class AssessmentResource {
     try {
       returnID = dataAccess.saveAssessment(t);
     }
-    catch (SQLException e) {
+    catch (Exception e) {
       System.out.println(e.getMessage() + " save assessment error");
     }
 
@@ -137,7 +137,7 @@ public class AssessmentResource {
 
     try {
       dataAccess.saveAssessmentResult(a);
-    } catch (SQLException e) {
+    } catch (Exception e) {
       System.out.println(e.getMessage() + " Save result error");
     }
 

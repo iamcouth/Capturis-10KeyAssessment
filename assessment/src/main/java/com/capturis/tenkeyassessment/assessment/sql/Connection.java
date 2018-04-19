@@ -16,10 +16,12 @@ public class Connection {
     java.sql.Connection connection = setUpCommonConnection();
     return connection.createStatement();
   }
+
   public PreparedStatement setupPreparedStatement(String sql) throws SQLException, IOException {
     java.sql.Connection connection = setUpCommonConnection();
     return connection.prepareStatement(sql);
   }
+
   private java.sql.Connection setUpCommonConnection() throws SQLException, IOException {
 
     return DriverManager.getConnection(DB_CONN, DB_USER, DB_PW);

@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 public class DataAccess extends Connection {
 
   private final Statement statement;
+  private PreparedStatement ps;
 
   @Inject
   public DataAccess() throws SQLException, IOException {
@@ -93,42 +94,60 @@ public class DataAccess extends Connection {
     return count == 1;
   }
 
-  public int saveAssessment(Assessment a) throws SQLException
+  public int saveAssessment(Assessment a) throws SQLException, IOException
   {
-    String sql = "INSERT INTO assessment (userid, datetaken, timegiven, typeid) VALUES ("
-      + a.getUserId() + ", " + a.getDateTaken() + ", " + a.getTimeGiven() + ", " + a.getTypeId() + ")";
+    String sql = "INSERT INTO assessment (userid, datetaken, timegiven, typeid) " +
+      "VALUES (?, ?, ?, ?) RETURNING assessmentid";
 
-    ResultSet rs = statement.executeQuery(sql);
-    if(rs.next())
-    {
-      String sql2 = "SELECT assessmentid from assessment where userid = " + a.getUserId() + " AND typeid = "
-      + a.getTypeId() + " ORDER BY id DESC LIMIT 1";
+    try {
+      ps = setupPreparedStatement(sql);
+      ps.setInt(1, a.getUserId());
+      ps.setTimestamp(2, a.getDateTaken());
+      ps.setInt(3, a.getTimeGiven());
+      ps.setInt(4, a.getTypeId());
 
-      ResultSet rs2 = statement.executeQuery(sql2);
-      if(rs.next())
-      {
-        return rs2.getInt(0);
+      ResultSet rs = ps.executeQuery();
+      rs.next();
+      int id = rs.getInt(1);
+      a.setAssessmentId(id);
+      System.out.println(id);
+      return id;
+    }
+    catch (Exception e) {
+      if(e instanceof RuntimeException) {
+        throw e;
       }
-      else
-      {
-        return -1;
+      else {
+        throw new RuntimeException(e);
       }
     }
-    else
-    {
-      return -1;
-    }
-
   }
 
-  public void saveAssessmentResult(AssessmentResult result) throws SQLException
-  {
-    String sql = "INSERT INTO assessmentresult (userid, assessmentid, perfectcount, uncorrectedmistakes, backspacepresscount, " +
-      "kph, accuracy, linescompleted, totalkeystrokes) VALUES (" + result.getUserId() + ", " + result.getAssessmentId() + ", " + result.getPerfectCount()
-      + ", " + result.getUnCorrectedMistakes() + ", " + result.getBackspacePressCount() + ", " + result.getKph() + ", " + result.getAccuracy() + ", "
-      + result.getLinesCompleted() + ", " + result.getTotalKeyStrokes() + ")";
+  public void saveAssessmentResult(AssessmentResult result) throws SQLException, IOException {
+    String sql = "INSERT INTO assessmentresult (userid, assessmentid, perfectcount, uncorrectedmistakes," +
+      " backspacepresscount, kph, accuracy, linescompleted, totalkeystrokes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    ResultSet rs = statement.executeQuery(sql);
+    try {
+      ps = setupPreparedStatement(sql);
+      ps.setInt(1, result.getUserId());
+      ps.setInt(2, result.getAssessmentId());
+      ps.setInt(3, result.getPerfectCount());
+      ps.setInt(4, result.getUnCorrectedMistakes());
+      ps.setInt(5, result.getBackspacePressCount());
+      ps.setInt(6, result.getKph());
+      ps.setDouble(7, result.getAccuracy());
+      ps.setInt(8, result.getLinesCompleted());
+      ps.setInt(9, result.getTotalKeyStrokes());
+
+      ResultSet rs = ps.executeQuery();
+      rs.next();
+    } catch (Exception e) {
+      if (e instanceof RuntimeException) {
+        throw e;
+      } else {
+        throw new RuntimeException(e);
+      }
+    }
   }
 
   private Assessment mapAssessment(ResultSet rs) throws SQLException{
