@@ -9,7 +9,7 @@ import { AssessmentResults } from './assessment-results.model';
 const path = 'http://localhost:8080/api/assessmentresults';
 // Service related to assessment page
 @Injectable()
-export class AssessmentService {
+export class AssessmentResultService {
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +20,6 @@ export class AssessmentService {
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
 
-    return this.http.get(path + '/getResult' + arg1, options);
+    return this.http.get(path + '/getResults/' + arg1, options);
   }
 }

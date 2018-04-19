@@ -12,7 +12,7 @@ import java.sql.SQLException;
 @Singleton
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("assessmentresult")
+@Path("assessmentresults")
 public class AssessmentResultResource {
 
   private final DataAccess dataAccess;
