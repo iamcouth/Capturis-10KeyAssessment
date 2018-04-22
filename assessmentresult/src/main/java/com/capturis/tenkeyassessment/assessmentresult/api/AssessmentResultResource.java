@@ -3,6 +3,7 @@ package com.capturis.tenkeyassessment.assessmentresult.api;
 import com.capturis.tenkeyassessment.assessmentresult.data.DataAccess;
 import com.capturis.tenkeyassessment.assessmentresult.model.AssessmentResult;
 import com.capturis.tenkeyassessment.assessmentresult.model.ManagerSummary;
+import com.capturis.tenkeyassessment.assessmentresult.model.UserHistory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,7 +28,7 @@ public class AssessmentResultResource {
   @Path("/{id}")
   public AssessmentResult getAssessmentResultByUserId(@PathParam("id") int id) {
     try{
-      return dataAccess.getAssessmentByUserId(id);
+      return dataAccess.getAssessmentResultByUserId(id);
     }
     catch (SQLException e)
     {
@@ -43,9 +44,23 @@ public class AssessmentResultResource {
       return dataAccess.findAll();
     }
     catch (SQLException e) {
-      System.out.println(e.getMessage());
+      throw new RuntimeException(e);
+      //System.out.println(e.getMessage());
     }
-    return  null;
+    //return null;
+  }
+
+  @GET
+  @Path("/all/userhistory/{id}")
+  public List<UserHistory> findUserHistoryById(@PathParam("id") int id) {
+    try {
+      return dataAccess.getHistoryByUserId(id);
+    }
+    catch (SQLException e) {
+      throw new RuntimeException(e);
+      //System.out.println(e.getMessage());
+    }
+    //return null;
   }
 
   @POST

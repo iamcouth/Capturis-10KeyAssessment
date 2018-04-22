@@ -32,6 +32,8 @@ import { RegisterService } from './register/register.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+import { MatTableModule } from '@angular/material';
+
 import { BotDetectCaptchaModule } from 'angular-captcha';
 
 @NgModule({
@@ -53,7 +55,8 @@ import { BotDetectCaptchaModule } from 'angular-captcha';
     FormsModule,
     HttpClientModule,
     MatCardModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    MatTableModule
   ],
   providers: [RegisterService, EmailValidator],
   bootstrap: [AppComponent]

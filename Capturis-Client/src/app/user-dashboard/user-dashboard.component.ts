@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {tempLogin} from "../login/login.model";
 import {AssessmentUser} from "../register/register.model";
 import {UserDashboardService} from "./user-dashboard.service";
+import {UserHistory} from "./user-dashboard.model";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -12,6 +13,7 @@ import {UserDashboardService} from "./user-dashboard.service";
 })
 export class UserDashboardComponent implements OnInit {
 
+  displayedColumns = ['dateTaken', 'assessmentType', 'kph', 'accuracy', 'uncorrectedMistakes', 'backspacePressCount'];
   assessmentUser: AssessmentUser = {
     userLoginId: null,
     userId: null,
@@ -30,7 +32,10 @@ export class UserDashboardComponent implements OnInit {
     roleId: 0,
     country: ''
   }
+
+  userHistoryList: Array<any>;
   sessionId = parseInt(sessionStorage.getItem("userid"));
+  assessmentResultList: Array<any>;
 
     constructor(private router: Router, private _userdashboardservice: UserDashboardService) {
 
@@ -38,18 +43,34 @@ export class UserDashboardComponent implements OnInit {
     }
 
   ngOnInit() {
-    this._userdashboardservice.getById(this.sessionId).subscribe(res =>{
+    // this._userdashboardservice.getById(1).subscribe(res =>{
+    //
+    //   //let body = res.body;
+    //   //
+    //   console.log(res);
+    //   this.assessmentUser = res.body;
+    //   console.log(this.assessmentUser);
+    //   console.log(this.assessmentUser.firstName);
+    // },
+    //   err => {
+    //     console.error(err)
+    // });
 
-      //let body = res.body;
-      //
-      console.log(res);
-      this.assessmentUser = res.body;
-      console.log(this.assessmentUser);
-      console.log(this.assessmentUser.firstName);
+    // this._userdashboardservice.getAll().subscribe(data => {
+    //   //console.log(data);
+    //   this.assessmentResultList = data.body;
+    //   console.log(this.assessmentResultList);
+    // });
+
+    this._userdashboardservice.getUserHistory(this.sessionId).subscribe(res => {
+
+      this.userHistoryList = res.body;
+
     },
       err => {
-        console.error(err)
-    });
+      console.log(err);
+      })
+
   }
 
 }

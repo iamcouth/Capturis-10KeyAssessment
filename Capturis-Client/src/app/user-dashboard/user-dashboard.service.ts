@@ -3,24 +3,42 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
-const MASTER_PATH = 'http://localhost:8080/api/auth/';
+const MASTER_PATH = 'http://localhost:8080/api/';
 @Injectable()
 export class UserDashboardService {
-
 
   constructor(private http: HttpClient) {
   }
 
-  getById(id: number): Observable<any> {
+  // getById(id: number): Observable<any> {
+  //   const options: any = {
+  //     observe: 'response',
+  //   };
+  //   const req = this.http.get<any>(MASTER_PATH + 'assessmentresults/' + id, options);
+  //   //console.log(req);
+  //   return req;
+  //   //
+  //   //
+  //   // this.http
+  //   //   .get<any>(MASTER_PATH, {observe: 'response'});
+  // }
+
+  // getAll(): Observable<any> {
+  //   const options: any = {
+  //     observe: 'response',
+  //   };
+  //
+  //   const req = this.http.get<any>(MASTER_PATH + "assessmentresults/all/assessmentresults", options);
+  //   //console.log(req);
+  //   return req;
+  // }
+
+  getUserHistory(id: number): Observable<any> {
     const options: any = {
-      observe: 'response',
-    };
-    const req = this.http.get<any>(MASTER_PATH + 'getuser/' + id, options);
-    //console.log(req);
+          observe: 'response',
+        };
+
+    const req = this.http.get<any>(MASTER_PATH + "assessmentresults/all/userhistory/" + id, options);
     return req;
-    //
-    //
-    // this.http
-    //   .get<any>(MASTER_PATH, {observe: 'response'});
   }
 }

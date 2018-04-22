@@ -91,6 +91,14 @@
         left: 50%;
         transform: translateX(-50%);
       }
+      .historyTable
+      {
+        margin-top: 90px;
+        width: calc(100% - 12px);
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
       .logout {
       	font-size: 30px;
       	float:right;

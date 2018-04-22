@@ -72,6 +72,7 @@ export class AssessmentComponent implements OnInit {
     this.inputValues[this.enterCount] = this.document.getElementById('in').value;
     this.enterCount++;
     this.assessment = {
+      assessmentId: 0,
     userId: 1,
     dateTaken: new Date(),
     timeGiven: this.timeOfTest,
