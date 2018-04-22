@@ -35,7 +35,6 @@ export class UserDashboardComponent implements OnInit {
 
   userHistoryList: Array<any>;
   sessionId = parseInt(sessionStorage.getItem("userid"));
-  assessmentResultList: Array<any>;
 
     constructor(private router: Router, private _userdashboardservice: UserDashboardService) {
 
@@ -43,24 +42,18 @@ export class UserDashboardComponent implements OnInit {
     }
 
   ngOnInit() {
-    // this._userdashboardservice.getById(1).subscribe(res =>{
-    //
-    //   //let body = res.body;
-    //   //
-    //   console.log(res);
-    //   this.assessmentUser = res.body;
-    //   console.log(this.assessmentUser);
-    //   console.log(this.assessmentUser.firstName);
-    // },
-    //   err => {
-    //     console.error(err)
-    // });
+    this._userdashboardservice.getById(this.sessionId).subscribe(res =>{
 
-    // this._userdashboardservice.getAll().subscribe(data => {
-    //   //console.log(data);
-    //   this.assessmentResultList = data.body;
-    //   console.log(this.assessmentResultList);
-    // });
+      //let body = res.body;
+      //
+      console.log(res);
+      this.assessmentUser = res.body;
+      console.log(this.assessmentUser);
+      console.log(this.assessmentUser.firstName);
+    },
+      err => {
+        console.error(err)
+    });
 
     this._userdashboardservice.getUserHistory(this.sessionId).subscribe(res => {
 

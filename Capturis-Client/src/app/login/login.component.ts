@@ -68,15 +68,17 @@ export class LoginComponent implements OnInit {
       sessionStorage.clear();
       if(res != null)
       {
-        this.authentication_error = true;
-        //console.log("yay");
-        //console.log(this.tl);
-        sessionStorage.setItem("userid", res.userId)
-        console.log(sessionStorage);
-        this.router.navigate(['home']);
+        if(res.body.roleid == 1) {
+          sessionStorage.setItem("userid", res.userId)
+          console.log(sessionStorage);
+          this.router.navigate(['home']);
+        }
+        else {
+          this.router.navigate(['manager']);
+        }
       }
       else{
-        //location.reload();
+        this.authentication_error = true;
         console.log(this.authentication_error);
       }
       //console.log(res);

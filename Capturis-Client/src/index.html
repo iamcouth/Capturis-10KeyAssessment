@@ -94,6 +94,12 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script>
+    function logout() {
+      sessionStorage.clear();
+    }
+  </script>
+
 
 
 
@@ -132,6 +138,8 @@
                                 <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19"><a href="https://www.capturis.com/about-us/">About Us</a></li>
 
                                 <li id="menu-item-489" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-489"><a href="https://www.nisc.coop/careers/capturis/">Careers</a></li>
+
+                              <li id="logout" class="logout"><a href="/login" (click)="logout()">Logout</a></li>
 
                             </ul>
 
