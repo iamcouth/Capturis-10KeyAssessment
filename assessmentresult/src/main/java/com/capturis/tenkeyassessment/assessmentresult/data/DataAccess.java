@@ -5,6 +5,7 @@ import com.capturis.tenkeyassessment.assessmentresult.sql.Connection;
 
 import javax.inject.Inject;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,7 @@ import java.sql.Statement;
   public class DataAccess extends Connection {
 
     private final Statement statement;
+    private PreparedStatement ps;
 
     @Inject
     public DataAccess() throws SQLException, IOException {
@@ -20,15 +22,14 @@ import java.sql.Statement;
     }
 
 
-    public AssessmentResult getAssessmentByUserId(int id) throws SQLException{
+    public AssessmentResult getAssessmentByUserId(int id) throws SQLException {
 
       String sql = "SELECT * FROM assessmentresult where userid = " + id;
       ResultSet rs = statement.executeQuery(sql);
-      if (rs.next()) {
-        return mapAssessmentResult(rs);
+      if(rs.next()) {
+        return assessmentResultMap(rs);
       }
-      else
-      {
+      else {
         return null;
       }
 
@@ -39,7 +40,7 @@ import java.sql.Statement;
       ResultSet rs = statement.executeQuery(sql);
       if(rs.next())
       {
-        return mapAssessmentResult(rs);
+        return assessmentResultMap(rs);
       }
       else
       {
@@ -47,7 +48,7 @@ import java.sql.Statement;
       }
     }
 
-    private AssessmentResult mapAssessmentResult(ResultSet rs) throws SQLException{
+    private AssessmentResult assessmentResultMap(ResultSet rs) throws SQLException{
 
       int assessmentResultId = rs.getInt("assessmentresultid");
       int userId = rs.getInt("userid");

@@ -2,6 +2,7 @@ package com.capturis.tenkeyassessment.assessmentresult.sql;
 
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -16,6 +17,10 @@ public class Connection {
     return connection.createStatement();
   }
 
+  public PreparedStatement setupPreparedStatement(String sql) throws SQLException, IOException {
+    java.sql.Connection connection = setUpCommonConnection();
+    return connection.prepareStatement(sql);
+  }
   private java.sql.Connection setUpCommonConnection() throws SQLException, IOException {
 
     return DriverManager.getConnection(DB_CONN, DB_USER, DB_PW);

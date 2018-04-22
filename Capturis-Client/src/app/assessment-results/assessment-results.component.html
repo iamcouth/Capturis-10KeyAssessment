@@ -6,11 +6,11 @@
   <mat-card-content>
 
     <label class="kph">KPH</label>
-    <input type="text" id = 'in' name="in" value="10,000" class="kph">
+    <input type="text" id = 'in' name="in" value="{{ kph }}" class="kph">
     <label class="accuracy">Accuracy</label>
-    <input type="text" name = "num" class = "accuracy" value = "105%" readonly>
+    <input type="text" name = "num" class = "accuracy" value = "{{ accuracy }}%" readonly>
     <label class="backspaces">Backspaces</label>
-    <input type="text" id='clock' name= 'clock' class='backspaces' value= "0" readonly>
+    <input type="text" id='clock' name= 'clock' class='backspaces' value= "{{ backspaces }}" readonly>
 
   </mat-card-content>
   <!-- <mat-card-actions>

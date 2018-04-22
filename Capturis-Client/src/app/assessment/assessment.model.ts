@@ -5,7 +5,8 @@ export class Assessment {
   public typeId: number;
   public keystrokes: number;
   public backspaces: number;
-  public inputValues:string[];
-  public expectedValues:string[];
+  public inputValues: string[];
+  public expectedValues: string[];
   public enterCount: number;
+  public assessmentId: any;
 }

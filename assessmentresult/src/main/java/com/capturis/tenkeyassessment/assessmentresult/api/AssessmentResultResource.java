@@ -34,8 +34,8 @@ public class AssessmentResultResource {
   }
 
   @GET
-  @Path("/getResults")
-  public AssessmentResult getResults(int assessmentID)
+  @Path("/getResults/{id}")
+  public AssessmentResult getResults(@PathParam("id") int assessmentID)
   {
     try
     {

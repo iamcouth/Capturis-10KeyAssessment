@@ -36,6 +36,19 @@ public class AssessmentResource {
     }
     return null;
   }
+  @POST
+  @Path("/newassessment")
+  public int getNewAssessment(Assessment t)
+  {
+    int returnID = 0;
+    try {
+      returnID = dataAccess.saveAssessment(t);
+    }
+    catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return returnID;
+  }
 
   @POST
   @Path("/process")
@@ -56,12 +69,6 @@ public class AssessmentResource {
     errors += t.lastCheck(input[enterCount-1], expected[enterCount-1]);
     int KPH = keystrokes * (60/t.getTimeGiven());
     int returnID = 0;
-    try {
-      returnID = dataAccess.saveAssessment(t);
-    }
-    catch (Exception e) {
-      System.out.println(e.getMessage() + " save assessment error");
-    }
 
     AssessmentResult a = new AssessmentResult();
     a.setBackspacePressCount(backspaces);
@@ -71,20 +78,21 @@ public class AssessmentResource {
     a.setPerfectCount(0);
     a.setUnCorrectedMistakes(0);
     a.setLinesCompleted(0);
-    a.setAssessmentId(returnID);
+    a.setAssessmentId(t.getAssessmentId());
 
-    double keys = (double) keystrokes;
-    double errs = (double) errors;
-    System.out.println("errors: " + errs + "------- keystrokes: " + keys);
+    a.setUnCorrectedMistakes(errors);
+    System.out.println("errors: " + errors + "------- keystrokes: " + keystrokes);
     if(errors >= keystrokes)
     {
       a.setAccuracy(0);
     }
     else
     {
-      a.setAccuracy(((keys-errs)/keys)*100);
+      double accuracy = ((keystrokes-errors)/keystrokes)*100;
+      a.setAccuracy(accuracy);
+      System.out.println("Accuracy " + accuracy);
     }
-    System.out.println("Acc" + (keys-errs)/keys);
+
     System.out.println(a.getAccuracy());
     System.out.println("KPH" + KPH);
     System.out.println(a.getKph());
