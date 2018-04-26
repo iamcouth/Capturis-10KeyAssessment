@@ -38,7 +38,6 @@ export class AssessmentResultService {
     this.http.get(path + '/getResults/' + assessmentId, options).toPromise().then(
       res => {
         console.log(res);
-        return res.body;
       },
       msg => {
         reject(msg);

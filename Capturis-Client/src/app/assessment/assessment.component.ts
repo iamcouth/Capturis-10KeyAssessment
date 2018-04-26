@@ -90,8 +90,8 @@ export class AssessmentComponent implements OnInit {
     enterCount: this.enterCount,
     assessmentId: this.assessmentId
   }
-    sessionStorage.setItem("inputArray", this.inputValues);
-    sessionStorage.setItem("expectedArray", this.expectedValues);
+    sessionStorage.setItem("inputArray", JSON.stringify(this.inputValues));
+    sessionStorage.setItem("expectedArray", JSON.stringify(this.expectedValues));
     let id: any;
     this._assessmentService.processData(this.assessment).subscribe(res => {
       this.router.navigate(['/assessment-results'], { relativeTo: this.route });
