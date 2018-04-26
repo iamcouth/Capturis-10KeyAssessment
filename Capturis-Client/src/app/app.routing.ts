@@ -11,16 +11,16 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 
 
 const appRoutes: Routes = [
-    { path: '', component: UserDashboardComponent  },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'assessment/:type/:time', component: AssessmentComponent },
-    { path: 'assessment-results', component: AssessmentResultsComponent },
-    { path: 'home', component: UserDashboardComponent },
-    { path: 'manager', component: ManagerDashboardComponent },
+  { path: '', component: LoginComponent  },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'assessment/:type/:time', component: AssessmentComponent },
+  { path: 'assessment-results', component: AssessmentResultsComponent },
+  { path: 'home', component: UserDashboardComponent },
+  { path: 'manager', component: ManagerDashboardComponent },
 
-    // otherwise redirect to home
-    { path: '**', redirectTo: 'home' }
+  // otherwise redirect to home
+  { path: '**', redirectTo: 'home' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

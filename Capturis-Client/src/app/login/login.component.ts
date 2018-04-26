@@ -68,14 +68,14 @@ export class LoginComponent implements OnInit {
       sessionStorage.clear();
       if(res != null)
       {
-        if(res.body.roleid == 1) {
+        //if(res.body.roleid == 1) {
           sessionStorage.setItem("userid", res.userId)
           console.log(sessionStorage);
           this.router.navigate(['home']);
-        }
-        else {
-          this.router.navigate(['manager']);
-        }
+        //}
+        // else {
+        //   this.router.navigate(['manager']);
+        // }
       }
       else{
         this.authentication_error = true;

@@ -110,7 +110,6 @@ public class DataAccess extends Connection {
       rs.next();
       int id = rs.getInt(1);
       a.setAssessmentId(id);
-      System.out.println(id);
       return id;
     }
     catch (Exception e) {

@@ -3,7 +3,17 @@
   font-weight: bold;
   text-align: center;
 }
-
+.homeButton {
+  background-color: #4CAF50;
+  position: absolute;
+  left: 42%;
+  top: 85%;
+  width: 15%;
+  height: 7%;
+  float: right;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
 
 .example-card {
   width: 100%;
@@ -24,7 +34,7 @@ label.kph {
   position: absolute;
   height: 20%;
   top: 33%;
-  left: 12%;
+  left: 14%;
   width: 25%;
   border: none;
   font-size: 200%;
@@ -33,7 +43,7 @@ label.kph {
 
 label.accuracy{
   position: absolute;
-  left: 37%;
+  left: 36%;
   width: 25%;
   top: 33%;
   height: 20%;
@@ -96,5 +106,5 @@ input.backspaces {
   color: #4CAF50;
   text-align: center;
   font-weight: bold;
-  font-size: 300%;
+  font-size: 200%;
 }

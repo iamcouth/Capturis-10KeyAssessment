@@ -10,12 +10,16 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
   public class DataAccess extends Connection {
 
     private final Statement statement;
+    private PreparedStatement ps;
 
     @Inject
     public DataAccess() throws SQLException, IOException {
@@ -23,13 +27,14 @@ import java.util.List;
     }
 
 
-    public AssessmentResult getAssessmentResultByUserId(int id) throws SQLException {
+    public AssessmentResult getAssessmentByUserId(int id) throws SQLException {
 
       String sql = "SELECT * FROM assessmentresult where userid = " + id;
       ResultSet rs = statement.executeQuery(sql);
-      if (rs.next()) {
+      if(rs.next()) {
         return mapAssessmentResult(rs);
-      } else {
+      }
+      else {
         return null;
       }
 

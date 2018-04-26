@@ -28,7 +28,7 @@ public class AssessmentResultResource {
   @Path("/{id}")
   public AssessmentResult getAssessmentResultByUserId(@PathParam("id") int id) {
     try{
-      return dataAccess.getAssessmentResultByUserId(id);
+      return dataAccess.getAssessmentByUserId(id);
     }
     catch (SQLException e)
     {
@@ -71,8 +71,9 @@ public class AssessmentResultResource {
     }
     return null;
   }
-  @Path("/getResults")
-  public AssessmentResult getResults(int assessmentID)
+  @GET
+  @Path("/getResults/{id}")
+  public AssessmentResult getResults(@PathParam("id") int assessmentID)
   {
     try
     {

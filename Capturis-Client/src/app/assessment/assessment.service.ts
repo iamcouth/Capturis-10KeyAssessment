@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import {Injectable} from "@angular/core";
 
-const path = 'http://localhost:8080/api';
+const path = 'http://localhost:8080/api/assessment';
 
 @Injectable()
 export class AssessmentService {
@@ -13,13 +13,23 @@ export class AssessmentService {
   constructor(private http: HttpClient) {
   }
 
-  getAssessmentByUserId(id: number): Observable<any> {
+  // getAssessmentByUserId(id: number): Observable<any> {
+  //   const options: any = {
+  //     observe: 'response',
+  //   };
+  //   const req = this.http.get<any>(path + '/assessment/' + id, options);
+  //   //console.log(req);
+  //   return req;
+  // }
+
+  getNewAssessment(arg1: Assessment): Observable<any> {
     const options: any = {
-      observe: 'response',
+    observe: 'response',
     };
-    const req = this.http.get<any>(path + '/assessment/' + id, options);
-    //console.log(req);
-    return req;
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    return this.http.post(path + '/newassessment', arg1, {headers: headers});
   }
 
   processData(arg1: Assessment): Observable<any> {

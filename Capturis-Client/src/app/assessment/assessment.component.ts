@@ -14,7 +14,9 @@ import { Assessment } from './assessment.model';
 })
 export class AssessmentComponent implements OnInit {
 
-  assessment: Assessment = new Assessment();
+  sessionId = parseInt(sessionStorage.getItem("userid"));
+  assessment: Assessment;
+  assessmentId: any;
   testType;
   testDesc;
   enterCount = 0;
@@ -36,9 +38,9 @@ export class AssessmentComponent implements OnInit {
 
   increment($event) {
     if (this.start === 0) {
-      this.timer = Observable.timer(1000, 100);
-      this.start = 1;
-      this.sub = this.timer.subscribe(t => {
+        this.timer = Observable.timer(1000, 100);
+        this.start = 1;
+        this.sub = this.timer.subscribe(t => {
         this.counter();
       });
     }
@@ -54,10 +56,13 @@ export class AssessmentComponent implements OnInit {
       this.enterCount++;
       this.change2.emit(this.a);
       this.document.getElementById('in').value = '';
+      console.log($event.keyCode);
 
     } else if ($event.keyCode === 8) {
         this.backspaces++;
+        console.log($event.keyCode);
     } else {
+        console.log($event.keyCode);
         this.keystrokes++;
       }
   }
@@ -68,12 +73,13 @@ export class AssessmentComponent implements OnInit {
   private _assessmentService: AssessmentService
   ) { }
   redirect() {
+    sessionStorage.setItem("assessmentid", this.assessmentId);
+    console.log("assessmentId" + this.assessmentId);
     this.expectedValues[this.enterCount] = this.a;
     this.inputValues[this.enterCount] = this.document.getElementById('in').value;
     this.enterCount++;
     this.assessment = {
-      assessmentId: 0,
-    userId: 1,
+    userId: this.sessionId,
     dateTaken: new Date(),
     timeGiven: this.timeOfTest,
     typeId: this.testType,
@@ -81,14 +87,18 @@ export class AssessmentComponent implements OnInit {
     backspaces: this.backspaces,
     inputValues: this.inputValues,
     expectedValues: this.expectedValues,
-    enterCount: this.enterCount
+    enterCount: this.enterCount,
+    assessmentId: this.assessmentId
   }
-
+    sessionStorage.setItem("inputArray", JSON.stringify(this.inputValues));
+    sessionStorage.setItem("expectedArray", JSON.stringify(this.expectedValues));
     let id: any;
-    this._assessmentService.processData(this.assessment).subscribe(res => {id = (res)});
-    sessionStorage.setItem("assessmentid", id);
-    this.router.navigate(['/assessment-results']);
-  }
+    this._assessmentService.processData(this.assessment).subscribe(res => {
+      this.router.navigate(['/assessment-results'], { relativeTo: this.route });
+    });
+
+
+}
   generateRandom(x) {
 
     if (x === 4) {
@@ -150,13 +160,13 @@ export class AssessmentComponent implements OnInit {
   getTestType(x) {
 
     if (x === ':1') {
-      this.testDesc = 'Whole Number';
+      this.testDesc = 'Date Format';
       return 1;
     } else if (x === ':2') {
-      this.testDesc = 'Decimal Number';
+      this.testDesc = 'Decimal Number Format';
       return 2;
     } else if (x === ':3') {
-      this.testDesc = 'Date Format';
+      this.testDesc = 'Whole Number Format';
       return 3;
     } else {
       this.testDesc = 'Mixed Format';
@@ -187,13 +197,13 @@ export class AssessmentComponent implements OnInit {
 
   ngOnInit() {
 
-    this._assessmentService.getAssessmentByUserId(1).subscribe( res => {
-      console.log(res)
-
-    },
-      error => {
-        console.error(error)
-      });
+    // this._assessmentService.getAssessmentByUserId(1).subscribe( res => {
+    //   console.log(res)
+    //
+    // },
+    //   error => {
+    //     console.error(error)
+    //   });
 
     let typeOfTest = '';
     let timeOfTest = '';
@@ -208,5 +218,18 @@ export class AssessmentComponent implements OnInit {
     this.c = this.generateRandom(this.testType);
     this.d = this.generateRandom(this.testType);
 
+    this.assessment = {
+    userId: this.sessionId,
+    dateTaken: new Date(),
+    timeGiven: this.timeOfTest,
+    typeId: this.testType,
+    keystrokes: 0,
+    backspaces: 0,
+    inputValues: this.inputValues,
+    expectedValues: this.expectedValues,
+    enterCount: 0,
+    assessmentId: 0,
+  }
+    this._assessmentService.getNewAssessment(this.assessment).subscribe( (res => {this.assessmentId = (res)}));
   }
 }

@@ -6,7 +6,7 @@
   </mat-card-header>
   <mat-card-content>
 
-    <input type="text" id = 'in' name="in" class="in" (keypress) = "increment($event)">
+    <input type="text" id = 'in' name="in" class="in" (keydown) = "increment($event)">
 
     <input type="text" name = "num" class = "out" value = "{{ a }}" readonly>
     <input type="text" name = "num" class = "next" value = "{{ b }}" readonly>

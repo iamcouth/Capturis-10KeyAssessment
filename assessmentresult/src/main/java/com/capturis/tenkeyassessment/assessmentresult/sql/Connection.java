@@ -20,7 +20,6 @@ public class Connection {
     java.sql.Connection connection = setUpCommonConnection();
     return connection.prepareStatement(sql);
   }
-
   private java.sql.Connection setUpCommonConnection() throws SQLException, IOException {
 
     return DriverManager.getConnection(DB_CONN, DB_USER, DB_PW);
