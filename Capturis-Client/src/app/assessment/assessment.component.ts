@@ -38,7 +38,7 @@ export class AssessmentComponent implements OnInit {
 
   increment($event) {
     if (this.start === 0) {
-        this.timer = Observable.timer(1000, 1000);
+        this.timer = Observable.timer(1000, 100);
         this.start = 1;
         this.sub = this.timer.subscribe(t => {
         this.counter();
@@ -93,8 +93,10 @@ export class AssessmentComponent implements OnInit {
     sessionStorage.setItem("inputArray", this.inputValues);
     sessionStorage.setItem("expectedArray", this.expectedValues);
     let id: any;
-    this._assessmentService.processData(this.assessment).subscribe(res => {(res)});
-    this.router.navigate(['/assessment-results']);
+    this._assessmentService.processData(this.assessment).subscribe(res => {
+      this.router.navigate(['/assessment-results'], { relativeTo: this.route });
+    });
+
 
 }
   generateRandom(x) {
@@ -158,13 +160,13 @@ export class AssessmentComponent implements OnInit {
   getTestType(x) {
 
     if (x === ':1') {
-      this.testDesc = 'Whole Number';
+      this.testDesc = 'Date Format';
       return 1;
     } else if (x === ':2') {
-      this.testDesc = 'Decimal Number';
+      this.testDesc = 'Decimal Number Format';
       return 2;
     } else if (x === ':3') {
-      this.testDesc = 'Date Format';
+      this.testDesc = 'Whole Number Format';
       return 3;
     } else {
       this.testDesc = 'Mixed Format';

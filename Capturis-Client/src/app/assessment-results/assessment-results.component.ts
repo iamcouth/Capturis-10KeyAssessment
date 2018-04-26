@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { AssessmentResults } from './assessment-results.model';
 import { AssessmentResultService } from './assessment-results.service';
 
@@ -16,9 +16,9 @@ export class AssessmentResultsComponent implements OnInit {
   userId = 1;
   found: any;
   done = 0;
+  input = sessionStorage.getItem("inputArray");
+  expected = sessionStorage.getItem("expectedArray");
 
-  @Output()
-  change: EventEmitter<any> = new EventEmitter<number>();
 
   assessmentResult: AssessmentResults = {
     userId: this.userId,
@@ -34,11 +34,8 @@ export class AssessmentResultsComponent implements OnInit {
   constructor(private _assessmentResultService: AssessmentResultService) { }
 
   ngOnInit() {
-    let test = sessionStorage.getItem("inputArray");
     let assessmentId = parseInt(sessionStorage.getItem("assessmentid"));
-    setTimeout(() => {
-        this.getResults(assessmentId);
-    }, 3000);
+    this.getResults(assessmentId);
 
   }
   getResults(id) {
