@@ -6,7 +6,7 @@ public class ManagerSummary {
 
   String name;
   int kph;
-  double accuracy;
+  String accuracy;
   String jobCode;
   String assessmentName;
   int timeGiven;
@@ -31,11 +31,11 @@ public class ManagerSummary {
     this.kph = kph;
   }
 
-  public double getAccuracy() {
+  public String getAccuracy() {
     return accuracy;
   }
 
-  public void setAccuracy(double accuracy) {
+  public void setAccuracy(String accuracy) {
     this.accuracy = accuracy;
   }
 

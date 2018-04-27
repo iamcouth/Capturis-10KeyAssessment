@@ -134,7 +134,7 @@ public class DataAccess extends Connection {
       ps.setInt(4, result.getUnCorrectedMistakes());
       ps.setInt(5, result.getBackspacePressCount());
       ps.setInt(6, result.getKph());
-      ps.setDouble(7, result.getAccuracy());
+      ps.setString(7, result.getAccuracy());
       ps.setInt(8, result.getLinesCompleted());
       ps.setInt(9, result.getTotalKeyStrokes());
 
