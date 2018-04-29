@@ -9,7 +9,7 @@ public class AssessmentResult {
   private int unCorrectedMistakes;
   private int backspacePressCount;
   private int kph;
-  private String accuracy;
+  private double accuracy;
   private int linesCompleted;
   private int totalKeyStrokes;
   private int correctedMistakes;
@@ -73,11 +73,11 @@ public class AssessmentResult {
     this.kph = kph;
   }
 
-  public String getAccuracy() {
+  public double getAccuracy() {
     return accuracy;
   }
 
-  public void setAccuracy(String accuracy) {
+  public void setAccuracy(double accuracy) {
     this.accuracy = accuracy;
   }
 

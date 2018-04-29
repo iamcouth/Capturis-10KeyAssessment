@@ -12,7 +12,41 @@
     <label class="backspaces">Backspaces</label>
     <input type="text" id='clock' name= 'clock' class='backspaces' value= "{{ backspaces }}" readonly>
 
+    <table>
+      <tbody id="tbody">
+        <td>
+          <tr>Input</tr>
+          <tr>Expected</tr>
+        </td>
+      </tbody>
+    </table>
   </mat-card-content>
 </mat-card>
 <button mat-button class="homeButton" [routerLink]="['/home']">Home</button>
 </body>
+
+
+<script>
+  function fillTable()
+  {
+    var tbody = document.getElementById('tbody');
+    var input = {{ input }};
+    var expected = {{ expected }};
+
+    for(var i = 0; i < input.length; i++)
+    {
+      var tr = "<tr>";
+
+      if(input[i].toString() != expected[i].toString())
+      {
+        tr += "<td style="color:red">" + input[i].toString() + "</td>" + "<td>" + expected[i].toString() + "</td></tr>";
+      }
+      else
+      {
+        tr += "<td style="color:green">" + input[i].toString() + "</td>" + "<td>" + expected[i].toString() + "</td></tr>";
+      }
+
+    }
+
+  }
+</script>

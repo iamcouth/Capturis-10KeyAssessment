@@ -129,7 +129,7 @@ public class AssessmentResource {
 
     if(keystrokes == 0)
     {
-      a.setAccuracy("00");
+      a.setAccuracy(0);
     }
     else
     {
@@ -137,10 +137,9 @@ public class AssessmentResource {
       System.out.println("errors" + errors);
       double errs = (double) errors;
       double keys = (double) keystrokes;
-      DecimalFormat df = new DecimalFormat("#.00");
       double accuracy = (keys/(keys + errs))*100;
       System.out.println("accuracy" + accuracy);
-      a.setAccuracy(df.format(accuracy));
+      a.setAccuracy(accuracy);
     }
 
     try {

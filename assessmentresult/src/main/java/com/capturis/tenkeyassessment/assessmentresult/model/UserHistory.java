@@ -26,7 +26,7 @@ public class UserHistory {
   private Timestamp dateTaken;
   private String assessmentType;
   private int kph;
-  private String accuracy;
+  private double accuracy;
   private int backspacePressCount;
   private int mistakes;
 
@@ -57,11 +57,11 @@ public class UserHistory {
     this.kph = kph;
   }
 
-  public String getAccuracy() {
+  public double getAccuracy() {
     return accuracy;
   }
 
-  public void setAccuracy(String accuracy) {
+  public void setAccuracy(double accuracy) {
     this.accuracy = accuracy;
   }
 

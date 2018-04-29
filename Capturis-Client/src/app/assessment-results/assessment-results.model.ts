@@ -6,6 +6,6 @@ export class AssessmentResults {
   public keystrokes: number;
   public kph: number;
   public backspaces: number;
-  public accuracy: number;
+  public accuracy: any;
   public assessmentId: number;
 }
