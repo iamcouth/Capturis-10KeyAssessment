@@ -1,32 +1,38 @@
-import { Component, OnInit, Input, Output, Inject, ViewChild } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-
+import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatSort } from '@angular/material';
+import { ManagerDashboardService } from "./manager-dashboard.service";
+import { ManagerHistory } from "./manager-dashboard.model";
 
 @Component({
   selector: 'app-manager-dashboard',
   templateUrl: './manager-dashboard.component.html',
-  styleUrls: ['./manager-dashboard.component.css']
+  styleUrls: ['./manager-dashboard.component.css'],
+  providers: [ManagerDashboardService]
 })
-export class ManagerDashboardComponent implements OnInit {
+export class ManagerDashboardComponent {
 
-  @Input()
-  jobCode;
-  name;
-  KPH;
-  accuracy;
-  loadingIndicator = true;
-  reorderable = true;
-  rows = [ { name: 'test1' }, { name: 'test2' } , { name: 'test3' } ];
-  columns = [ { name: 'name' }];
+  displayedColumns = ['name', 'assessmentName', 'timeGiven', 'kph', 'accuracy', 'dateTaken', 'jobCode'];
+  dataSource;
+  RESULT_DATA: ManagerHistory[];
+  @ViewChild(MatSort) sort: MatSort;
 
-
-
-   constructor() {
-
-
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
+
+  constructor(private _managerDashboardService: ManagerDashboardService) {}
 
   ngOnInit() {
-  }
-
+      this._managerDashboardService.getAll().subscribe(res =>{
+        console.log(res);
+        this.RESULT_DATA = res.body;
+        this.dataSource = new MatTableDataSource(this.RESULT_DATA);
+        this.dataSource.sort = this.sort;
+      },
+        err => {
+          console.error(err)
+      });
+    }
 }

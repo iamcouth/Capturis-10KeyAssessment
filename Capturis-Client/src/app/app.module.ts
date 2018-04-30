@@ -16,7 +16,7 @@ import { RegisterComponent } from './register/register.component';
 
 import { routing } from './app.routing';
 
-import { EmailValidator, FormsModule } from '@angular/forms';
+import { EmailValidator, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 
@@ -34,7 +34,12 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { MatTableModule } from '@angular/material';
 
+import { MatSortModule } from '@angular/material/sort';
+
 import { BotDetectCaptchaModule } from 'angular-captcha';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -49,14 +54,17 @@ import { BotDetectCaptchaModule } from 'angular-captcha';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
     routing,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatCardModule,
     NgxDatatableModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule
   ],
   providers: [RegisterService, EmailValidator],
   bootstrap: [AppComponent]

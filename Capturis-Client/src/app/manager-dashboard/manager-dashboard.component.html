@@ -1,1 +1,52 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" style="border:solid">
+    </mat-form-field>
+  </div>
+  <mat-table #table [dataSource]="dataSource" matSort>
 
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="assessmentName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Assessment Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.assessmentName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="timeGiven">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Assessment Time</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.timeGiven}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="kph">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> KPH </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.kph}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="accuracy">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Accuracy </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.accuracy}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="jobCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Job Code </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.jobCode}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateTaken">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date Taken </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateTaken}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
