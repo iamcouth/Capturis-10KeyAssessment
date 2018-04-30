@@ -56,7 +56,7 @@ public class DataAccess extends Connection
   public AssessmentUser authenticate(String username, String password) throws SQLException, IOException {
       String sql = "SELECT * FROM userlogin WHERE username=?";
     ps = setupPreparedStatement(sql);
-      ps.setString(1, username);
+      ps.setString(1, username.toLowerCase());
     ResultSet rs = ps.executeQuery();
       if(rs.next()){
         UserLogin userLogin = userLoginMap(rs);

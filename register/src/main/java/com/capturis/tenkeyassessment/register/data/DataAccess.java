@@ -81,7 +81,7 @@ public AssessmentUser getUserById(int id) throws SQLException{
 
       String hashedpw = BCrypt.hashpw(assessmentUser.getPasswordHash(), BCrypt.gensalt());
       PreparedStatement ps1 = setupPreparedStatement(sql1);
-      ps1.setString(1, assessmentUser.getUsername());
+      ps1.setString(1, assessmentUser.getUsername().toLowerCase());
       ps1.setInt(2, id);
       ps1.setString(3, hashedpw);
       ps1.setBoolean(4, false);
