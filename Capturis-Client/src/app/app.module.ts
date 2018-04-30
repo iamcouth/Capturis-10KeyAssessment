@@ -8,6 +8,8 @@ import { AssessmentComponent } from './assessment/assessment.component';
 
 import { AssessmentResultsComponent } from './assessment-results/assessment-results.component';
 
+import { RecaptchaModule } from 'ng-recaptcha';
+
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
 import { LoginComponent } from './login/login.component';
@@ -56,7 +58,8 @@ import { BotDetectCaptchaModule } from 'angular-captcha';
     HttpClientModule,
     MatCardModule,
     NgxDatatableModule,
-    MatTableModule
+    MatTableModule,
+    RecaptchaModule.forRoot()
   ],
   providers: [RegisterService, EmailValidator],
   bootstrap: [AppComponent]

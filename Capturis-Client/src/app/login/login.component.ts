@@ -65,17 +65,17 @@ export class LoginComponent implements OnInit {
   submitLogin() {
     this.tempService.postLogin(this.tl).subscribe(res => {
       this.serverResponse = res;
+      console.log(res.roleId);
       sessionStorage.clear();
-      if(res != null)
-      {
-        //if(res.body.roleid == 1) {
+      if(res != null) {
+        if (res.roleId == 1) {
           sessionStorage.setItem("userid", res.userId)
           console.log(sessionStorage);
           this.router.navigate(['home']);
-        //}
-        // else {
-        //   this.router.navigate(['manager']);
-        // }
+        }
+        else {
+          this.router.navigate(['manager']);
+        }
       }
       else{
         this.authentication_error = true;

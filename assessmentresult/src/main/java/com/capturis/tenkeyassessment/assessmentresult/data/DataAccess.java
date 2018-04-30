@@ -81,6 +81,7 @@ import java.sql.Statement;
         ",att.assessmentname" +
         ",a.timegiven" +
         ",a.datetaken " +
+        ",ar.linescompleted " +
         "FROM assessmentuser as au " +
         "JOIN assessment as a " +
         "ON a.userid = au.userid " +
@@ -204,6 +205,7 @@ import java.sql.Statement;
       String assessmentName = rs.getString("assessmentname");
       int timeGiven = rs.getInt("timegiven");
       Timestamp dateTaken = rs.getTimestamp("datetaken");
+      int linesCompleted = rs.getInt("linescompleted");
 
       ManagerSummary managerSummary = new ManagerSummary();
 
@@ -214,6 +216,7 @@ import java.sql.Statement;
       managerSummary.setAssessmentName(assessmentName);
       managerSummary.setTimeGiven(timeGiven);
       managerSummary.setDateTaken(dateTaken);
+      managerSummary.setLinesCompleted(linesCompleted);
 
       return managerSummary;
     }

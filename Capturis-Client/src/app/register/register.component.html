@@ -1,4 +1,9 @@
 
+<!DOCTYPE html>
+<head>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
 <div class="container">
         <div class="row">
 
@@ -7,6 +12,18 @@
 
                     <fieldset>
 
+                      <div *ngIf="!passwordMatch" class="alert alert-danger box-msg" role="alert">
+                        <strong>Password does not match Confirm password field.</strong>
+                      </div>
+                      <div *ngIf="duplicateEmail" class="alert alert-danger box-msg" role="alert">
+                        <strong>Email already exists. Please enter a new Email Address.</strong>
+                      </div>
+                      <div *ngIf="duplicateUser" class="alert alert-danger box-msg" role="alert">
+                        <strong>Username already exists. Please enter a new Username.</strong>
+                      </div>
+                      <div *ngIf="captchaError" class="alert alert-danger box-msg" role="alert">
+                        <strong>Must check captcha box.</strong>
+                      </div>
                     	<legend class="text-center">Account Registration</legend>
 
                         <div class="form-group col-md-6">
@@ -66,11 +83,16 @@
 
                     <div class="form-group">
                         <div class="submit-button">
-                            <button type="submit" class="btn btn-primary" (click) = "submitRegister()" [routerLink]="['/login']">
+                          <re-captcha
+                            (resolved)="resolved($event)"
+                            siteKey="6LeUGlYUAAAAAAM0KYkMWgh8QkE_dVWSqdiYMSUA"
+                          ></re-captcha>
+                          <button type="submit" class="btn btn-primary" (click) = "validateFields();submitRegister()">
                                 Register
                             </button><br><br>
                             <a href="/login">Already have an account?</a>
                         </div>
+                      {{serverResponse}}
                     </div>
 
                 </form>
@@ -78,4 +100,3 @@
 
         </div>
     </div>
-<!--<h3>Server Response: {{serverResponse}}</h3>-->

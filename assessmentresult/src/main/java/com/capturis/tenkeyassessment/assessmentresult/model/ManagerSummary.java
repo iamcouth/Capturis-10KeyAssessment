@@ -4,13 +4,15 @@ import java.sql.Timestamp;
 
 public class ManagerSummary {
 
-  String name;
-  int kph;
-  double accuracy;
-  String jobCode;
-  String assessmentName;
-  int timeGiven;
-  Timestamp dateTaken;
+  private String name;
+  private int kph;
+  private double accuracy;
+  private String jobCode;
+  private String assessmentName;
+  private int timeGiven;
+  private Timestamp dateTaken;
+  private int linesCompleted;
+
 
   public ManagerSummary() {
   }
@@ -70,4 +72,8 @@ public class ManagerSummary {
   public void setDateTaken(Timestamp dateTaken) {
     this.dateTaken = dateTaken;
   }
+
+  public int getLinesCompleted() { return linesCompleted; }
+
+  public void setLinesCompleted(int linesCompleted) { this.linesCompleted = linesCompleted; }
 }
