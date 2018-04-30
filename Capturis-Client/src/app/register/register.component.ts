@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import emailMask from 'text-mask-addons/dist/emailMask'
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,9 @@ import 'rxjs/add/observable/throw';
 })
 export class RegisterComponent implements OnInit {
 
+  phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+
+  emailMask=emailMask;
   passwordMatch: boolean = true;
   duplicateUser: boolean = false;
   duplicateEmail: boolean = false;

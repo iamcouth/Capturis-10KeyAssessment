@@ -36,7 +36,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { MatTableModule } from '@angular/material';
 
-import { BotDetectCaptchaModule } from 'angular-captcha';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,8 @@ import { BotDetectCaptchaModule } from 'angular-captcha';
     MatCardModule,
     NgxDatatableModule,
     MatTableModule,
-    RecaptchaModule.forRoot()
+    RecaptchaModule.forRoot(),
+    TextMaskModule
   ],
   providers: [RegisterService, EmailValidator],
   bootstrap: [AppComponent]

@@ -38,12 +38,12 @@
 
                         <div class="form-group col-md-6">
                             <label for="">Email</label>
-                          <input type="text" class="form-control" id="emailAddress" name="emailAddress" required [(ngModel)]="au.emailAddress">
+                          <input type="text" class="form-control" id="emailAddress" name="emailAddress" required [(ngModel)]="au.emailAddress" [textMask]="{mask: emailMask}">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="">Phone Number</label>
-                          <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required [(ngModel)]="au.phoneNumber">
+                          <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required [(ngModel)]="au.phoneNumber" [textMask]="{mask: phoneMask}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Street</label>
