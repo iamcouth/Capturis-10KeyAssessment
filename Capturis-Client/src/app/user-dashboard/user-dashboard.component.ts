@@ -29,7 +29,7 @@ export class UserDashboardComponent implements OnInit {
     phoneNumber: '',
     jobCode: '',
     createdDate: new Date(),
-    roleId: 0,
+    roleId: 1,
     country: ''
   }
 

@@ -18,7 +18,7 @@ import { RegisterComponent } from './register/register.component';
 
 import { routing } from './app.routing';
 
-import { EmailValidator, FormsModule } from '@angular/forms';
+import { EmailValidator, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 
@@ -38,6 +38,11 @@ import { MatTableModule } from '@angular/material';
 
 import { TextMaskModule } from 'angular2-text-mask';
 
+import { MatSortModule } from '@angular/material/sort';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,16 +56,19 @@ import { TextMaskModule } from 'angular2-text-mask';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
     routing,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatCardModule,
     NgxDatatableModule,
     MatTableModule,
     RecaptchaModule.forRoot(),
-    TextMaskModule
+    TextMaskModule,
+    MatSortModule
   ],
   providers: [RegisterService, EmailValidator],
   bootstrap: [AppComponent]

@@ -38,7 +38,7 @@ export class AssessmentComponent implements OnInit {
 
   increment($event) {
     if (this.start === 0) {
-        this.timer = Observable.timer(1000, 100);
+        this.timer = Observable.timer(1000, 1000);
         this.start = 1;
         this.sub = this.timer.subscribe(t => {
         this.counter();

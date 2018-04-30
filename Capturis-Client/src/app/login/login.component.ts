@@ -64,11 +64,9 @@ export class LoginComponent implements OnInit {
 
   submitLogin() {
     this.tempService.postLogin(this.tl).subscribe(res => {
-      this.serverResponse = res;
-      console.log(res.roleId);
       sessionStorage.clear();
       if(res != null) {
-        if (res.roleId == 1) {
+        if (res.roleId === 1) {
           sessionStorage.setItem("userid", res.userId)
           console.log(sessionStorage);
           this.router.navigate(['home']);
@@ -79,13 +77,14 @@ export class LoginComponent implements OnInit {
       }
       else{
         this.authentication_error = true;
+        this.tl.passwordHash = '';
         console.log(this.authentication_error);
       }
       //console.log(res);
       },
         error => {
       this.serverResponse = <any>error;
-          //console.log(error);
+          console.log(error);
     });
   }
 

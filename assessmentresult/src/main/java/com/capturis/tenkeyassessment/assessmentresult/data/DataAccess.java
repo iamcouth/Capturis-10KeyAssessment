@@ -174,7 +174,7 @@ import java.sql.Statement;
       int unCorrectedMistakes = rs.getInt("uncorrectedmistakes");
       int backspacePressCount = rs.getInt("backspacepresscount");
       int kph = rs.getInt("kph");
-      double accuracy = rs.getDouble("accuracy");
+      Double accuracy = rs.getDouble("accuracy");
       int linesCompleted = rs.getInt("linescompleted");
       int totalKeyStrokes = rs.getInt("totalkeystrokes");
       int correctedMistakes = rs.getInt("correctedmistakes");

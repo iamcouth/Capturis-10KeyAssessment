@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Singleton
@@ -125,23 +126,21 @@ public class AssessmentResource {
     a.setAssessmentId(t.getAssessmentId());
 
     a.setUnCorrectedMistakes(errors);
-    System.out.println("errors: " + errors + "------- keystrokes: " + keystrokes);
-    if(errors >= keystrokes)
+
+    if(keystrokes == 0)
     {
       a.setAccuracy(0);
     }
     else
     {
-      double accuracy = ((keystrokes-errors)/keystrokes)*100;
+      System.out.println("keystrokes" + keystrokes);
+      System.out.println("errors" + errors);
+      double errs = (double) errors;
+      double keys = (double) keystrokes;
+      double accuracy = (keys/(keys + errs))*100;
+      System.out.println("accuracy" + accuracy);
       a.setAccuracy(accuracy);
-      System.out.println("Accuracy " + accuracy);
     }
-
-    System.out.println(a.getAccuracy());
-    System.out.println("KPH" + KPH);
-    System.out.println(a.getKph());
-    System.out.println("keystrokes" + keystrokes);
-    System.out.println(a.getTotalKeyStrokes());
 
     try {
       dataAccess.saveAssessmentResult(a);
