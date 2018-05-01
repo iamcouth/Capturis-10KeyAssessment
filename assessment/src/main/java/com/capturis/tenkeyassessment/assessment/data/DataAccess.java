@@ -2,17 +2,13 @@ package com.capturis.tenkeyassessment.assessment.data;
 
 import com.capturis.tenkeyassessment.assessment.models.Assessment;
 import com.capturis.tenkeyassessment.assessment.sql.Connection;
+import com.capturis.tenkeyassessment.assessmentresult.model.AssessmentResult;
 
 import javax.inject.Inject;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.capturis.tenkeyassessment.assessmentresult.model.AssessmentResult;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 
 public class DataAccess extends Connection {
 
@@ -124,7 +120,7 @@ public class DataAccess extends Connection {
 
   public void saveAssessmentResult(AssessmentResult result) throws SQLException, IOException {
     String sql = "INSERT INTO assessmentresult (userid, assessmentid, perfectcount, uncorrectedmistakes," +
-      " backspacepresscount, kph, accuracy, linescompleted, totalkeystrokes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      " backspacepresscount, kph, accuracy, linescompleted, totalkeystrokes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING assessmentresultid";
 
     try {
       ps = setupPreparedStatement(sql);
@@ -140,6 +136,8 @@ public class DataAccess extends Connection {
 
       ResultSet rs = ps.executeQuery();
       rs.next();
+      int id = rs.getInt(1);
+      result.setAssessmentResultId(id);
     } catch (Exception e) {
       if (e instanceof RuntimeException) {
         throw e;
