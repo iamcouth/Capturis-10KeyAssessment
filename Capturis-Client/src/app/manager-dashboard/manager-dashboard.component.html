@@ -28,7 +28,7 @@
 
     <ng-container matColumnDef="accuracy">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Accuracy </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.accuracy}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.accuracy | number : '1.1'}}% </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="jobCode">
@@ -38,7 +38,7 @@
 
     <ng-container matColumnDef="dateTaken">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Date Taken </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.dateTaken}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateTaken | date: 'MM/dd/yyyy'}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

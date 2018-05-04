@@ -1,3 +1,7 @@
+/**
+ * DAO for Assessment
+ */
+
 package com.capturis.tenkeyassessment.assessment.data;
 
 import com.capturis.tenkeyassessment.assessment.models.Assessment;

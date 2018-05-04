@@ -141,7 +141,7 @@
       <!-- Symbol Column -->
       <ng-container matColumnDef="accuracy">
         <mat-header-cell *matHeaderCellDef><strong>Accuracy</strong> </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.accuracy}}% </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.accuracy | number : '1.1'}}% </mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->

@@ -12,26 +12,12 @@ export class TempService {
   constructor(private http: HttpClient) {
   }
 
-  // getById(id: number): Observable<any> {
-  //   const options: any = {
-  //     observe: 'response',
-  //   };
-  //   const req = this.http.get<any>('http://localhost:8080/api/auth/' + id, options);
-  //   //console.log(req);
-  //   return req;
-  //   //
-  //   //
-  //   // this.http
-  //   //   .get<any>(MASTER_PATH, {observe: 'response'});
-  // }
-
   getAll(): Observable<any> {
     const options: any = {
       observe: 'response',
     };
 
     const req = this.http.get<any>(MASTER_PATH + "all/Users", options);
-    //console.log(req);
     return req;
   }
 

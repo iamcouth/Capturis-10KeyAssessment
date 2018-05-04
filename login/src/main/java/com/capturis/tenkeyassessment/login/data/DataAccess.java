@@ -1,3 +1,7 @@
+/**
+ * DAO for UserLogin
+ */
+
 package com.capturis.tenkeyassessment.login.data;
 
 import com.capturis.tenkeyassessment.login.model.UserLogin;
@@ -22,25 +26,6 @@ public class DataAccess extends Connection
       this.statement = setupStatement();
     }
 
-//  public void AddUser(UserLogin params) {
-//    Connection conn = null;
-//    try {
-//      conn = getDBConn();
-//      PreparedStatement ps = conn.prepareStatement("INSERT INTO testhash(plainpass, hashpass, matc) VALUES (?, ?, ?, ?)");
-//
-//      ps.setString(1, params.getPlainText());
-//      ps.setString(2, params.getHashed());
-//      ps.setBoolean(3, params.isMatched());
-//      ps.setInt(4, params.getId());
-//
-//      ps.executeUpdate();
-//    }
-//    catch (SQLException e)
-//    {
-//      String.format(e.getMessage());
-//    }
-//  }
-
   public UserLogin getById(int id) throws SQLException{
     String sql = "SELECT * FROM userlogin where userid = " + id;
     ResultSet rs = statement.executeQuery(sql);
@@ -53,23 +38,31 @@ public class DataAccess extends Connection
     }
   }
 
+  /**
+   * Used to authenticate users
+   * @param username
+   * @param password
+   * @return AssessmentUser if finds username/password combo. Otherwise null
+   * @throws SQLException
+   * @throws IOException
+   */
   public AssessmentUser authenticate(String username, String password) throws SQLException, IOException {
-      String sql = "SELECT * FROM userlogin WHERE username=?";
+      String sql = "SELECT * FROM userlogin WHERE username=?"; //Check if username.toLowerCase exists in DB
     ps = setupPreparedStatement(sql);
       ps.setString(1, username.toLowerCase());
     ResultSet rs = ps.executeQuery();
-      if(rs.next()){
+      if(rs.next()){ //If username exists
         UserLogin userLogin = userLoginMap(rs);
-        String sql1 = "SELECT * FROM userlogin WHERE userid = ?";
+        String sql1 = "SELECT * FROM userlogin WHERE userid = ?"; //Grab userId associated with username that matched
         ps = setupPreparedStatement(sql1);
         ps.setInt(1, userLogin.getUserId());
         ResultSet rs1 = ps.executeQuery();
         if(rs1.next()) {
           UserLogin ul2 = userLoginMap(rs1);
           String plainPass = password;
-          if(BCrypt.checkpw(plainPass, ul2.getPasswordHash()))
+          if(BCrypt.checkpw(plainPass, ul2.getPasswordHash())) //Check if passwords match
           {
-            String sql2 = "SELECT * FROM assessmentuser WHERE userid = ?";
+            String sql2 = "SELECT * FROM assessmentuser WHERE userid = ?"; //Get AssessmentUser object based on userId previously found
             ps = setupPreparedStatement(sql2);
             ps.setInt(1, ul2.getUserId());
             ResultSet rs2 = ps.executeQuery();
@@ -100,36 +93,6 @@ public class DataAccess extends Connection
       return list;
   }
 
-//  public UserLogin save(UserLogin userLogin) throws SQLException, IOException {
-//      return userLogin.getUserId() > 0 ? update(userLogin) : create(userLogin);
-//  }
-
-//  public UserLogin create(UserLogin userLogin) throws SQLException, IOException {
-//    String sql = "INSERT INTO userlogin (username, userid, passwordhash, accountlock_fl, lastlogindate) VALUES (?, ?, ?, ?, ?)";
-//      ps = setupPreparedStatement(sql);
-//
-////    String hashedpw = BCrypt.hashpw(userLogin.getPasswordHash(), BCrypt.gensalt());
-//
-//      ps.setString(1, userLogin.getUsername());
-//      ps.setInt(2, userLogin.getUserId());
-//      ps.setString(3, userLogin.getPasswordHash());
-//      ps.setBoolean(4, userLogin.isAccountLockFl());
-//      ps.setTimestamp(5, userLogin.getLastLoginDate());
-//
-//      ps.executeUpdate();
-//      ResultSet rs = ps.getGeneratedKeys();
-//
-//      if(rs.next()) {
-//
-//        int id = rs.getInt(1);
-//        userLogin.setUserLoginId(id);
-//
-//        return userLogin;
-//      }
-//
-//      else return null;
-//  }
-
   public UserLogin update(UserLogin userLogin) throws SQLException, IOException {
 
     String sql = "UPDATE userlogin SET username = ?, passwordhash = ?, accountlock_fl = ? WHERE userid = ?";
@@ -155,6 +118,12 @@ public class DataAccess extends Connection
       return count == 1;
   }
 
+  /**
+   * UserLogin mapper method
+   * @param rs
+   * @return UserLogin
+   * @throws SQLException
+   */
   private UserLogin userLoginMap(ResultSet rs) throws SQLException {
     int userloginid = rs.getInt("userloginid");
     String username = rs.getString("username");
@@ -174,6 +143,13 @@ public class DataAccess extends Connection
     return userLogin;
 
   }
+
+  /**
+   * AssessmentUser mapper method
+   * @param rs
+   * @return AssessmentUser
+   * @throws SQLException
+   */
   private AssessmentUser assessmentUserMap(ResultSet rs) throws  SQLException{
 
     int userId = rs.getInt("userid");

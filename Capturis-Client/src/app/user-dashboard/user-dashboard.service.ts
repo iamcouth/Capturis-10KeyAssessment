@@ -14,25 +14,9 @@ export class UserDashboardService {
     const options: any = {
       observe: 'response',
     };
-    console.log(id);
     const req = this.http.get<any>(MASTER_PATH + 'auth/getuser/' + id, options);
-    console.log(req);
     return req;
-    //
-    //
-    // this.http
-    //   .get<any>(MASTER_PATH, {observe: 'response'});
   }
-
-  // getAll(): Observable<any> {
-  //   const options: any = {
-  //     observe: 'response',
-  //   };
-  //
-  //   const req = this.http.get<any>(MASTER_PATH + "assessmentresults/all/assessmentresults", options);
-  //   //console.log(req);
-  //   return req;
-  // }
 
   getUserHistory(id: number): Observable<any> {
     const options: any = {

@@ -13,15 +13,6 @@ export class AssessmentService {
   constructor(private http: HttpClient) {
   }
 
-  // getAssessmentByUserId(id: number): Observable<any> {
-  //   const options: any = {
-  //     observe: 'response',
-  //   };
-  //   const req = this.http.get<any>(path + '/assessment/' + id, options);
-  //   //console.log(req);
-  //   return req;
-  // }
-
   getNewAssessment(arg1: Assessment): Observable<any> {
     const options: any = {
     observe: 'response',

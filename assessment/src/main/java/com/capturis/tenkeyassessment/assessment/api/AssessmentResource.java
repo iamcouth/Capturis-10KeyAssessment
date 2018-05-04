@@ -1,3 +1,8 @@
+/**
+ *
+ * Backend AssessmentResource. Sends data utilizing the DAO.
+ */
+
 package com.capturis.tenkeyassessment.assessment.api;
 
 import com.capturis.tenkeyassessment.assessment.data.DataAccess;
@@ -10,7 +15,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.List;
 
 @Singleton
@@ -24,6 +28,11 @@ public class AssessmentResource {
   @Inject
   public AssessmentResource (DataAccess dataAccess) {this.dataAccess = dataAccess;}
 
+  /**
+   * Getting the assessment by UserId
+   * @param id
+   * @return Assessment
+   */
   @GET
   @Path("/{id}")
   public Assessment getAssessmentById(@PathParam("id") int id) {
@@ -50,6 +59,10 @@ public class AssessmentResource {
     return returnID;
   }
 
+  /**
+   * Getting all Assessments
+   * @return List of Assessment objects
+   */
   @GET
   @Path("/all/assessments")
   public List<Assessment> findAll() {
@@ -62,6 +75,11 @@ public class AssessmentResource {
     return  null;
   }
 
+  /**
+   * Creating new assessment
+   * @param assessment
+   * @return assessment
+   */
   @POST
   public Assessment create(Assessment assessment) {
     try {
@@ -73,6 +91,11 @@ public class AssessmentResource {
     return null;
   }
 
+  /**
+   * Used for updating an assessment
+   * @param assessment
+   * @return assessment
+   */
   @PUT
   @Path("/{id}")
   public Assessment update(Assessment assessment) {
@@ -86,6 +109,10 @@ public class AssessmentResource {
     return null;
   }
 
+  /**
+   * Used for deleting an assessment
+   * @param id
+   */
   @DELETE
   @Path("/{id}")
   public void remove (@PathParam("id") int id) {
@@ -95,6 +122,12 @@ public class AssessmentResource {
       System.out.println((e.getMessage()));
     }
   }
+
+  /**
+   * Used for processing the results coming from user input on frontend
+   * @param t
+   * @return
+   */
   @POST
   @Path("/process")
   public int processResults(Assessment t)
@@ -149,7 +182,6 @@ public class AssessmentResource {
     }
 
     return returnID;
-    //return a.getAssessmentId();
   }
 
 }

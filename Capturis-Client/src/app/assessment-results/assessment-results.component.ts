@@ -19,9 +19,6 @@ export class AssessmentResultsComponent implements OnInit {
   done = 0;
   input = sessionStorage.getItem("inputArray");
   expected = sessionStorage.getItem("expectedArray");
- // sessionStorage.setItem("inputArray", NULL);
-  //sessionStorage.setItem("expectedArray", NULL);
-
 
   assessmentResult: AssessmentResults = {
     userId: this.userId,
@@ -50,9 +47,6 @@ export class AssessmentResultsComponent implements OnInit {
       },
       err => {
         console.log(err); });
-
-  }
-  getData(res) {
 
   }
 

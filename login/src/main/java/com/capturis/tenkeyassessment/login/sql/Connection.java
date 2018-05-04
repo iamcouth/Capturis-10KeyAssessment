@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Connection {
-private static  final String DB_CONN = "jdbc:postgresql://134.129.125.210/capturis_10keyassessment";
+private static  final String DB_CONN = "jdbc:postgresql://134.129.125.210/appdb";
   private static  final String DB_USER = "tester";
   private static  final String DB_PW = "test1234";
 

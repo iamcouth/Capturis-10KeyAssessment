@@ -1,3 +1,8 @@
+/**
+ *
+ * Backend AssessmentResultResource. Sends data utilizing the DAO.
+ */
+
 package com.capturis.tenkeyassessment.assessmentresult.api;
 
 import com.capturis.tenkeyassessment.assessmentresult.data.DataAccess;
@@ -24,6 +29,11 @@ public class AssessmentResultResource {
   @Inject
   public AssessmentResultResource (DataAccess dataAccess) { this.dataAccess = dataAccess; }
 
+  /**
+   * Getting assessmentresult by UserId
+   * @param id
+   * @return assessmentResult
+   */
   @GET
   @Path("/{id}")
   public AssessmentResult getAssessmentResultByUserId(@PathParam("id") int id) {
@@ -37,6 +47,10 @@ public class AssessmentResultResource {
     return null;
   }
 
+  /**
+   * Getting all assessmentresults
+   * @return List of assessmentresults
+   */
   @GET
   @Path("/all/assessmentresults")
   public List<AssessmentResult> findAll() {
@@ -45,11 +59,14 @@ public class AssessmentResultResource {
     }
     catch (SQLException e) {
       throw new RuntimeException(e);
-      //System.out.println(e.getMessage());
     }
-    //return null;
   }
 
+  /**
+   * Used for generating data on the User-Dashboard: User History table
+   * @param id
+   * @return
+   */
   @GET
   @Path("/all/userhistory/{id}")
   public List<UserHistory> findUserHistoryById(@PathParam("id") int id) {
@@ -58,11 +75,14 @@ public class AssessmentResultResource {
     }
     catch (SQLException e) {
       throw new RuntimeException(e);
-      //System.out.println(e.getMessage());
     }
-    //return null;
   }
 
+  /**
+   * Used for creating an assessmentresult
+   * @param assessmentResult
+   * @return assessmentResult
+   */
   @POST
   public AssessmentResult create(AssessmentResult assessmentResult) {
     try {
@@ -71,6 +91,12 @@ public class AssessmentResultResource {
     }
     return null;
   }
+
+  /**
+   * Used for getting results of an assessmentresult
+   * @param assessmentID
+   * @return assessmentresult
+   */
   @GET
   @Path("/getResults/{id}")
   public AssessmentResult getResults(@PathParam("id") int assessmentID)
@@ -85,6 +111,12 @@ public class AssessmentResultResource {
     }
     return null;
   }
+
+  /**
+   * Used for updating an AssessmentResult
+   * @param assessmentResult
+   * @return assessmentResult
+   */
   @PUT
   @Path("/{id}")
   public AssessmentResult update(AssessmentResult assessmentResult) {
@@ -98,6 +130,10 @@ public class AssessmentResultResource {
     return null;
   }
 
+  /**
+   * Used for deleting an AssessmentResult
+   * @param id
+   */
   @DELETE
   @Path("/{id}")
   public void remove (@PathParam("id") int id) {
@@ -109,6 +145,10 @@ public class AssessmentResultResource {
     }
   }
 
+  /**
+   * Used to display data on the manager page
+   * @return
+   */
   @GET
   @Path("/all/manager")
   public List<ManagerSummary> findAllManager() {

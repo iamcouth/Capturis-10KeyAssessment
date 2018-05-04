@@ -38,18 +38,11 @@ export class UserDashboardComponent implements OnInit {
 
     constructor(private router: Router, private _userdashboardservice: UserDashboardService) {
 
-        //this.router.navigate(['/assessment', this.id]);
     }
 
   ngOnInit() {
     this._userdashboardservice.getById(this.sessionId).subscribe(res =>{
-
-      //let body = res.body;
-      //
-      console.log(res);
       this.assessmentUser = res.body;
-      console.log(this.assessmentUser);
-      console.log(this.assessmentUser.firstName);
     },
       err => {
         console.error(err)

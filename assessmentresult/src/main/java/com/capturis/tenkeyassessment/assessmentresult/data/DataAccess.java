@@ -1,3 +1,7 @@
+/**
+ * DAO for AssessmentResult
+ */
+
 package com.capturis.tenkeyassessment.assessmentresult.data;
 
 import com.capturis.tenkeyassessment.assessmentresult.model.AssessmentResult;
@@ -165,6 +169,12 @@ import java.sql.Statement;
       }
     }
 
+    /**
+     * AssessmentResult Mapper method
+     * @param rs
+     * @return assessmentresult
+     * @throws SQLException
+     */
     private AssessmentResult mapAssessmentResult(ResultSet rs) throws SQLException {
 
       int assessmentResultId = rs.getInt("assessmentresultid");
@@ -196,6 +206,12 @@ import java.sql.Statement;
       return assessmentResult;
     }
 
+    /**
+     * Manager Summary Mapper method
+     * @param rs
+     * @return managerSummary
+     * @throws SQLException
+     */
     private ManagerSummary mapManagerSummary(ResultSet rs) throws SQLException {
 
       String name = rs.getString("name");
@@ -221,6 +237,12 @@ import java.sql.Statement;
       return managerSummary;
     }
 
+    /**
+     * User History mapper method
+     * @param rs
+     * @return userHistrory
+     * @throws SQLException
+     */
     private UserHistory mapUserHistory(ResultSet rs) throws SQLException {
 
       int userId = rs.getInt("userid");

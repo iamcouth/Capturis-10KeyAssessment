@@ -1,3 +1,7 @@
+/**
+ * DAO for AssessmentUser
+ */
+
 package com.capturis.tenkeyassessment.register.data;
 
 import com.capturis.tenkeyassessment.register.models.AssessmentUser;
@@ -52,6 +56,8 @@ public AssessmentUser getUserById(int id) throws SQLException{
       " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " +
       "RETURNING userid";
     String sql1 = "INSERT INTO userlogin (username, userid, passwordHash, accountlock_fl, lastlogindate) VALUES (?, ?, ?, ?, ?) RETURNING userloginid";
+
+    //Try to insert record into assessmentuser table
     try {
     PreparedStatement ps = setupPreparedStatement(sql);
 
@@ -79,6 +85,7 @@ public AssessmentUser getUserById(int id) throws SQLException{
         int id = rs.getInt(1);
         assessmentUser.setUserId(id);
 
+        //Encrypt password and store in UserLogin table
       String hashedpw = BCrypt.hashpw(assessmentUser.getPasswordHash(), BCrypt.gensalt());
       PreparedStatement ps1 = setupPreparedStatement(sql1);
       ps1.setString(1, assessmentUser.getUsername().toLowerCase());
@@ -141,7 +148,13 @@ public AssessmentUser getUserById(int id) throws SQLException{
     return count == 1;
   }
 
-private AssessmentUser assessmentUserMap(ResultSet rs) throws  SQLException{
+  /**
+   * AssessmentUser mapper method
+   * @param rs
+   * @return assessmentUser
+   * @throws SQLException
+   */
+  private AssessmentUser assessmentUserMap(ResultSet rs) throws  SQLException{
 
   int userId = rs.getInt("userid");
   String firstName = rs.getString("firstname");

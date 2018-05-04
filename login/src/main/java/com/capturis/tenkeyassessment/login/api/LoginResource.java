@@ -1,3 +1,8 @@
+/**
+ *
+ * Backend LoginResource. Sends data utilizing the DAO.
+ */
+
 package com.capturis.tenkeyassessment.login.api;
 
 import com.capturis.tenkeyassessment.login.data.DataAccess;
@@ -26,6 +31,11 @@ public LoginResource(DataAccess dataAccess) {
   this.dataAccess = dataAccess;
 }
 
+  /**
+   * Used for getting User by UserId
+   * @param id
+   * @return UserLogin
+   */
   @GET
   @Path("/{id}")
   public UserLogin getById(@PathParam("id") int id) {
@@ -39,6 +49,10 @@ public LoginResource(DataAccess dataAccess) {
     return null;
 }
 
+  /**
+   * Used for getting all users
+   * @return List of UserLogin
+   */
   @GET
   @Path("/all/Users")
   public List<UserLogin> findAll() {
@@ -51,20 +65,11 @@ public LoginResource(DataAccess dataAccess) {
   return  null;
 }
 
-//  @POST
-//  @Path("/post")
-//  @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-//  @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-//  public UserLogin create(UserLogin userLogin) {
-//  try {
-//    return dataAccess.login(userLogin);
-//  }
-//  catch (SQLException | IOException e) {
-//    System.out.println(e.getMessage());
-//  }
-//  return null;
-//}
-
+  /**
+   * Used to authenticate a user
+   * @param userLogin
+   * @return AssessmentUser
+   */
   @POST
   @Path("/authenticate")
   @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -80,56 +85,35 @@ public LoginResource(DataAccess dataAccess) {
   return null;
   }
 
+  /**
+   * Used to update an UserLogin object
+   * @param userLogin
+   * @return UserLogin
+   */
   @PUT
   @Path("/{id}")
   public UserLogin update(UserLogin userLogin) {
-  try {
-    dataAccess.update(userLogin);
-    return userLogin;
-  }
-  catch (SQLException | IOException e) {
-    System.out.println((e.getMessage()));
-  }
-  return null;
+    try {
+      dataAccess.update(userLogin);
+      return userLogin;
+    } catch (SQLException | IOException e) {
+      System.out.println((e.getMessage()));
+    }
+    return null;
   }
 
+  /**
+   * Used to delete an UserLogin object
+   * @param id
+   */
   @DELETE
   @Path("/{id}")
   public void remove (@PathParam("id") int id) {
-  try {
-    dataAccess.remove(id);
+    try {
+      dataAccess.remove(id);
+    } catch (SQLException | IOException e) {
+      System.out.println((e.getMessage()));
+    }
   }
-  catch (SQLException | IOException e) {
-    System.out.println((e.getMessage()));
-  }
-}
-
-//  @GET
-//  @Produces(MediaType.APPLICATION_JSON)
-//  @Path("/login")
-//  public Response login()
-//  {
-//    //JSONObject response = new JSONObject();
-//    String password = "Hey";
-//    String wrongPassword = "Hey";
-//    String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-//    boolean check = CheckIfMatches(wrongPassword, hashed);
-//    DataAccess d = new DataAccess();
-//    UserLogin u = new UserLogin(password, hashed, check);
-//    d.AddUser(u);
-//    JsonObject response = new JsonObject();
-//    response.addProperty("Password", password);
-//    response.addProperty("Hashed", hashed);
-//    //String testString = String.format("Hashed Password: %s, Does it match: %s", hashed, check);
-//    return Response.ok(response.toString()).build();
-//    //return String.format("Hashed Password: %s, Does it match: %s",hashed , check);
-//  }
-//
-//  public boolean CheckIfMatches(String plainPw, String hashedPw)
-//  {
-//    return BCrypt.checkpw(plainPw, hashedPw);
-//  }
-
-
 
 }

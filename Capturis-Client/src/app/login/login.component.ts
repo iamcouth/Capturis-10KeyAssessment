@@ -20,55 +20,23 @@ export class LoginComponent implements OnInit {
   tllist: Array<any>;
   serverResponse: string = '';
   authentication_error = false;
-  //sessionId: number = parseInt(sessionStorage.getItem('userId'))
   constructor(private tempService: TempService, private router: Router) {
   }
 
   ngOnInit() {
-    // this.tempService.getById(1).subscribe(res =>{
-    //
-    //   //let body = res.body;
-    //   console.log(res);
-    //   this.tl = res.body;
-    //   console.log(this.tl);
-    // },
-    //   err => {
-    //     console.error(err)
-    // });
 
     this.tempService.getAll().subscribe(data => {
-      //console.log(data);
       this.tllist = data.body;
     });
-
-    // this.tempService.getById(1).subscribe(res => {
-    //
-    //   //let body = res.body;
-    //   console.log(res);
-    //   this.tl = res.body;
-    //   console.log(this.tl);
-    // },
-    //   err => {
-    //     console.error(err);
-    // });
-
-    //   console.log(res);
-    //   this.tl = res.body;
-    //   console.log(this.tl);
-    // },
-    //   err => {
-    //   console.error(err)
-    //   });
 
   }
 
   submitLogin() {
     this.tempService.postLogin(this.tl).subscribe(res => {
       sessionStorage.clear();
-      if(res != null) {
+      if(res != null) { //If response back is null, this means the authentication process did not go through successfully.
         if (res.roleId === 1) {
           sessionStorage.setItem("userid", res.userId)
-          console.log(sessionStorage);
           this.router.navigate(['home']);
         }
         else {
@@ -78,9 +46,7 @@ export class LoginComponent implements OnInit {
       else{
         this.authentication_error = true;
         this.tl.passwordHash = '';
-        console.log(this.authentication_error);
       }
-      //console.log(res);
       },
         error => {
       this.serverResponse = <any>error;

@@ -45,7 +45,7 @@ export class AssessmentComponent implements OnInit {
       });
     }
 
-    if ($event.keyCode === 13) {
+    if ($event.keyCode === 13) { //If backspace is pressed
       this.expectedValues[this.enterCount] = this.a;
       this.inputValues[this.enterCount] = this.document.getElementById('in').value;
       this.a = this.b;
@@ -99,12 +99,18 @@ export class AssessmentComponent implements OnInit {
 
 
 }
+
+  /**
+   * Generating random numbers based on text
+   * @param x
+   * @returns {any}
+   */
   generateRandom(x) {
 
     if (x === 4) {
       x = Math.floor(Math.random() * Math.floor(3)) + 1;
     }
-    if (x === 1) {
+    if (x === 3) {
       const month = Math.floor(Math.random() * Math.floor(12)) + 1;
       let range = 31;
       if (month === 2) {
@@ -132,7 +138,7 @@ export class AssessmentComponent implements OnInit {
       const dec = Math.floor(Math.random() * Math.floor(99)) + 1;
 
       return num + '.' + dec;
-    } else if (x === 3) {
+    } else if (x === 1) {
       const num = Math.floor(Math.random() * Math.floor(999999)) + 1;
 
       return num;
@@ -140,6 +146,9 @@ export class AssessmentComponent implements OnInit {
 
   }
 
+  /**
+   * Timer logic
+   */
   counter() {
 
     if (this.timeLeft === 0) {
@@ -157,15 +166,20 @@ export class AssessmentComponent implements OnInit {
 
   }
 
+  /**
+   * Getting test type (Whole Number, Decimal, Date, Mixed)
+   * @param x
+   * @returns {number}
+   */
   getTestType(x) {
 
-    if (x === ':1') {
+    if (x === ':3') {
       this.testDesc = 'Date Format';
       return 1;
     } else if (x === ':2') {
       this.testDesc = 'Decimal Number Format';
       return 2;
-    } else if (x === ':3') {
+    } else if (x === ':1') {
       this.testDesc = 'Whole Number Format';
       return 3;
     } else {
@@ -175,6 +189,11 @@ export class AssessmentComponent implements OnInit {
 
   }
 
+  /**
+   * Based on time selected, 1,3,5 minute variations
+   * @param x
+   * @returns {number}
+   */
   getTestTime(x) {
     if (x === ':1') {
       this.displayTime = '1:00';
@@ -196,14 +215,6 @@ export class AssessmentComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // this._assessmentService.getAssessmentByUserId(1).subscribe( res => {
-    //   console.log(res)
-    //
-    // },
-    //   error => {
-    //     console.error(error)
-    //   });
 
     let typeOfTest = '';
     let timeOfTest = '';
