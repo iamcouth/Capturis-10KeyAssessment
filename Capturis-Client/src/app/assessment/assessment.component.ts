@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Inject } from '@angular/core';
-import { Router, Params, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import {Component, OnInit, Input, Output, EventEmitter, ViewChild, Inject} from '@angular/core';
+import {Router, Params, ActivatedRoute} from '@angular/router';
+import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-import { DOCUMENT } from '@angular/common';
-import {AssessmentService} from "./assessment.service";
-import { Assessment } from './assessment.model';
+import {DOCUMENT} from '@angular/common';
+import {AssessmentService} from '../services/assessment.service';
+import {Assessment} from './assessment.model';
 
 @Component({
   selector: 'app-assessment',
@@ -14,55 +14,49 @@ import { Assessment } from './assessment.model';
 })
 export class AssessmentComponent implements OnInit {
 
-  sessionId = parseInt(sessionStorage.getItem("userid"));
+  sessionId = parseInt(sessionStorage.getItem('userid'), 10);
   assessment: Assessment;
   assessmentId: any;
   testType;
   testDesc;
   enterCount = 0;
   start = 0;
-  index = 0;
   timeOfTest;
   timeLeft;
   displayTime;
   timer;
-  sub;
+  timerSubscription;
   keystrokes = 0;
   backspaces = 0;
-  a; b; c; d;
-  inputValues:string[] = new Array(500);
-  expectedValues:string[] = new Array(500);
+  currentExpectedValue; nextExpectedValue; thirdExpectedValue; fourthExpectedValue;
+  inputValues: string[] = new Array(500);
+  expectedValues: string[] = new Array(500);
   @Output()
-  change: EventEmitter<number> = new EventEmitter<number>();
-  change2: EventEmitter<string> = new EventEmitter<string>();
+  changeExpectedValues: EventEmitter<string> = new EventEmitter<string>();
 
   increment($event) {
     if (this.start === 0) {
         this.timer = Observable.timer(1000, 1000);
         this.start = 1;
-        this.sub = this.timer.subscribe(t => {
+        this.timerSubscription = this.timer.subscribe(t => {
         this.counter();
       });
     }
 
-    if ($event.keyCode === 13) { //If backspace is pressed
-      this.expectedValues[this.enterCount] = this.a;
-      this.inputValues[this.enterCount] = this.document.getElementById('in').value;
-      this.a = this.b;
-      this.b = this.c;
-      this.c = this.d;
-      this.d = this.d = this.generateRandom(this.testType);
-      this.index++;
+    if ($event.keyCode === 13) { // If backspace is pressed
+      this.expectedValues[this.enterCount] = this.currentExpectedValue;
+      this.inputValues[this.enterCount] = this.document.getElementById('userInput').value;
+      this.currentExpectedValue = this.nextExpectedValue;
+      this.nextExpectedValue = this.thirdExpectedValue;
+      this.thirdExpectedValue = this.fourthExpectedValue;
+      this.fourthExpectedValue = this.generateRandom(this.testType);
       this.enterCount++;
-      this.change2.emit(this.a);
-      this.document.getElementById('in').value = '';
-      console.log($event.keyCode);
+      this.changeExpectedValues.emit(this.currentExpectedValue);
+      this.document.getElementById('userInput').value = '';
 
     } else if ($event.keyCode === 8) {
         this.backspaces++;
-        console.log($event.keyCode);
     } else {
-        console.log($event.keyCode);
         this.keystrokes++;
       }
   }
@@ -73,10 +67,9 @@ export class AssessmentComponent implements OnInit {
   private _assessmentService: AssessmentService
   ) { }
   redirect() {
-    sessionStorage.setItem("assessmentid", this.assessmentId);
-    console.log("assessmentId" + this.assessmentId);
-    this.expectedValues[this.enterCount] = this.a;
-    this.inputValues[this.enterCount] = this.document.getElementById('in').value;
+    sessionStorage.setItem('assessmentid', this.assessmentId);
+    this.expectedValues[this.enterCount] = this.currentExpectedValue;
+    this.inputValues[this.enterCount] = this.document.getElementById('userInput').value;
     this.enterCount++;
     this.assessment = {
     userId: this.sessionId,
@@ -89,10 +82,7 @@ export class AssessmentComponent implements OnInit {
     expectedValues: this.expectedValues,
     enterCount: this.enterCount,
     assessmentId: this.assessmentId
-  }
-    sessionStorage.setItem("inputArray", JSON.stringify(this.inputValues));
-    sessionStorage.setItem("expectedArray", JSON.stringify(this.expectedValues));
-    let id: any;
+  };
     this._assessmentService.processData(this.assessment).subscribe(res => {
       this.router.navigate(['/assessment-results'], { relativeTo: this.route });
     });
@@ -152,7 +142,7 @@ export class AssessmentComponent implements OnInit {
   counter() {
 
     if (this.timeLeft === 0) {
-      this.sub.unsubscribe();
+      this.timerSubscription.unsubscribe();
       this.redirect();
     }
     this.timeLeft--;
@@ -173,14 +163,14 @@ export class AssessmentComponent implements OnInit {
    */
   getTestType(x) {
 
-    if (x === ':3') {
-      this.testDesc = 'Date Format';
+    if (x === ':1') {
+      this.testDesc = 'Whole Number Format';
       return 1;
     } else if (x === ':2') {
       this.testDesc = 'Decimal Number Format';
       return 2;
-    } else if (x === ':1') {
-      this.testDesc = 'Whole Number Format';
+    } else if (x === ':3') {
+      this.testDesc = 'Date Format';
       return 3;
     } else {
       this.testDesc = 'Mixed Format';
@@ -224,10 +214,10 @@ export class AssessmentComponent implements OnInit {
     this.testType = this.getTestType(typeOfTest);
     this.timeLeft = this.getTestTime(timeOfTest);
 
-    this.a = this.generateRandom(this.testType);
-    this.b = this.generateRandom(this.testType);
-    this.c = this.generateRandom(this.testType);
-    this.d = this.generateRandom(this.testType);
+    this.currentExpectedValue = this.generateRandom(this.testType);
+    this.nextExpectedValue = this.generateRandom(this.testType);
+    this.thirdExpectedValue = this.generateRandom(this.testType);
+    this.fourthExpectedValue = this.generateRandom(this.testType);
 
     this.assessment = {
     userId: this.sessionId,
@@ -240,7 +230,7 @@ export class AssessmentComponent implements OnInit {
     expectedValues: this.expectedValues,
     enterCount: 0,
     assessmentId: 0,
-  }
-    this._assessmentService.getNewAssessment(this.assessment).subscribe( (res => {this.assessmentId = (res)}));
+  };
+    this._assessmentService.getNewAssessment(this.assessment).subscribe( (res => {this.assessmentId = (res); }));
   }
 }

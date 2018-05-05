@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     moduleId: module.id.toString(),
-    selector: 'app',
+    selector: 'app-capturis',
     templateUrl: 'app.component.html',
     styleUrls: ['./app.component.css']
 })

@@ -1,6 +1,6 @@
 export class ManagerHistory {
   public userId: number;
-  public assessmentId: number
+  public assessmentId: number;
   public dateTaken: Date;
   public assessmentName: string;
   public kph: number;

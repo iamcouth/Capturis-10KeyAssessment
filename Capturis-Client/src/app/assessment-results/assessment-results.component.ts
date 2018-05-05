@@ -1,6 +1,6 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
-import { AssessmentResults } from './assessment-results.model';
-import { AssessmentResultService } from './assessment-results.service';
+import {Component, OnInit, EventEmitter} from '@angular/core';
+import {AssessmentResults} from './assessment-results.model';
+import {AssessmentResultService } from '../services/assessment-results.service';
 
 @Component({
   selector: 'app-assessment-results',
@@ -9,7 +9,7 @@ import { AssessmentResultService } from './assessment-results.service';
   providers: [AssessmentResultService]
 })
 export class AssessmentResultsComponent implements OnInit {
-  sessionId = parseInt(sessionStorage.getItem("userid"));
+  sessionId = parseInt(sessionStorage.getItem('userid'), 10);
   result: any;
   kph: number;
   backspaces: number;
@@ -17,8 +17,8 @@ export class AssessmentResultsComponent implements OnInit {
   userId = this.sessionId;
   found: any;
   done = 0;
-  input = sessionStorage.getItem("inputArray");
-  expected = sessionStorage.getItem("expectedArray");
+  input = sessionStorage.getItem('inputArray');
+  expected = sessionStorage.getItem('expectedArray');
 
   assessmentResult: AssessmentResults = {
     userId: this.userId,
@@ -30,24 +30,21 @@ export class AssessmentResultsComponent implements OnInit {
     backspaces: null,
     accuracy: null,
     assessmentId: null
-  }
+  };
   constructor(private _assessmentResultService: AssessmentResultService) { }
 
   ngOnInit() {
-    let assessmentId = parseInt(sessionStorage.getItem("assessmentid"));
+    const assessmentId = parseInt(sessionStorage.getItem('assessmentid'), 10);
     this.getResults(assessmentId);
 
   }
   getResults(id) {
     this._assessmentResultService.getResult(id).subscribe(res => {
-      console.log(res.body);
       this.kph = res.body.kph;
       this.backspaces = res.body.backspacePressCount;
       this.accuracy = res.body.accuracy;
       },
-      err => {
-        console.log(err); });
-
-  }
-
+      err => { }
+  );
+}
 }

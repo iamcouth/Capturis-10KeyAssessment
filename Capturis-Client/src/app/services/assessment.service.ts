@@ -1,16 +1,16 @@
 import {HttpClient, HttpResponse, HttpHeaders} from '@angular/common/http';
-import {Observable}     from 'rxjs/Observable';
-import {Assessment} from "./assessment.model";
+import {Observable} from 'rxjs/Observable';
+import {Assessment} from '../assessment/assessment.model';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
 const path = 'http://localhost:8080/api/assessment';
 
 @Injectable()
 export class AssessmentService {
 
-  constructor(private http: HttpClient) {
+constructor(private http: HttpClient) {
   }
 
   getNewAssessment(arg1: Assessment): Observable<any> {

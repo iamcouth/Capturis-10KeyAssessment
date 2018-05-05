@@ -1,5 +1,4 @@
-export class Assessment
-{
+export class Assessment {
   public userId: number;
   public dateTaken: Date;
   public timeGiven: number;

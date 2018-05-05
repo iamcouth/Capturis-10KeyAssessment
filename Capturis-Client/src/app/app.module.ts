@@ -30,7 +30,7 @@ import { MatButtonModule, MatInputModule } from '@angular/material';
 
 import { MatCardModule } from '@angular/material/card';
 
-import { RegisterService } from './register/register.service';
+import { RegisterService } from './services/register.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
