@@ -1,10 +1,10 @@
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {AssessmentUser} from '../register/register.model';
+import {AssessmentUser} from '../models/register.model';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import {Injectable} from '@angular/core';
-import {TempLogin} from '../login/login.model';
+import {TempLogin} from '../models/login.model';
 
 const path = 'http://localhost:8080/api/auth';
 // Service related to login page

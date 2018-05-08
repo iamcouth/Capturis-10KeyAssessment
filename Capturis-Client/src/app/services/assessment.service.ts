@@ -1,6 +1,6 @@
 import {HttpClient, HttpResponse, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {Assessment} from '../assessment/assessment.model';
+import {Assessment} from '../models/assessment.model';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import {Injectable} from '@angular/core';

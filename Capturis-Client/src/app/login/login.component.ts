@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LoginService} from '../services/login.service';
-import {TempLogin} from './login.model';
+import {TempLogin} from '../models/login.model';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',

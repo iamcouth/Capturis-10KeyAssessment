@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import {Injectable} from '@angular/core';
-import {AssessmentResults} from '../assessment-results/assessment-results.model';
+import {AssessmentResults} from '../models/assessment-results.model';
 import 'rxjs/add/operator/toPromise';
 
 

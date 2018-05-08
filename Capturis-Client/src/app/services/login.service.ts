@@ -2,7 +2,7 @@ import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest, HttpRespons
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {TempLogin} from '../login/login.model';
+import {TempLogin} from '../models/login.model';
 
 
 const MASTER_PATH = 'http://localhost:8080/api/auth/';
