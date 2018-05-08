@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import {TempLogin} from '../login/login.model';
-import {AssessmentUser} from '../register/register.model';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AssessmentUser} from '../models/register.model';
 import {UserDashboardService} from '../services/user-dashboard.service';
-import {UserHistory} from './user-dashboard.model';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -36,20 +34,21 @@ export class UserDashboardComponent implements OnInit {
   userHistoryList: Array<any>;
   sessionId = parseInt(sessionStorage.getItem('userid'), 10);
 
-    constructor(private router: Router, private _userdashboardservice: UserDashboardService) {}
+  constructor(private router: Router, private _userdashboardservice: UserDashboardService) {
+  }
 
   ngOnInit() {
     this._userdashboardservice.getById(this.sessionId).subscribe(res => {
-      this.assessmentUser = res.body;
-    },
+        this.assessmentUser = res.body;
+      },
       err => {
-    });
+      });
 
     this._userdashboardservice.getUserHistory(this.sessionId).subscribe(res => {
 
-      this.userHistoryList = res.body;
+        this.userHistoryList = res.body;
 
-    },
+      },
       err => {
       });
 

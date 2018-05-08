@@ -1,5 +1,5 @@
 import {Component, OnInit, EventEmitter} from '@angular/core';
-import {AssessmentResults} from './assessment-results.model';
+import {AssessmentResults} from '../models/assessment-results.model';
 import {AssessmentResultService } from '../services/assessment-results.service';
 
 @Component({

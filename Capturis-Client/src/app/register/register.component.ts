@@ -2,7 +2,7 @@ import {Component, OnInit, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {EmailValidator} from '@angular/forms';
 import {RegisterService} from '../services/register.service';
-import {AssessmentUser} from './register.model';
+import {AssessmentUser} from '../models/register.model';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';

@@ -13,8 +13,6 @@ html, body{
 }
 
 .example-card {
-  width: 100%;
-  height: 100%;
   position: absolute;
   left: 20%;
   top: 30%;

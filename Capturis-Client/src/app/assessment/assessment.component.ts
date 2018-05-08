@@ -4,7 +4,7 @@ import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import {DOCUMENT} from '@angular/common';
 import {AssessmentService} from '../services/assessment.service';
-import {Assessment} from './assessment.model';
+import {Assessment} from '../models/assessment.model';
 
 @Component({
   selector: 'app-assessment',

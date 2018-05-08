@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ManagerDashboardService } from '../services/manager-dashboard.service';
-import { ManagerHistory } from './manager-dashboard.model';
+import { ManagerHistory } from '../models/manager-dashboard.model';
 
 @Component({
   selector: 'app-manager-dashboard',

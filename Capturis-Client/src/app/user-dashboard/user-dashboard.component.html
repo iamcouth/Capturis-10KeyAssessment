@@ -122,38 +122,38 @@
 
       <!-- Position Column -->
       <ng-container matColumnDef="dateTaken">
-        <mat-header-cell *matHeaderCellDef> <strong>Date Taken</strong> </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.dateTaken | date: 'MM/dd/yyyy'}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef><strong>Date Taken</strong></mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dateTaken | date: 'MM/dd/yyyy'}}</mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="assessmentType">
-        <mat-header-cell *matHeaderCellDef><strong>Assessment Type</strong> </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.assessmentType}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef><strong>Assessment Type</strong></mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.assessmentType}}</mat-cell>
       </ng-container>
 
       <!-- Weight Column -->
       <ng-container matColumnDef="kph">
         <mat-header-cell *matHeaderCellDef><strong>KPH</strong></mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.kph}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.kph}}</mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="accuracy">
-        <mat-header-cell *matHeaderCellDef><strong>Accuracy</strong> </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.accuracy | number : '1.1'}}% </mat-cell>
+        <mat-header-cell *matHeaderCellDef><strong>Accuracy</strong></mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.accuracy | number : '1.1'}}%</mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="uncorrectedMistakes">
-        <mat-header-cell *matHeaderCellDef><strong>Mistakes</strong> </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.mistakes}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef><strong>Mistakes</strong></mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.mistakes}}</mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="backspacePressCount">
-        <mat-header-cell *matHeaderCellDef><strong>Backspaces</strong> </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.backspacePressCount}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef><strong>Backspaces</strong></mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.backspacePressCount}}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
